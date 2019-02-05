@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ac5cb565-613a-4825-b8bb-08171f326be0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/brain.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/environment.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/exception.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMTrainers/A2C.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMTrainers/AC.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMTrainers/DDPG.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMTrainers/DDQN.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMTrainers/DQN.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMTrainers/DRQN.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMTrainers/PPO.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMTrainers/PrioritizedDQN.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMTrainers/Random.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMTrainers/exception.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMTrainers/trainer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMTrainers/trainer_controller.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OpenAIGym/trainer_config.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="ac5cb565-613a-4825-b8bb-08171f326be0" name="Default Changelist" comment="Remove spelling">
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/brain.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/environment.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMTrainers/A2C.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/A2C.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMTrainers/AC.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/AC.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMTrainers/DDPG.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/DDPG.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMTrainers/DDQN.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/DDQN.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMTrainers/DQN.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/DQN.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMTrainers/DRQN.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/DRQN.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMTrainers/PPO.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/PPO.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMTrainers/PrioritizedDQN.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/PrioritizedDQN.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMTrainers/Random.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/Random.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMTrainers/exception.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMTrainers/trainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/trainer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMTrainers/trainer_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/trainer_controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OpenAIGym/main_test_001.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/main_test_001.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,9 +28,9 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMTrainers/DQN.py">
+        <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/DQN.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="686">
+            <state relative-caret-position="884">
               <caret line="52" column="37" selection-start-line="52" selection-start-column="37" selection-end-line="52" selection-end-column="37" />
               <folding>
                 <element signature="e#19#28#0" expanded="true" />
@@ -54,8 +51,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/OpenAIGym/main_test_001.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="646">
-              <caret line="53" column="8" selection-start-line="53" selection-start-column="8" selection-end-line="53" selection-end-column="8" />
+            <state relative-caret-position="578">
+              <caret line="129" column="12" selection-start-line="129" selection-start-column="12" selection-end-line="129" selection-end-column="12" />
               <folding>
                 <element signature="e#52#66#0" expanded="true" />
               </folding>
@@ -64,32 +61,12 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMTrainers/trainer_controller.py">
+        <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/trainer_controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="86" selection-start-line="86" selection-end-line="113" selection-end-column="80" />
+            <state relative-caret-position="153">
+              <caret line="78" selection-start-line="78" selection-end-line="84" selection-end-column="23" />
               <folding>
                 <element signature="e#52#66#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/exception.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="33" selection-start-column="6" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/environment.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1275">
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -182,12 +159,6 @@
               <item name="03_Pythom_Workspace" type="462c0819:PsiDirectoryNode" />
               <item name="OpenAIGym" type="462c0819:PsiDirectoryNode" />
               <item name="FAPSPLMAgents" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="03_Pythom_Workspace" type="b2602c69:ProjectViewProjectNode" />
-              <item name="03_Pythom_Workspace" type="462c0819:PsiDirectoryNode" />
-              <item name="OpenAIGym" type="462c0819:PsiDirectoryNode" />
-              <item name="FAPSPLMTrainers" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -580,10 +551,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMTrainers/trainer.py">
+    <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/trainer.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMTrainers/exception.py">
+    <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/exception.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/__init__.py">
@@ -618,9 +589,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMTrainers/DQN.py">
+    <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/trainer_controller.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="686">
+        <state relative-caret-position="153">
+          <caret line="78" selection-start-line="78" selection-end-line="84" selection-end-column="23" />
+          <folding>
+            <element signature="e#52#66#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/DQN.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="884">
           <caret line="52" column="37" selection-start-line="52" selection-start-column="37" selection-end-line="52" selection-end-column="37" />
           <folding>
             <element signature="e#19#28#0" expanded="true" />
@@ -628,20 +609,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMTrainers/trainer_controller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="86" selection-start-line="86" selection-end-line="113" selection-end-column="80" />
-          <folding>
-            <element signature="e#52#66#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/OpenAIGym/main_test_001.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="53" column="8" selection-start-line="53" selection-start-column="8" selection-end-line="53" selection-end-column="8" />
+        <state relative-caret-position="578">
+          <caret line="129" column="12" selection-start-line="129" selection-start-column="12" selection-end-line="129" selection-end-column="12" />
           <folding>
             <element signature="e#52#66#0" expanded="true" />
           </folding>

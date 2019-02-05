@@ -17,7 +17,6 @@ import gym
 import gym_eflex_agent
 
 
-@staticmethod
 def _create_model_path(model_path):
     try:
         if not os.path.exists(model_path):
@@ -39,8 +38,16 @@ def _load_config(_trainer_config_path):
         raise Exception("There was an error decoding Trainer Config from this path : {}".format(_trainer_config_path))
 
 
-def _initialize_trainer(_brain_name, _trainer_config):
-    strainer_parameters_dict = {}
+def _import_module(module_name, class_name):
+    """Constructor"""
+    module = __import__(module_name)
+    my_class = getattr(module, class_name)
+    my_class = getattr(my_class, class_name)
+    return my_class
+
+
+def _initialize_trainer(_brain_name, _trainer_config, _env, _train_model, _seed):
+    trainer_parameters_dict = {}
     trainers = {}
 
     trainer_parameters = _trainer_config['default'].copy()
@@ -51,22 +58,21 @@ def _initialize_trainer(_brain_name, _trainer_config):
         _brain_key = _brain_name
         for k in _trainer_config[_brain_key]:
             trainer_parameters[k] = _trainer_config[_brain_key][k]
-        strainer_parameters_dict[brain_name] = trainer_parameters.copy()
+        trainer_parameters_dict[_brain_name] = trainer_parameters.copy()
 
     # Instantiate the trainer
     # import the module
-    module_spec = self._import_module("FAPSPLMAgents." + self.trainer_parameters_dict[brain_name]['trainer'],
-                                      self.trainer_parameters_dict[brain_name]['trainer'])
+    module_spec = _import_module("FAPSPLMAgents." + trainer_parameters_dict[_brain_name]['trainer'],
+                                 trainer_parameters_dict[_brain_name]['trainer'])
     if module_spec is None:
-        raise FAPSPLMEnvironmentException("The trainer config contains an unknown trainer type for brain {}"
-                                          .format(brain_name))
+        raise Exception("The trainer config contains an unknown trainer type for brain {}".format(_brain_name))
     else:
-        self.trainers[brain_name] = module_spec(self.env, brain_name, self.trainer_parameters_dict[brain_name],
-                                                self.train_model, self.seed)
+        trainers[brain_name] = module_spec(_env, _brain_name, trainer_parameters_dict[brain_name], _train_model, _seed)
+
+    return trainer_parameters_dict, trainers
 
 
-def start_learning(_brain_name, _use_gpu, trainer_config_path):
-
+def start_learning(_brain_name, _use_gpu, trainer_config_path, _train_model, _load_model, _seed):
     # configure tensor flow to use 8 cores
     if _use_gpu:
         if backend.backend() == 'tensorflow':
@@ -95,33 +101,33 @@ def start_learning(_brain_name, _use_gpu, trainer_config_path):
     _create_model_path(model_path)
 
     # Choose and instantiate a trainer
-    _initialize_trainer(_brain_name, trainer_config)
+    trainer_parameters_dict, trainers = _initialize_trainer(_brain_name, trainer_config, _env,  _train_model, _seed)
 
     print("\n##################################################################################################")
     print("Starting Training...")
-    print("Brain Name: {}".format(self.brain_name))
+    print("Brain Name: {}".format(_brain_name))
     print("Backend : {}".format(backend.backend()))
-    print("Use cpu: {}".format(self.use_gpu))
+    print("Use cpu: {}".format(_use_gpu))
     iterator = 0
-    for k, t in self.trainers.items():
+    for k, t in trainers.items():
         print("Trainer({}): {}".format(iterator, t.__str__()))
         iterator = iterator + 1
     print("##################################################################################################")
 
     # Initialize the trainer
-    for k, t in self.trainers.items():
+    for k, t in trainers.items():
         t.initialize()
 
     # Instantiate model parameters
-    if self.load_model:
+    if _load_model:
         print("\nINFO: Loading models ...")
-        for k, t in self.trainers.items():
-            t.load_model_and_restore(self.model_path)
+        for k, t in trainers.items():
+            t.load_model_and_restore(model_path)
 
     global_step = 0  # This is only for saving the model
-    curr_info = self.all_info[self.brain_name]
+    curr_info = _env.reset()
 
-    if self.train_model:
+    if _train_model:
         for brain_name, trainer in self.trainers.items():
             trainer.write_tensorboard_text('Hyperparameters', trainer.parameters)
     try:
