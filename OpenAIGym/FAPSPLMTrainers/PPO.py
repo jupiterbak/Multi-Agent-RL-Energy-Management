@@ -1,0 +1,203 @@
+# # FAPS PLMAgents
+
+import logging
+import numpy as np
+from collections import deque
+
+from FAPSPLMAgents.exception import FAPSPLMEnvironmentException
+
+logger = logging.getLogger("FAPSPLMAgents")
+
+
+class FAPSTrainerException(FAPSPLMEnvironmentException):
+    """
+    Related to errors with the Trainer. - Not implemented
+    """
+    pass
+
+
+class PPO(object):
+    """This class is the abstract class for the unitytrainers"""
+
+    def __init__(self, env, brain_name, trainer_parameters, training, seed):
+        """
+        Responsible for collecting experiences and training a neural network model.
+
+        :param env: The FAPSPLMEnvironment.
+        :param brain_name: The brain to train.
+        :param trainer_parameters: The parameters for the trainer (dictionary).
+        :param training: Whether the trainer is set for training.
+        :param seed: Random seed.
+        """
+        self.brain_name = brain_name
+        self.brain = env
+        self.trainer_parameters = trainer_parameters
+        self.is_training = training
+        self.seed = seed
+        self.steps = 0
+        self.last_reward = 0
+        self.initialized = False
+
+        # initialize specific PPO parameters
+        self.env_brain = env
+        self.state_size = env.stateSize
+        self.action_size = env.actionSize
+        self.action_space_type = env.actionSpaceType
+        self.num_layers = self.trainer_parameters['num_layers']
+        self.batch_size = self.trainer_parameters['batch_size']
+        self.hidden_units = self.trainer_parameters['hidden_units']
+        self.replay_memory = deque(maxlen=self.trainer_parameters['memory_size'])
+        self.gamma = self.trainer_parameters['gamma']  # discount rate
+        self.epsilon = self.trainer_parameters['epsilon']  # exploration rate
+        self.epsilon_min = self.trainer_parameters['epsilon_min']
+        self.epsilon_decay = self.trainer_parameters['epsilon_decay']
+        self.learning_rate = self.trainer_parameters['learning_rate']
+        self.tau = self.trainer_parameters['tau']
+        self.model = None
+
+    def __str__(self):
+        return '''PPO Trainer'''
+
+    @property
+    def parameters(self):
+        """
+        Returns the trainer parameters of the trainer.
+        """
+        return self.trainer_parameters
+
+    @property
+    def get_max_steps(self):
+        """
+        Returns the maximum number of steps. Is used to know when the trainer should be stopped.
+        :return: The maximum number of steps of the trainer
+        """
+        return self.trainer_parameters['max_steps']
+
+    @property
+    def get_step(self):
+        """
+        Returns the number of steps the trainer has performed
+        :return: the step count of the trainer
+        """
+        return self.steps
+
+    @property
+    def get_last_reward(self):
+        """
+        Returns the last reward the trainer has had
+        :return: the new last reward
+        """
+        return self.last_reward
+
+    def is_initialized(self):
+        """
+        check if the trainer is initialized
+        """
+        return self.initialized
+
+    def initialize(self):
+        """
+        Initialize the trainer
+        """
+        # Nothing to be done.
+        self.initialized = True
+
+    def clear(self):
+        """
+        Clear the trainer
+        """
+        self.replay_memory.clear()
+        self.model = None
+
+    def load_model_and_restore(self, model_path):
+        """
+        Load and restore the model from a defined path.
+
+        :param model_path: Random seed.
+        """
+        # Nothing to be done.
+
+    def increment_step(self):
+        """
+        Increment the step count of the trainer
+        """
+        self.steps = self.steps + 1
+
+    def update_last_reward(self, reward):
+        """
+        Updates the last reward
+        """
+        self.last_reward = reward
+
+    def take_action(self, brain_info):
+        """
+        Decides actions given state/observation information, and takes them in environment.
+        :param brain_info: The BrainInfo from environment.
+        :return: the action array and an object to be passed to add experiences
+        """
+        return np.random.randint(0, 1, self.action_size)
+
+    def add_experiences(self, curr_info, action_vector, next_info):
+        """
+        Adds experiences to each agent's experience history.
+        :param action_vector: Current executed action
+        :param curr_info: Current AllBrainInfo.
+        :param next_info: Next AllBrainInfo.
+        """
+        self.replay_memory.append(
+            (curr_info.states, action_vector, next_info.rewards, next_info.states, next_info.local_done))
+
+    def process_experiences(self, current_info, action_vector, next_info):
+        """
+        Checks agent histories for processing condition, and processes them as necessary.
+        Processing involves calculating value and advantage targets for model updating step.
+        :param current_info: Current BrainInfo.
+        :param action_vector: Current executed action
+        :param next_info: Next corresponding BrainInfo.
+        """
+        # Nothing to be done.
+
+    def end_episode(self):
+        """
+        A signal that the Episode has ended. The buffer must be reset.
+        Get only called when the academy resets.
+        """
+        self.replay_memory.clear()
+
+    def is_ready_update(self):
+        """
+        Returns whether or not the trainer has enough elements to run update model
+        :return: A boolean corresponding to wether or not update_model() can be run
+        """
+        return (len(self.replay_memory) >= self.batch_size) and (len(self.replay_memory) % self.batch_size == 0)
+
+    def update_model(self):
+        """
+        Uses training_buffer to update model. Run back propagation.
+        """
+        # Nothing to be done.
+
+    def save_model(self, model_path):
+        """
+        Save the model architecture to i.e. Tensorboard.
+        :param model_path: The path where the model will be saved.
+        """
+        # Nothing to be done.
+
+    def write_summary(self):
+        """
+        Saves training statistics to i.e. Tensorboard.
+        """
+        # Nothing to be done.
+
+    def write_tensorboard_text(self, key, input_dict):
+        """
+        Saves text to Tensorboard.
+        Note: Only works on tensorflow r1.2 or above.
+        :param key: The name of the text.
+        :param input_dict: A dictionary that will be displayed in a table on Tensorboard.
+        """
+        # Nothing to be done.
+
+
+pass
