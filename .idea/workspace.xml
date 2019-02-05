@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ac5cb565-613a-4825-b8bb-08171f326be0" name="Default Changelist" comment="" />
+    <list default="true" id="ac5cb565-613a-4825-b8bb-08171f326be0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexAgentV0.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexAgentV1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gym_eflex_agent/setup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/EFlexAgent/EFlexAgent/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/EFlexAgent/EFlexAgent/envs/EFlexAgentV0.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/EFlexAgent/EFlexAgent/envs/EFlexAgentV1.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/EFlexAgent/EFlexAgent/envs/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/EFlexAgent/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/gym_eflex_agent/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/EFlexAgent/setup.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/main_test_001.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/main_test_001.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -11,22 +24,10 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/EFLEXAgent/EFLEXAgent.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="51" selection-start-line="51" selection-end-line="51" />
-              <folding>
-                <element signature="e#0#28#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/OpenAIGym/main_test_001.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
-              <caret line="27" column="33" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
+            <state relative-caret-position="239">
+              <caret line="33" column="25" selection-start-line="33" selection-start-column="25" selection-end-line="33" selection-end-column="25" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -35,86 +36,58 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/OpenAIGym/EFlexAgent/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor />
-              <second_editor />
+        <entry file="file://C:/ProgramData/Anaconda3/envs/OPENAI/Lib/site-packages/gym/logger.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="24" selection-start-line="24" selection-end-line="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gym_eflex_agent/setup.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="20" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexAgentV1.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="18" lean-forward="true" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/OpenAIGym/EFlexAgent/setup.py">
+        <entry file="file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexAgentV0.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="1" lean-forward="true" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/OpenAIGym/EFlexAgent/EFlexAgent/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/OpenAIGym/EFlexAgent/EFlexAgent/envs/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+            <state relative-caret-position="275">
+              <caret line="104" column="54" lean-forward="true" selection-start-line="104" selection-start-column="54" selection-end-line="104" selection-end-column="54" />
               <folding>
-                <element signature="e#0#26#0" expanded="true" />
+                <element signature="e#0#21#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/OpenAIGym/EFlexAgent/EFlexAgent/envs/EFlexAgentV0.py">
+        <entry file="file://C:/ProgramData/Anaconda3/envs/OPENAI/Lib/enum.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
-              <folding>
-                <element signature="e#0#10#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="279">
+              <caret line="323" selection-start-line="323" selection-end-line="323" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/OpenAIGym/EFlexAgent/EFlexAgent/envs/EFlexAgentV1.py">
+        <entry file="file://C:/ProgramData/Anaconda3/envs/OPENAI/Lib/site-packages/gym/envs/registration.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
-              <folding>
-                <element signature="e#0#10#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/EFLEXAgent/EFLEXAgentStateMachine.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="593">
-              <caret line="61" column="21" selection-start-line="61" selection-start-column="21" selection-end-line="61" selection-end-column="21" />
-              <folding>
-                <element signature="e#0#38#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://C:/ProgramData/Anaconda3/envs/OPENAI/Lib/site-packages/opcua/ua/uatypes.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="425" column="19" selection-start-line="425" selection-start-column="6" selection-end-line="425" selection-end-column="19" />
+            <state relative-caret-position="200">
+              <caret line="170" selection-start-line="170" selection-end-line="170" />
             </state>
           </provider>
         </entry>
@@ -131,7 +104,12 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>&quot;</find>
+      <find>:</find>
+      <find>self.current_state</find>
     </findStrings>
+    <replaceStrings>
+      <replace>.value:</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -143,15 +121,25 @@
         <option value="$PROJECT_DIR$/IM/EFLEXAgentStateMachine.py" />
         <option value="$PROJECT_DIR$/EFLEXAgentStateMachine.py" />
         <option value="$PROJECT_DIR$/EFLEXAgent.py" />
-        <option value="$PROJECT_DIR$/OpenAIGym/main_test_001.py" />
         <option value="$PROJECT_DIR$/OpenAIGym/EFlexAgent/EFlexAgent/EflexAgent_v0.py" />
         <option value="$PROJECT_DIR$/OpenAIGym/EFlexAgent/EFlexAgent/EflexAgent_v1.py" />
-        <option value="$PROJECT_DIR$/OpenAIGym/EFlexAgent/setup.py" />
         <option value="$PROJECT_DIR$/OpenAIGym/EFlexAgent/EFlexAgent/EflexAgent-v0.py" />
         <option value="$PROJECT_DIR$/OpenAIGym/EFlexAgent/EFlexAgent/env/EflexAgent-v1.py" />
         <option value="$PROJECT_DIR$/OpenAIGym/EFlexAgent/EFlexAgent/env/__init__.py" />
+        <option value="$PROJECT_DIR$/OpenAIGym/EFlexAgent/README.md" />
         <option value="$PROJECT_DIR$/OpenAIGym/EFlexAgent/EFlexAgent/envs/__init__.py" />
+        <option value="$PROJECT_DIR$/OpenAIGym/EFlexAgent/EFlexAgent/envs/EFlexAgentV1.py" />
+        <option value="$PROJECT_DIR$/OpenAIGym/EFlexAgent/EFlexAgent/envs/EFlexAgentV0.py" />
         <option value="$PROJECT_DIR$/OpenAIGym/EFlexAgent/EFlexAgent/__init__.py" />
+        <option value="$PROJECT_DIR$/OpenAIGym/EFlexAgent/setup.py" />
+        <option value="$PROJECT_DIR$/GYM_EFlexAgent/EFlexAgent/__init__.py" />
+        <option value="$PROJECT_DIR$/GYM_EFlexAgent/setup.py" />
+        <option value="$PROJECT_DIR$/gym_eflex_agent/setup.py" />
+        <option value="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/__init__.py" />
+        <option value="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/__init__.py" />
+        <option value="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexAgentV1.py" />
+        <option value="$PROJECT_DIR$/OpenAIGym/main_test_001.py" />
+        <option value="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexAgentV0.py" />
       </list>
     </option>
   </component>
@@ -174,6 +162,24 @@
               <item name="03_Pythom_Workspace" type="b2602c69:ProjectViewProjectNode" />
               <item name="03_Pythom_Workspace" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="03_Pythom_Workspace" type="b2602c69:ProjectViewProjectNode" />
+              <item name="03_Pythom_Workspace" type="462c0819:PsiDirectoryNode" />
+              <item name="gym_eflex_agent" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="03_Pythom_Workspace" type="b2602c69:ProjectViewProjectNode" />
+              <item name="03_Pythom_Workspace" type="462c0819:PsiDirectoryNode" />
+              <item name="gym_eflex_agent" type="462c0819:PsiDirectoryNode" />
+              <item name="gym_eflex_agent" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="03_Pythom_Workspace" type="b2602c69:ProjectViewProjectNode" />
+              <item name="03_Pythom_Workspace" type="462c0819:PsiDirectoryNode" />
+              <item name="gym_eflex_agent" type="462c0819:PsiDirectoryNode" />
+              <item name="gym_eflex_agent" type="462c0819:PsiDirectoryNode" />
+              <item name="envs" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -186,10 +192,14 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Administrator\Desktop\SP347\02_Paper\2019_Multi_Agent_Energy_Management\03_Pythom_Workspace\OpenAIGym\EFlexAgent\EFlexAgent\envs" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Administrator\Desktop\SP347\02_Paper\2019_Multi_Agent_Energy_Management\03_Pythom_Workspace" />
+      <recent name="C:\Users\Administrator\Desktop\SP347\02_Paper\2019_Multi_Agent_Energy_Management\03_Pythom_Workspace\OPCUA-EFLEXAgent" />
       <recent name="C:\Users\Administrator\Desktop\SP347\02_Paper\2019_Multi_Agent_Energy_Management\03_Pythom_Workspace\OpenAIGym\EFlexAgent\EFlexAgent\env" />
       <recent name="C:\Users\Administrator\Desktop\SP347\02_Paper\2019_Multi_Agent_Energy_Management\03_Pythom_Workspace\EFLEXAgent" />
-      <recent name="C:\Users\Administrator\Desktop\SP347\02_Paper\2019_Multi_Agent_Energy_Management\03_Pythom_Workspace" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -247,6 +257,10 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.main" />
+      <item itemvalue="Python.main_test_001" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.main_test_001" />
@@ -265,22 +279,31 @@
       <option name="presentableId" value="Default" />
       <updated>1549277651531</updated>
     </task>
+    <task id="LOCAL-00001" summary="Remove spelling">
+      <created>1549357731708</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1549357731708</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24973656" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24973656" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Python Console" />
       <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" sideWeight="0.50316125" side_tool="true" visible="true" weight="0.46264368" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.2394636" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49894625" weight="0.32950193" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49683878" visible="true" weight="0.46264368" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49841937" weight="0.41762453" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -288,6 +311,26 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Remove spelling" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove spelling" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/__init__.py</url>
+          <line>5</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexAgentV0.py</url>
+          <line>231</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/packmltest.xml">
@@ -300,20 +343,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/EFLEXAgent/IM/packml_eflex_modified.xml">
+    <entry file="file://$PROJECT_DIR$/OPCUA-EFLEXAgent/IM/packml_eflex_modified.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="13" lean-forward="true" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/EFLEXAgent/EFLEXAgentStateMachine.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="593">
-          <caret line="61" column="21" selection-start-line="61" selection-start-column="21" selection-end-line="61" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -338,17 +371,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/EFLEXAgent/EFLEXAgent.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="51" selection-start-line="51" selection-end-line="51" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/EFLEXAgent/main.py">
+    <entry file="file://$PROJECT_DIR$/OPCUA-EFLEXAgent/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="423">
           <caret line="33" column="8" lean-forward="true" selection-end-line="46" />
@@ -365,71 +388,191 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/main_test_001.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="27" column="33" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/EFlexAgent/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor />
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/OpenAIGym/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/OpenAIGym/EFlexAgent/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/EFlexAgent/EFlexAgent/envs/EFlexAgentV1.py">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor>
+            <caret selection-end-column="31" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gym_eflex_agent/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor>
+            <caret column="13" selection-start-column="13" selection-end-column="13" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OPCUA-EFLEXAgent/EFLEXAgentStateMachine.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
+        <state relative-caret-position="51">
+          <caret line="5" selection-start-line="5" selection-end-line="48" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OPCUA-EFLEXAgent/EFLEXAgent.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="867">
+          <caret line="51" selection-start-line="51" selection-end-line="51" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/EFlexAgent/EFlexAgent/envs/EFlexAgentV0.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://C:/ProgramData/Anaconda3/envs/OPENAI/Lib/site-packages/gym/spaces/prng.py">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/EFlexAgent/EFlexAgent/envs/__init__.py">
+    <entry file="file://C:/ProgramData/Anaconda3/envs/OPENAI/Lib/site-packages/gym/spaces/tuple_space.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/envs/OPENAI/Lib/site-packages/gym/spaces/multi_discrete.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
+          <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/EFlexAgent/EFlexAgent/__init__.py">
+    <entry file="file://C:/ProgramData/Anaconda3/envs/OPENAI/Lib/site-packages/gym/spaces/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="41" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/envs/OPENAI/Lib/site-packages/gym/spaces/box.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="11" column="35" lean-forward="true" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/envs/OPENAI/Lib/site-packages/gym/spaces/multi_binary.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="3" column="17" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/envs/OPENAI/Lib/site-packages/gym/spaces/discrete.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="5" column="4" lean-forward="true" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/envs/OPENAI/Lib/site-packages/pkg_resources/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="2300" selection-start-line="2300" selection-end-line="2300" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OPCUA-EFLEXAgent/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GYM_EFlexAgent/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent.egg-info/requires.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent.egg-info/SOURCES.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent.egg-info/top_level.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent.egg-info/dependency_links.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent.egg-info/PKG-INFO">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="9" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gym_eflex_agent/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="20" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/envs/OPENAI/Lib/site-packages/gym/logger.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/EFlexAgent/setup.py">
+    <entry file="file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="1" lean-forward="true" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
+        <state relative-caret-position="17">
+          <caret line="1" column="35" lean-forward="true" selection-start-line="1" selection-start-column="35" selection-end-line="1" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OpenAIGym/main_test_001.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="33" column="25" selection-start-line="33" selection-start-column="25" selection-end-line="33" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/envs/OPENAI/Lib/site-packages/gym/envs/registration.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="170" selection-start-line="170" selection-end-line="170" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexAgentV1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="18" lean-forward="true" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/envs/OPENAI/Lib/enum.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="323" selection-start-line="323" selection-end-line="323" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexAgentV0.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="104" column="54" lean-forward="true" selection-start-line="104" selection-start-column="54" selection-end-line="104" selection-end-column="54" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

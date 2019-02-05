@@ -2,6 +2,8 @@ import sys
 import time
 import logging
 import gym
+import gym_eflex_agent
+
 
 sys.path.insert(0, "..")
 
@@ -25,10 +27,11 @@ if __name__ == "__main__":
     logger.setLevel(logging.DEBUG)
 
     # test gym
-    env = gym.make('FrozenLake-v0')
-    env.reset()
+    env = gym.make('eflex-agent-v0')
+    observation = env.reset()
     for _ in range(5000):
-        env.step(env.action_space.sample())
+        observation, reward, done, info = env.step(env.action_space.sample())
+        print(info['info'])
         env.render('human')
     env.close()
 
