@@ -1,6 +1,6 @@
 from enum import Enum
 
-from EFLEXAgent.EFLEXAgent import EFLEXAgentType
+from OPCUAEFLEXAgent.EFLEXAgent import EFLEXAgentType
 
 
 class EFLEXAgentState(Enum):

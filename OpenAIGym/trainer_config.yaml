@@ -1,7 +1,7 @@
 default:
     trainer: DQN            # trainer type
     batch_size: 1024        # batch size
-    memory_size: 1024        # allocated memory size
+    memory_size: 1024       # allocated memory size
     beta: 5.0e-3
     epsilon: 0.2            # exploration rate
     epsilon_min: 0.01       # minimal exploration rate
@@ -15,16 +15,16 @@ default:
     learning_rate: 0.001    # learning rate
     max_steps: 500000       # maximum number of state for an episode
     normalize: false        # add nomalization layer to the associated NN
-    num_epoch: 5000            # total number of epochs
+    num_epoch: 5000         # total number of epochs
     time_horizon: 64        # time horizon
     sequence_length: 64     # TODO:
     summary_freq: 1000      # Frequency at which at summary will be printed out
     buffer_size: 10240
 
 RealFakeBrain:
-    trainer: DQN           # trainer type
+    trainer: Random         # trainer type
     batch_size: 512         # batch size
-    memory_size: 10240       # allocated memory size
+    memory_size: 10240      # allocated memory size
     beta: 5.0e-3
     epsilon: 0.2            # exploration rate
     epsilon_min: 0.01       # minimal exploration rate
@@ -44,9 +44,9 @@ RealFakeBrain:
     summary_freq: 1000      # Frequency at which at summary will be printed out
 
 MCD:
-    trainer: DQN           # trainer type
-    batch_size: 512        # batch size
-    memory_size: 10240     # allocated memory size
+    trainer: Random         # trainer type
+    batch_size: 512         # batch size
+    memory_size: 10240      # allocated memory size
     beta: 5.0e-3
     epsilon: 0.2            # exploration rate
     epsilon_min: 0.01       # minimal exploration rate
@@ -59,7 +59,7 @@ MCD:
     lambd: 0.95
     learning_rate: 0.001    # learning rate
     max_steps: 5000000      # maximum number of state for an episode
-    normalize: false        # add nomalization layer to the associated NN
+    normalize: false        # add normalization layer to the associated NN
     num_epoch: 10000        # total number of epochs
     time_horizon: 64        # time horizon
     sequence_length: 64     # TODO:

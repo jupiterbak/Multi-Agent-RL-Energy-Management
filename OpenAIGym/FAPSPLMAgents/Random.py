@@ -4,8 +4,7 @@ import logging
 import numpy as np
 from collections import deque
 
-from FAPSPLMAgents.exception import FAPSPLMEnvironmentException
-from FAPSPLMAgents.communicatorapi_python import action_type_proto_pb2 as action_type_proto_pb2
+from OpenAIGym.FAPSPLMAgents.exception import FAPSPLMEnvironmentException
 
 logger = logging.getLogger("FAPSPLMAgents")
 
@@ -20,18 +19,18 @@ class FAPSTrainerException(FAPSPLMEnvironmentException):
 class Random(object):
     """This class is the abstract class for the faps trainers"""
 
-    def __init__(self, env, brain_name, trainer_parameters, training, seed):
+    def __init__(self, envs, brain_name, trainer_parameters, training, seed):
         """
         Responsible for collecting experiences and training a neural network model.
 
-        :param env: The FAPSPLMEnvironment.
+        :param envs: The FAPSPLMEnvironment.
         :param brain_name: The brain to train.
         :param trainer_parameters: The parameters for the trainer (dictionary).
         :param training: Whether the trainer is set for training.
         :param seed: Random seed.
         """
         self.brain_name = brain_name
-        self.brain = env
+        self.brain = envs
         self.trainer_parameters = trainer_parameters
         self.is_training = training
         self.seed = seed
@@ -40,10 +39,14 @@ class Random(object):
         self.initialized = False
 
         # initialize specific DQN parameters
-        self.env_brain = env
-        self.state_size = env.stateSize
-        self.action_size = env.actionSize
-        self.action_space_type = env.actionSpaceType
+        self.env_brains = envs
+        self.state_size = 0
+        self.action_size = 0
+        for k, env in self.env_brains.items():
+            self.state_size = env.action_space.n
+            self.action_size = envs.observation_space.n
+
+        self.action_space_type = envs.actionSpaceType
         self.num_layers = self.trainer_parameters['num_layers']
         self.batch_size = self.trainer_parameters['batch_size']
         self.hidden_units = self.trainer_parameters['hidden_units']
@@ -135,10 +138,7 @@ class Random(object):
         :param brain_info: The BrainInfo from environment.
         :return: the action array and an object to be passed to add experiences
         """
-        if self.action_space_type == action_type_proto_pb2.action_discrete:
-            return np.random.randint(0, 1, self.action_size)
-        else:
-            return (np.random.sample(self.action_size) * 2) - 1
+        return self.env.action_space.sample()
 
     def add_experiences(self, curr_info, action_vector, next_info):
         """

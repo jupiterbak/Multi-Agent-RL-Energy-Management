@@ -1,4 +1,5 @@
 README.md
+setup.py
 gym_eflex_agent.egg-info/PKG-INFO
 gym_eflex_agent.egg-info/SOURCES.txt
 gym_eflex_agent.egg-info/dependency_links.txt

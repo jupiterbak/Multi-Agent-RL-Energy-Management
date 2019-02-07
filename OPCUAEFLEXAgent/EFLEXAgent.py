@@ -37,13 +37,13 @@ class EFLEXAgent():
             ua.SecurityPolicyType.NoSecurity,
             ua.SecurityPolicyType.Basic256Sha256_SignAndEncrypt,
             ua.SecurityPolicyType.Basic256Sha256_Sign])
-        server.set_application_uri("urn:fau:faps:OPCUA-EFLEXAgent:server")
+        server.set_application_uri("urn:fau:faps:OPCUAEFLEXAgent:server")
         objects = server.get_objects_node()
         server.import_xml("./IM/Opc.Ua.Di.NodeSet2.xml")
         server.import_xml("./IM/Opc.Ua.Plc.NodeSet2.xml")
         server.import_xml("./IM/packmltest.xml")
         server.import_xml("./IM/packml_eflex_modified.xml")
-        uri = "http://faps.fau.de/OPCUA-EFLEXAgent"
+        uri = "http://faps.fau.de/OPCUAEFLEXAgent"
         idx = server.register_namespace(uri)
         idx_eflex = server.get_namespace_index("http://siemens.com/PackML_Eflex/")
 

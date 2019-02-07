@@ -1,7 +1,7 @@
 import sys
 import time
 import logging
-from EFLEXAgent.EFLEXAgent import EFLEXAgent
+from OPCUAEFLEXAgent.EFLEXAgent import EFLEXAgent
 
 
 sys.path.insert(0, "..")
