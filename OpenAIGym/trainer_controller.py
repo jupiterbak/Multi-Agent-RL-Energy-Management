@@ -272,7 +272,6 @@ class TrainerController(object):
             if global_step != 0 and self.train_model:
                 for brain_name, trainer in self.trainers.items():
                     self._save_model(trainer, self.model_paths[brain_name])
-
         except KeyboardInterrupt:
             if self.train_model:
                 self.logger.info("Learning was interrupted. Please wait while the graph is generated.")
