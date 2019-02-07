@@ -1,10 +1,9 @@
 # # FAPS PLMAgents
 
 import logging
-import numpy as np
 from collections import deque
 
-from OpenAIGym.FAPSPLMAgents.exception import FAPSPLMEnvironmentException
+from OpenAIGym.exception import FAPSPLMEnvironmentException
 
 logger = logging.getLogger("FAPSPLMAgents")
 
@@ -30,7 +29,6 @@ class Random(object):
         :param seed: Random seed.
         """
         self.brain_name = brain_name
-        self.brain = envs
         self.trainer_parameters = trainer_parameters
         self.is_training = training
         self.seed = seed
@@ -43,10 +41,10 @@ class Random(object):
         self.state_size = 0
         self.action_size = 0
         for k, env in self.env_brains.items():
-            self.state_size = env.action_space.n
-            self.action_size = envs.observation_space.n
+            self.action_size = env.action_space.n
+            self.state_size = env.observation_space.n
 
-        self.action_space_type = envs.actionSpaceType
+        ## self.action_space_type = envs.actionSpaceType
         self.num_layers = self.trainer_parameters['num_layers']
         self.batch_size = self.trainer_parameters['batch_size']
         self.hidden_units = self.trainer_parameters['hidden_units']
@@ -132,23 +130,27 @@ class Random(object):
         """
         self.last_reward = reward
 
-    def take_action(self, brain_info):
+    def take_action(self, brain_info, _env):
         """
         Decides actions given state/observation information, and takes them in environment.
         :param brain_info: The BrainInfo from environment.
+        :param _env: The environment.
         :return: the action array and an object to be passed to add experiences
         """
-        return self.env.action_space.sample()
+        return _env.action_space.sample()
 
-    def add_experiences(self, curr_info, action_vector, next_info):
+    def add_experiences(self, observation, action, next_observation, reward, done, info):
         """
         Adds experiences to each agent's experience history.
-        :param action_vector: Current executed action
-        :param curr_info: Current AllBrainInfo.
-        :param next_info: Next AllBrainInfo.
+        :param observation: the observation before executing the action
+        :param action: Current executed action
+        :param next_observation: the observation after executing the action
+        :param reward: the reward obtained after executing the action.
+        :param done: true if the episode ended.
+        :param info: info after executing the action.
         """
         self.replay_memory.append(
-            (curr_info.states, action_vector, next_info.rewards, next_info.states, next_info.local_done))
+            (observation, action, next_observation, reward, done, info))
 
     def process_experiences(self, current_info, action_vector, next_info):
         """

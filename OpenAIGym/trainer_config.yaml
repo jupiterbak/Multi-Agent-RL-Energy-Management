@@ -22,7 +22,7 @@ default:
     buffer_size: 10240
 
 RealFakeBrain:
-    trainer: Random         # trainer type
+    trainer: DQN            # trainer type
     batch_size: 512         # batch size
     memory_size: 10240      # allocated memory size
     beta: 5.0e-3
@@ -44,7 +44,7 @@ RealFakeBrain:
     summary_freq: 1000      # Frequency at which at summary will be printed out
 
 MCD:
-    trainer: Random         # trainer type
+    trainer: DQN            # trainer type
     batch_size: 512         # batch size
     memory_size: 10240      # allocated memory size
     beta: 5.0e-3

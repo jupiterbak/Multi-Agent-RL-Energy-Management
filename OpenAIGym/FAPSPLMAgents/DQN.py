@@ -5,12 +5,11 @@ import logging
 import numpy as np
 from collections import deque
 
-from keras.models import Sequential
 from keras.layers import Dense
 from keras.optimizers import Adam
 from keras import backend as k, Input, Model
 
-from .exception import FAPSPLMEnvironmentException
+from OpenAIGym.exception import FAPSPLMEnvironmentException
 logger = logging.getLogger("FAPSPLMAgents")
 
 
@@ -24,7 +23,7 @@ class FAPSTrainerException(FAPSPLMEnvironmentException):
 class DQN:
     """This class is the abstract class for the trainers"""
 
-    def __init__(self, env, brain_name, trainer_parameters, training, seed):
+    def __init__(self, envs, brain_name, trainer_parameters, training, seed):
         """
         Responsible for collecting experiences and training a neural network model.
 
@@ -37,7 +36,6 @@ class DQN:
 
         # initialize global trainer parameters
         self.brain_name = brain_name
-        self.env_brain = env
         self.trainer_parameters = trainer_parameters
         self.is_training = training
         self.seed = seed
@@ -46,12 +44,14 @@ class DQN:
         self.initialized = False
 
         # initialize specific DQN parameters
-        self.env_brain = env
-        self.state_size = env.stateSize
-        self.action_size = env.actionSize
-        self.action_space_type = env.actionSpaceType
-        if self.action_space_type == action__type__proto__pb2.action_continuous:
-            logger.warning("Using DQN with continuous action space. Please check your environment definition")
+        self.env_brains = envs
+        self.state_size = 0
+        self.action_size = 0
+        for k, env in self.env_brains.items():
+            self.action_size = env.action_space.n
+            self.state_size = env.observation_space.n
+
+        ## self.action_space_type = envs.actionSpaceType
         self.num_layers = self.trainer_parameters['num_layers']
         self.batch_size = self.trainer_parameters['batch_size']
         self.hidden_units = self.trainer_parameters['hidden_units']
@@ -107,7 +107,7 @@ class DQN:
         # return model
 
         a = Input(shape=[self.state_size], name='actor_state')
-        h = Dense(self.hidden_units, activation='relu', kernel_initializer='he_uniform', name="ATTTS")(a)
+        h = Dense(self.hidden_units, activation='relu', kernel_initializer='he_uniform', name="dense_actor")(a)
         for x in range(1, self.num_layers):
             h = Dense(self.hidden_units, activation='relu', kernel_initializer='he_uniform')(h)
         o = Dense(self.action_size, activation='linear', kernel_initializer='he_uniform')(h)
@@ -164,35 +164,34 @@ class DQN:
         """
         self.last_reward = rewards
 
-    def take_action(self, brain_info):
+    def take_action(self, observation, _env):
         """
         Decides actions given state/observation information, and takes them in environment.
-        :param brain_info: The BrainInfo from environment.
+        :param observation: The BrainInfo from environment.
+        :param _env: The environment.
         :return: the action array and an object as cookie
         """
-        # take_action_vector[brain_name], action_cookie = trainer.take_action(curr_info, self.env)
-
+        temp = None
         if np.random.rand() <= self.epsilon:
-            # action_cookie = random.randrange(self.action_size)
-            return np.random.randint(0, 1, self.action_size)
-            # return random.randrange(self.action_size)
+            temp = np.argmax(np.random.randint(0, 2, self.action_size))
         else:
-            act_values = self.model.predict(brain_info.states)
-            # action_cookie = np.argmax(act_values[0])
-            index = np.argmax(act_values[0])
-            rslt = np.zeros(shape=act_values[0].shape, dtype=np.dtype(int))
-            rslt[index] = 1
-            return rslt  # returns action
+            tmp = observation.reshape((1, self.state_size))
+            act_values = self.model.predict(tmp)
+            temp = np.argmax(act_values[0])
+        return temp  # returns action
 
-    def add_experiences(self, curr_info, action_vector, next_info):
+    def add_experiences(self, observation, action, next_observation, reward, done, info):
         """
         Adds experiences to each agent's experience history.
-        :param action_vector: Current executed action
-        :param curr_info: Current AllBrainInfo.
-        :param next_info: Next AllBrainInfo.
+        :param observation: the observation before executing the action
+        :param action: Current executed action
+        :param next_observation: the observation after executing the action
+        :param reward: the reward obtained after executing the action.
+        :param done: true if the episode ended.
+        :param info: info after executing the action.
         """
         self.replay_memory.append(
-            (curr_info.states, action_vector, [next_info.rewards], next_info.states, [next_info.local_done]))
+            (observation, action, next_observation, reward, done, info))
 
     def process_experiences(self, current_info, action_vector, next_info):
         """
@@ -237,12 +236,12 @@ class DQN:
         action_batch = []
         terminal1_batch = []
         state1_batch = []
-        for state, action, reward, next_state, done in mini_batch:
-            state0_batch.append(state[0])
-            state1_batch.append(next_state[0])
-            reward_batch.append(reward[0])
+        for state, action, next_state, reward,  done, info in mini_batch:
+            state0_batch.append(state)
+            state1_batch.append(next_state)
+            reward_batch.append(reward)
             action_batch.append(action)
-            terminal1_batch.append(0. if done[0] else 1.)
+            terminal1_batch.append(0. if done else 1.)
 
         state0_batch = np.array(state0_batch)
         state1_batch = np.array(state1_batch)
@@ -256,7 +255,7 @@ class DQN:
         delta_targets = (reward_batch + discounted_reward_batch).reshape(self.batch_size, 1)
 
         target_f = self.model.predict_on_batch(state0_batch)
-        indexes = np.argmax(action_batch, axis=1)
+        indexes = action_batch
         target_f_after = target_f
         target_f_after[:, indexes] = delta_targets
         self.model.train_on_batch(state0_batch, target_f_after)  # Test impl. other solution 'target_f'

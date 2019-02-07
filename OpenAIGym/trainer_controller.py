@@ -6,13 +6,14 @@ import re
 from enum import Enum
 
 import gym
+import gym_eflex_agent
 import keras
 import keras.backend as backend
 import numpy as np
 import tensorflow as tf
 import yaml
 
-from OpenAIGym.FAPSPLMAgents.exception import FAPSPLMEnvironmentException
+from OpenAIGym.exception import FAPSPLMEnvironmentException
 
 
 class SPACE_TYPE(Enum):
@@ -91,7 +92,7 @@ class TrainerController(object):
         Saves current model to checkpoint folder.
         """
         _trainer.save_model(_model_path)
-        print("\nINFO: Model saved.")
+        print("INFO: Model saved.")
 
     @staticmethod
     def _import_module(module_name, class_name):
@@ -207,10 +208,10 @@ class TrainerController(object):
                 t.load_model_and_restore(self.model_paths[k])
 
         global_step = 0  # This is only for saving the model
-
+        cumulated_reward = 0.0
         # Reset the environments
         for e, env in self.envs.items():
-            self.observations[e] = env.reset(train_mode=self.train_model)
+            self.observations[e] = env.reset()
             self.dones[e] = False
             self.rewards[e] = 0.0
             self.infos[e] = None
@@ -228,17 +229,19 @@ class TrainerController(object):
                     for e, env in self.envs.items():
                         # reset the environment and the trainers if env is done
                         if self.dones[e]:
-                            self.observations[e] = env.reset(train_mode=self.train_model)
+                            self.observations[e] = env.reset()
                             trainer.end_episode()
 
                         # Decide and take an action
-                        action_map[brain_name] = trainer.take_action(self.observations[e])
+                        action_map[brain_name] = trainer.take_action(self.observations[e], env)
                         new_observations[e], self.rewards[e], self.dones[e], self.infos[e] = \
                             env.step(action_map[brain_name])
 
                         # Process experience and generate statistics
-                        trainer.add_experiences(self.observations, action_map[brain_name], new_observations[e])
-                        trainer.process_experiences(self.observations, action_map[brain_name], new_observations[e])
+                        trainer.add_experiences(self.observations[e], action_map[brain_name], new_observations[e],
+                                                self.rewards[e], self.dones[e], self.infos[e])
+                        trainer.process_experiences(self.observations[e], action_map[brain_name], new_observations[e])
+                        cumulated_reward += self.rewards[e]
 
                         if trainer.is_ready_update() and self.train_model and trainer.get_step <= trainer.get_max_steps:
                             # Perform gradient descent with experience buffer
@@ -248,6 +251,10 @@ class TrainerController(object):
                         if self.train_model and trainer.get_step <= trainer.get_max_steps:
                             trainer.increment_step()
                             trainer.update_last_reward(self.rewards[e])
+
+                        # Render the environment
+                        env.render()
+                        print("CUL. REWARD: {}".format(cumulated_reward))
 
                     self.observations = new_observations
 

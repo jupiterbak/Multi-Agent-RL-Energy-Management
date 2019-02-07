@@ -1,21 +1,10 @@
 # # FAPS PLMAgents
 # ## FAPS PLM ML-Agent Learning
 
-import logging
-
-import os
 import docopt
 import logging
-import numpy as np
 import os
-import re
-import tensorflow as tf
-import keras
-import yaml
-import keras.backend as backend
-import gym
-import gym_eflex_agent
-from OpenAIGym.FAPSPLMAgents.trainer_controller import TrainerController
+from OpenAIGym.trainer_controller import TrainerController
 
 if __name__ == '__main__':
     logger = logging.getLogger("FAPSPLMAgents")
@@ -68,7 +57,7 @@ if __name__ == '__main__':
     base_path = os.path.dirname(__file__)
     TRAINER_CONFIG_PATH = os.path.abspath(os.path.join(base_path, "trainer_config.yaml"))
 
-    tc = TrainerController(use_gpu, [brain_name], [environment], save_freq, load_model, train_model,
+    tc = TrainerController(use_gpu, [brain_name], [environment, environment, environment, environment, environment], save_freq, load_model, train_model,
                            keep_checkpoints, seed, TRAINER_CONFIG_PATH)
     tc.start_learning()
     exit(0)
