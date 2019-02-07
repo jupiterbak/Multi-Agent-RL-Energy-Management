@@ -2,23 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac5cb565-613a-4825-b8bb-08171f326be0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/OpenAIGym/models/MCD/DQN.h5" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/A2C.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/_A2C.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/AC.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/_AC.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/DDPG.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/_DDPG.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/DDQN.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/_DDQN.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/DQN.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/DQN.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/DRQN.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/_DRQN.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/PPO.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/_PPO.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/PrioritizedDQN.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/Random.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/Random.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/exception.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/exception.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/trainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/trainer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/trainer_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/trainer_controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenAIGym/main_test_001.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/main_01.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenAIGym/trainer_config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/trainer_config.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexAgentV0.py" beforeDir="false" afterPath="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexAgentV0.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/OpenAIGym/trainer_controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="263">
-              <caret line="261" column="26" selection-start-line="261" selection-start-column="26" selection-end-line="261" selection-end-column="26" />
+            <state relative-caret-position="467">
+              <caret line="273" column="75" selection-start-line="273" selection-start-column="75" selection-end-line="273" selection-end-column="75" />
               <folding>
                 <element signature="e#51#65#0" expanded="true" />
               </folding>
@@ -272,7 +256,21 @@
       <option name="project" value="LOCAL" />
       <updated>1549357731708</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Add DQN">
+      <created>1549583667680</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1549583667680</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Add DQN">
+      <created>1549583739826</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1549583739826</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -483,8 +481,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/OpenAIGym/trainer_controller.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="261" column="26" selection-start-line="261" selection-start-column="26" selection-end-line="261" selection-end-column="26" />
+        <state relative-caret-position="467">
+          <caret line="273" column="75" selection-start-line="273" selection-start-column="75" selection-end-line="273" selection-end-column="75" />
           <folding>
             <element signature="e#51#65#0" expanded="true" />
           </folding>
