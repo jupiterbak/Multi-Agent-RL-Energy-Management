@@ -41,7 +41,7 @@ if __name__ == '__main__':
     # General parameters
     brain_name = options['--brain_name']
     environment = options['--environment']
-    render = options['--render']
+
     seed = int(options['--seed'])
     load_model = bool(options['--load'])
     train_model = bool(options['--train'])
@@ -50,6 +50,7 @@ if __name__ == '__main__':
 
     lesson = int(options['--lesson'])
     use_gpu = int(options['--use-gpu'])
+    render = bool(options['--render'])
 
     # log the configuration
     # logger.info(options)
@@ -59,7 +60,7 @@ if __name__ == '__main__':
     base_path = os.path.dirname(__file__)
     TRAINER_CONFIG_PATH = os.path.abspath(os.path.join(base_path, "trainer_config.yaml"))
 
-    tc = TrainerController(use_gpu, [brain_name], [environment, environment, environment, environment, environment],
+    tc = TrainerController(use_gpu, [brain_name], [environment],
                            render, save_freq, load_model, train_model,
                            keep_checkpoints, seed, TRAINER_CONFIG_PATH)
     tc.start_learning()

@@ -60,7 +60,7 @@ class TrainerController(object):
         # parse and format the brain names
         self.brain_names = []
         for b in brain_names:
-            self.brain_names.append(re.sub('[^0-9a-zA-Z]+', '-', b))
+            self.brain_names.append(re.sub('[^0-9a-zA-Z]+', '_', b))
 
         # Reset the environment and get all parameters from the simulation
         self.envs = {}
@@ -108,7 +108,7 @@ class TrainerController(object):
     def _initialize_trainer(self, _brain_name, _trainer_config):
 
         _trainer_parameters = _trainer_config['default'].copy()
-        _graph_scope = re.sub('[^0-9a-zA-Z]+', '-', _brain_name)
+        _graph_scope = re.sub('[^0-9a-zA-Z]+', '_', _brain_name)
         _trainer_parameters['graph_scope'] = _graph_scope
         _trainer_parameters['summary_path'] = '{basedir}/{name}'.format(
             basedir='summaries',
@@ -256,7 +256,7 @@ class TrainerController(object):
                         # Render the environment
                         if self.render:
                             env.render()
-                            print("CUL. REWARD: {}".format(cumulated_reward))
+                            # print("CUL. REWARD: {}".format(cumulated_reward))
 
                     self.observations = new_observations
 

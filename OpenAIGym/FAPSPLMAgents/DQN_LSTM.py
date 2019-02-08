@@ -7,7 +7,7 @@ import tensorflow as tf
 from collections import deque
 
 from keras.callbacks import TensorBoard
-from keras.layers import Dense, LSTM
+from keras.layers import Dense, LSTM, Dropout
 from keras.optimizers import Adam
 from keras import backend as k, Input, Model
 
@@ -23,7 +23,7 @@ class FAPSTrainerException(FAPSPLMEnvironmentException):
     pass
 
 
-class DQN:
+class DQN_LSTM:
     """This class is the abstract class for the trainers"""
 
     def __init__(self, envs, brain_name, trainer_parameters, training, seed):
@@ -47,6 +47,7 @@ class DQN:
         self.initialized = False
 
         # initialize specific DQN parameters
+        self.time_slice = 10
         self.env_brains = envs
         self.state_size = 0
         self.action_size = 0
@@ -54,11 +55,12 @@ class DQN:
             self.action_size = env.action_space.n
             self.state_size = env.observation_space.n
 
-        ## self.action_space_type = envs.actionSpaceType
+        # self.action_space_type = envs.actionSpaceType
         self.num_layers = self.trainer_parameters['num_layers']
         self.batch_size = self.trainer_parameters['batch_size']
         self.hidden_units = self.trainer_parameters['hidden_units']
         self.replay_memory = deque(maxlen=self.trainer_parameters['memory_size'])
+        self.replay_sequence = deque(maxlen=self.time_slice)
         self.gamma = self.trainer_parameters['gamma']  # discount rate
         self.epsilon = self.trainer_parameters['epsilon']  # exploration rate
         self.epsilon_min = self.trainer_parameters['epsilon_min']
@@ -69,7 +71,7 @@ class DQN:
         self.model = None
 
     def __str__(self):
-        return '''DQN Trainer'''
+        return '''DQN LSTM Trainer'''
 
     @property
     def parameters(self):
@@ -105,10 +107,15 @@ class DQN:
     def _build_model(self):
         # Neural Net for Deep-Q learning Model
 
-        a = Input(shape=[self.state_size], name='actor_state')
-        h = Dense(self.hidden_units, activation='relu', kernel_initializer='he_uniform', name="dense_actor")(a)
-        for x in range(1, self.num_layers):
-            h = Dense(self.hidden_units, activation='relu', kernel_initializer='he_uniform')(h)
+        a = Input(shape=(self.time_slice, self.state_size), name='state_input')
+        h = LSTM(self.hidden_units, activation="relu", name="lstm_input", dropout=0.2,
+                 recurrent_dropout=0.2)(a)
+        # h = LSTM(self.hidden_units, activation="relu", name="lstm_input", dropout=0.2,
+        #          recurrent_dropout=0.2, return_sequences=True)(a)
+        # for x in range(1, self.num_layers):
+        #      h = LSTM(self.hidden_units,activation='relu', dropout=0.2,
+        #               recurrent_dropout=0.2, name="lstm_{}".format(x))(h)
+        h = Dropout(0.2)(h)
         o = Dense(self.action_size, activation='softmax', kernel_initializer='he_uniform')(h)
         model = Model(inputs=a, outputs=o)
         return model
@@ -124,7 +131,9 @@ class DQN:
         Initialize the trainer
         """
         self.model = self._build_model()
-        self.model.compile(loss='mse', optimizer=Adam(lr=self.learning_rate), metrics=['mse'])
+        self.model.compile(loss='categorical_crossentropy', optimizer=Adam(lr=self.learning_rate),
+                           metrics=['accuracy'])
+        self.tensorboard.set_model(self.model)
         print(self.model.summary())
 
         self.initialized = True
@@ -146,10 +155,10 @@ class DQN:
         if os.path.exists(model_path + '/DQN.h5'):
             self.model = self._build_model()
             self.model.load_weights(model_path)
-            self.model.compile(loss='mse', optimizer=Adam(lr=self.learning_rate))
+            self.model.compile(loss='categorical_crossentropy', optimizer=Adam(lr=self.learning_rate))
         else:
             self.model = self._build_model()
-            self.model.compile(loss='mse', optimizer=Adam(lr=self.learning_rate))
+            self.model.compile(loss='categorical_crossentropy', optimizer=Adam(lr=self.learning_rate))
 
     def increment_step(self):
         """
@@ -170,14 +179,14 @@ class DQN:
         :param _env: The environment.
         :return: the action array and an object as cookie
         """
-        temp = None
-        if np.random.rand() <= self.epsilon:
-            temp = np.argmax(np.random.randint(0, 2, self.action_size))
+        if np.random.rand() <= self.epsilon or len(self.replay_sequence) < (self.time_slice - 1):
+            return np.argmax(np.random.randint(0, 2, self.action_size))
         else:
-            tmp = observation.reshape((1, self.state_size))
-            act_values = self.model.predict(tmp)
-            temp = np.argmax(act_values[0])
-        return temp  # returns action
+            last_elements = self.replay_sequence.copy()
+            last_elements.append(observation)
+            arr_last_elements = np.array([last_elements])
+            act_values = self.model.predict(arr_last_elements)
+            return np.argmax(act_values[0])
 
     def add_experiences(self, observation, action, next_observation, reward, done, info):
         """
@@ -189,8 +198,15 @@ class DQN:
         :param done: true if the episode ended.
         :param info: info after executing the action.
         """
-        self.replay_memory.append(
-            (observation, action, next_observation, reward, done, info))
+        self.replay_sequence.append(observation)
+        if len(self.replay_sequence) >= self.time_slice:
+            tmp = np.array(self.replay_sequence.copy())
+
+            next_last_elements = self.replay_sequence.copy()
+            next_last_elements.append(next_observation)
+            next_arr_last_elements = np.array(next_last_elements)
+
+            self.replay_memory.append((tmp, action, next_arr_last_elements, reward, done, info))
 
     def process_experiences(self, current_info, action_vector, next_info):
         """
@@ -250,16 +266,15 @@ class DQN:
         next_target = self.model.predict_on_batch(state1_batch)
         discounted_reward_batch = self.gamma * np.amax(next_target, axis=1)
         discounted_reward_batch = discounted_reward_batch * terminal1_batch
-        delta_targets = (reward_batch + discounted_reward_batch).reshape(self.batch_size, 1)
+        delta_targets = (reward_batch + discounted_reward_batch).reshape(num_samples, 1)
 
         target_f = self.model.predict_on_batch(state0_batch)
         indexes = action_batch
         target_f_after = target_f
         target_f_after[:, indexes] = delta_targets
-        self.model.train_on_batch(state0_batch, target_f_after)
         logs = self.model.train_on_batch(state0_batch, target_f_after)
-        train_names = ['train_loss', 'train_mse']
-        val_names = ['val_loss', 'val_mse']
+        train_names = ['train_loss', 'train_accuracy']
+        val_names = ['val_loss', 'val_accuracy']
         self._write_log(self.tensorboard, train_names, logs, self.steps % self.batch_size)
         self._write_log(self.tensorboard, val_names, logs, self.steps % self.batch_size)
 
@@ -273,7 +288,7 @@ class DQN:
         :param model_path: The path where the model will be saved.
         """
         if os.path.exists(model_path):
-            self.model.save(model_path + '/DQN.h5')
+            self.model.save(model_path + '/DQN_LSTM.h5')
         else:
             raise FAPSTrainerException("The model path doesn't exist. model_path : " + model_path)
 

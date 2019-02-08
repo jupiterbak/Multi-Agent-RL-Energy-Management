@@ -136,7 +136,7 @@ class EFlexAgentV0(gym.Env):
                 self.current_reward = 0.0
             elif action == EFLEXAgentTransition.Reset:
                 self.current_state = EFLEXAgentState.Idle
-                self.current_reward = 0.0
+                self.current_reward = 0.5
             else:
                 self.current_state = EFLEXAgentState.Stopped
                 self.current_reward = 0.0
