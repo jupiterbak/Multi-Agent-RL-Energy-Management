@@ -21,7 +21,7 @@ default:
     summary_freq: 1000      # Frequency at which at summary will be printed out
     buffer_size: 10240
 
-MCD_LSTM:
+MCD_DQN_LSTM:
     trainer: DQN_LSTM       # trainer type
     batch_size: 512         # batch size
     memory_size: 10240      # allocated memory size

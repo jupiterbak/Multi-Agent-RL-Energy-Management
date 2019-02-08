@@ -30,7 +30,7 @@ class DQN_LSTM:
         """
         Responsible for collecting experiences and training a neural network model.
 
-        :param env: The FAPSPLMEnvironment.
+        :param envs: The FAPSPLMEnvironment.
         :param brain_name: The brain to train.
         :param trainer_parameters: The parameters for the trainer (dictionary).
         :param training: Whether the trainer is set for training.
@@ -67,7 +67,7 @@ class DQN_LSTM:
         self.epsilon_decay = self.trainer_parameters['epsilon_decay']
         self.learning_rate = self.trainer_parameters['learning_rate']
         self.summary = self.trainer_parameters['summary_path']
-        self.tensorboard = TensorBoard(log_dir=self.summary)
+        self.tensorBoard = tf.summary.FileWriter(logdir=self.summary)
         self.model = None
 
     def __str__(self):
@@ -133,7 +133,6 @@ class DQN_LSTM:
         self.model = self._build_model()
         self.model.compile(loss='categorical_crossentropy', optimizer=Adam(lr=self.learning_rate),
                            metrics=['accuracy'])
-        self.tensorboard.set_model(self.model)
         print(self.model.summary())
 
         self.initialized = True
@@ -275,8 +274,8 @@ class DQN_LSTM:
         logs = self.model.train_on_batch(state0_batch, target_f_after)
         train_names = ['train_loss', 'train_accuracy']
         val_names = ['val_loss', 'val_accuracy']
-        self._write_log(self.tensorboard, train_names, logs, self.steps % self.batch_size)
-        self._write_log(self.tensorboard, val_names, logs, self.steps % self.batch_size)
+        self._write_log(self.tensorBoard, train_names, logs, self.steps % self.batch_size)
+        self._write_log(self.tensorBoard, val_names, logs, self.steps % self.batch_size)
 
         # TODO: check the performance with the following trick - Jupiter
         if self.epsilon > self.epsilon_min:
@@ -325,8 +324,8 @@ class DQN_LSTM:
             summary_value = summary.value.add()
             summary_value.simple_value = value
             summary_value.tag = name
-            callback.writer.add_summary(summary, batch_no)
-            callback.writer.flush()
+            callback.add_summary(summary, batch_no)
+            callback.flush()
 
 
 pass
