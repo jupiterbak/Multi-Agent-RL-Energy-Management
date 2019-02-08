@@ -22,7 +22,7 @@ class SPACE_TYPE(Enum):
 
 
 class TrainerController(object):
-    def __init__(self, use_gpu, brain_names, environment_names, save_freq, load, train, keep_checkpoints, seed,
+    def __init__(self, use_gpu, brain_names, environment_names, render, save_freq, load, train, keep_checkpoints, seed,
                  trainer_config_path):
         """
         :param brain_names: Names of the brain to train
@@ -42,6 +42,7 @@ class TrainerController(object):
         self.save_freq = save_freq
         self.load_model = load
         self.train_model = train
+        self.render = render
         self.keep_checkpoints = keep_checkpoints
         self.trainers = {}
 
@@ -253,8 +254,9 @@ class TrainerController(object):
                             trainer.update_last_reward(self.rewards[e])
 
                         # Render the environment
-                        env.render()
-                        print("CUL. REWARD: {}".format(cumulated_reward))
+                        if self.render:
+                            env.render()
+                            print("CUL. REWARD: {}".format(cumulated_reward))
 
                     self.observations = new_observations
 

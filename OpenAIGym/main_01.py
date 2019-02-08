@@ -20,6 +20,7 @@ if __name__ == '__main__':
       --keep-checkpoints=<n>     How many model checkpoints to keep [default: 5].
       --lesson=<n>               Start learning from this lesson [default: 0].
       --load                     Whether to load the model or randomly initialize [default: True].
+      --render                   Whether the environment should be rendered or not [default: False].
       --save-freq=<n>            Frequency at which to save model [default: 10000].
       --seed=<n>                 Random seed used for training [default: -1].
       --train                    Whether to train model, or only run inference [default: False].
@@ -40,6 +41,7 @@ if __name__ == '__main__':
     # General parameters
     brain_name = options['--brain_name']
     environment = options['--environment']
+    render = options['--render']
     seed = int(options['--seed'])
     load_model = bool(options['--load'])
     train_model = bool(options['--train'])
@@ -57,7 +59,8 @@ if __name__ == '__main__':
     base_path = os.path.dirname(__file__)
     TRAINER_CONFIG_PATH = os.path.abspath(os.path.join(base_path, "trainer_config.yaml"))
 
-    tc = TrainerController(use_gpu, [brain_name], [environment, environment, environment, environment, environment], save_freq, load_model, train_model,
+    tc = TrainerController(use_gpu, [brain_name], [environment, environment, environment, environment, environment],
+                           render, save_freq, load_model, train_model,
                            keep_checkpoints, seed, TRAINER_CONFIG_PATH)
     tc.start_learning()
     exit(0)
