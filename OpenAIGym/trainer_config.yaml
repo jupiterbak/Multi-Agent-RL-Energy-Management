@@ -6,7 +6,8 @@ default:
     epsilon: 0.2            # exploration rate
     epsilon_min: 0.01       # minimal exploration rate
     epsilon_decay: 0.999
-    gamma: 0.95             # discount factor
+    alpha: 0.1              #
+    gamma: 0.99             # discount factor
     tau: .125               # soft target model updates
     num_layers: 2           # number of hidden layers
     hidden_units: 128       # number of hidden unit in the hidden layer
@@ -32,7 +33,7 @@ MCD_DQN_LSTM:
     gamma: 0.99             # discount factor
     tau: .001               # soft target model updates
     num_layers: 1           # number of hidden layers
-    hidden_units: 32        # number of hidden unit in the hidden layer
+    hidden_units: 112       # number of hidden unit in the hidden layer
     use_recurrent: false    # use R-NN
     lambd: 0.95
     learning_rate: 0.001    # learning rate
@@ -85,4 +86,17 @@ MCD_DQN:
     num_epoch: 10000        # total number of epochs
     time_horizon: 64        # time horizon
     sequence_length: 64     # TODO:
+    summary_freq: 1000      # Frequency at which at summary will be printed out
+
+MCD_SARSA:
+    trainer: SARSA          # trainer type
+    batch_size: 512         # batch size
+    memory_size: 10240      # allocated memory size
+    alpha: 0.1              #
+    epsilon: 0.5            # exploration rate
+    epsilon_min: 0.01       # minimal exploration rate
+    epsilon_decay: 0.999
+    gamma: 0.99             # discount factor
+    max_steps: 5000000      # maximum number of state for an episode
+    num_epoch: 10000        # total number of epochs
     summary_freq: 1000      # Frequency at which at summary will be printed out

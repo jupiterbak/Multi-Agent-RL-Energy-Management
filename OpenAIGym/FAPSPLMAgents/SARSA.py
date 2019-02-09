@@ -1,15 +1,12 @@
 # # FAPS PLMAgents
+import logging
 import os
 import random
-import logging
-import numpy as np
-import tensorflow as tf
 from collections import deque
 
-from keras.callbacks import TensorBoard
-from keras.layers import Dense, LSTM
-from keras.optimizers import Adam
-from keras import backend as k, Input, Model
+import numpy as np
+import tensorflow as tf
+from keras import backend as k
 
 from OpenAIGym.exception import FAPSPLMEnvironmentException
 
@@ -23,14 +20,14 @@ class FAPSTrainerException(FAPSPLMEnvironmentException):
     pass
 
 
-class DQN:
+class SARSA:
     """This class is the abstract class for the trainers"""
 
     def __init__(self, envs, brain_name, trainer_parameters, training, seed):
         """
         Responsible for collecting experiences and training a neural network model.
 
-        :param env: The FAPSPLMEnvironment.
+        :param envs: The FAPSPLMEnvironment.
         :param brain_name: The brain to train.
         :param trainer_parameters: The parameters for the trainer (dictionary).
         :param training: Whether the trainer is set for training.
@@ -54,16 +51,13 @@ class DQN:
             self.action_size = env.action_space.n
             self.state_size = env.observation_space.n
 
-        # self.action_space_type = envs.actionSpaceType
-        self.num_layers = self.trainer_parameters['num_layers']
         self.batch_size = self.trainer_parameters['batch_size']
-        self.hidden_units = self.trainer_parameters['hidden_units']
-        self.replay_memory = deque(maxlen=self.trainer_parameters['memory_size'])
         self.gamma = self.trainer_parameters['gamma']  # discount rate
+        self.alpha = self.trainer_parameters['alpha']
         self.epsilon = self.trainer_parameters['epsilon']  # exploration rate
         self.epsilon_min = self.trainer_parameters['epsilon_min']
         self.epsilon_decay = self.trainer_parameters['epsilon_decay']
-        self.learning_rate = self.trainer_parameters['learning_rate']
+        self.replay_memory = deque(maxlen=self.trainer_parameters['memory_size'])
         self.summary = self.trainer_parameters['summary_path']
         self.tensorBoard = tf.summary.FileWriter(logdir=self.summary)
         self.model = None
@@ -104,13 +98,7 @@ class DQN:
 
     def _build_model(self):
         # Neural Net for Deep-Q learning Model
-
-        a = Input(shape=[self.state_size], name='actor_state')
-        h = Dense(self.hidden_units, activation='relu', kernel_initializer='he_uniform', name="dense_actor")(a)
-        # for x in range(1, self.num_layers):
-        #     h = Dense(self.hidden_units, activation='relu', kernel_initializer='he_uniform')(h)
-        o = Dense(self.action_size, activation='softmax', kernel_initializer='he_uniform')(h)
-        model = Model(inputs=a, outputs=o)
+        model = np.zeros((self.state_size, self.action_size))
         return model
 
     def is_initialized(self):
@@ -124,9 +112,7 @@ class DQN:
         Initialize the trainer
         """
         self.model = self._build_model()
-        self.model.compile(loss='mse', optimizer=Adam(lr=self.learning_rate), metrics=['mse'])
-        print(self.model.summary())
-
+        print('Summary SARSA Q-Matrix ({},{}): \n{}\n'.format(self.state_size, self.action_size, self.model))
         self.initialized = True
 
     def clear(self):
@@ -143,13 +129,11 @@ class DQN:
 
         :param model_path: saved model.
         """
-        if os.path.exists(model_path + '/DQN.h5'):
+        if os.path.exists(model_path + '/SARSA.h5.npy'):
             self.model = self._build_model()
-            self.model.load_weights(model_path)
-            self.model.compile(loss='mse', optimizer=Adam(lr=self.learning_rate))
+            self.model = np.load(model_path + '/SARSA.h5.npy')
         else:
             self.model = self._build_model()
-            self.model.compile(loss='mse', optimizer=Adam(lr=self.learning_rate))
 
     def increment_step(self):
         """
@@ -173,9 +157,10 @@ class DQN:
         if np.random.rand() <= self.epsilon:
             return np.argmax(np.random.randint(0, 2, self.action_size))
         else:
-            tmp = observation.reshape((1, self.state_size))
-            act_values = self.model.predict(tmp)
-            return np.argmax(act_values[0])
+            _max = np.nanmax(self.model[np.argmax(observation)])
+            indices = np.argwhere(self.model[np.argmax(observation)] == _max)
+            choice = np.random.choice(indices.size)
+            return indices[choice,0]
 
     def add_experiences(self, observation, action, next_observation, reward, done, info):
         """
@@ -199,13 +184,15 @@ class DQN:
         :param next_info: Next corresponding BrainInfo.
         """
         # Nothing to be done in the DQN case
+        pass
 
     def end_episode(self):
         """
         A signal that the Episode has ended. The buffer must be reset.
         Get only called when the academy resets.
         """
-        # print("End Episode...")
+        self.replay_memory.clear()
+        pass
 
     def is_ready_update(self):
         """
@@ -226,41 +213,20 @@ class DQN:
         mini_batch = random.sample(self.replay_memory, num_samples)
 
         # Start by extracting the necessary parameters (we use a vectorized implementation).
-        state0_batch = []
-        reward_batch = []
-        action_batch = []
-        terminal1_batch = []
-        state1_batch = []
         for state, action, next_state, reward, done, info in mini_batch:
-            state0_batch.append(state)
-            state1_batch.append(next_state)
-            reward_batch.append(reward)
-            action_batch.append(action)
-            terminal1_batch.append(0. if done else 1.)
-
-        state0_batch = np.array(state0_batch)
-        state1_batch = np.array(state1_batch)
-        terminal1_batch = np.array(terminal1_batch)
-        reward_batch = np.array(reward_batch)
-        action_batch = np.array(action_batch)
-
-        next_target = self.model.predict_on_batch(state1_batch)
-        discounted_reward_batch = self.gamma * np.amax(next_target, axis=1)
-        discounted_reward_batch = discounted_reward_batch * terminal1_batch
-        delta_targets = (reward_batch + discounted_reward_batch).reshape(self.batch_size, 1)
-
-        target_f = self.model.predict_on_batch(state0_batch)
-        indexes = action_batch
-        target_f_after = target_f
-        target_f_after[:, indexes] = delta_targets
-        self.model.train_on_batch(state0_batch, target_f_after)
-        logs = self.model.train_on_batch(state0_batch, target_f_after)
-        train_names = ['train_loss', 'train_mse']
-        self._write_log(self.tensorBoard, train_names, logs, int(self.steps / self.batch_size))
-
+            next_action = np.argmax(self.model[np.argmax(next_state)])
+            self.model[np.argmax(state), action] = self.model[np.argmax(state), action] \
+                                                   + self.alpha * \
+                                                   (
+                                                           reward +
+                                                           (self.gamma * self.model[np.argmax(next_state), next_action])
+                                                           - self.model[np.argmax(state), action]
+                                                   )
         # TODO: check the performance with the following trick - Jupiter
         if self.epsilon > self.epsilon_min:
             self.epsilon *= self.epsilon_decay
+
+        print('Actual Q-Matrix ({},{}): \n{}\n'.format(self.state_size, self.action_size, self.model))
 
     def save_model(self, model_path):
         """
@@ -268,7 +234,7 @@ class DQN:
         :param model_path: The path where the model will be saved.
         """
         if os.path.exists(model_path):
-            self.model.save(model_path + '/DQN.h5')
+            np.save(model_path + '/SARSA.h5', self.model)
         else:
             raise FAPSTrainerException("The model path doesn't exist. model_path : " + model_path)
 
@@ -277,7 +243,7 @@ class DQN:
         Saves training statistics to i.e. Tensorboard.
         """
         # TODO: Add Tensorboard support - Jupiter
-        # print(self.model.summary())
+        pass
 
     def write_tensorboard_text(self, key, input_dict):
         """
@@ -306,6 +272,7 @@ class DQN:
         summary_value = summary.value.add()
         summary_value.simple_value = value
         summary_value.tag = key
+        summary_value.node_name = key
         self.tensorBoard.add_summary(summary, int(self.steps / self.batch_size))
         self.tensorBoard.flush()
 
@@ -316,6 +283,7 @@ class DQN:
             summary_value = summary.value.add()
             summary_value.simple_value = value
             summary_value.tag = name
+            summary_value.node_name = name
             callback.add_summary(summary, batch_no)
             callback.flush()
 
