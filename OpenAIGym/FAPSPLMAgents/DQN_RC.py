@@ -7,7 +7,7 @@ from collections import deque
 import numpy as np
 import tensorflow as tf
 from keras import backend as k, Input, Model
-from keras.layers import Dense
+from keras.layers import Dense, Dropout
 from keras.optimizers import Adam
 
 from OpenAIGym.exception import FAPSPLMEnvironmentException
@@ -46,7 +46,7 @@ class DQN_RC:
         self.initialized = False
 
         # initialize specific DQN parameters
-        self.time_slice = 5
+        self.time_slice = 10
         self.env_brains = envs
         self.state_size = 0
         self.action_size = 0
@@ -107,8 +107,10 @@ class DQN_RC:
         # Neural Net for Deep-Q learning Model
         a = Input(shape=[self.state_size * self.time_slice], name='actor_state')
         h = Dense(self.hidden_units, activation='relu', kernel_initializer='he_uniform', name="dense_actor")(a)
+        h = Dropout(0.2)(h)
         for x in range(1, self.num_layers):
             h = Dense(self.hidden_units, activation='relu', kernel_initializer='he_uniform')(h)
+            h = Dropout(0.2)(h)
         o = Dense(self.action_size, activation='softmax', kernel_initializer='he_uniform')(h)
         model = Model(inputs=a, outputs=o)
         return model
@@ -124,7 +126,8 @@ class DQN_RC:
         Initialize the trainer
         """
         self.model = self._build_model()
-        self.model.compile(loss='rmse', optimizer=Adam(lr=self.learning_rate), metrics=['rmse'])
+        self.model.compile(loss='categorical_crossentropy', optimizer=Adam(lr=self.learning_rate),
+                           metrics=['accuracy'])
         print(self.model.summary())
 
         self.initialized = True
@@ -146,10 +149,12 @@ class DQN_RC:
         if os.path.exists(model_path + '/DQN.h5'):
             self.model = self._build_model()
             self.model.load_weights(model_path)
-            self.model.compile(loss='mse', optimizer=Adam(lr=self.learning_rate))
+            self.model.compile(loss='categorical_crossentropy', optimizer=Adam(lr=self.learning_rate),
+                               metrics=['accuracy'])
         else:
             self.model = self._build_model()
-            self.model.compile(loss='mse', optimizer=Adam(lr=self.learning_rate))
+            self.model.compile(loss='categorical_crossentropy', optimizer=Adam(lr=self.learning_rate),
+                               metrics=['accuracy'])
 
     def increment_step(self):
         """
@@ -179,7 +184,12 @@ class DQN_RC:
             arr_last_elements = np.array(last_elements)
             tmp = arr_last_elements.reshape((1, self.state_size * self.time_slice))
             act_values = self.model.predict(tmp)
-            return np.argmax(act_values[0])
+
+            _max = np.nanmax(act_values[0])
+            indices = np.argwhere(act_values[0] == _max)
+            choice = np.random.choice(indices.size)
+
+            return indices[choice, 0]
 
     def add_experiences(self, observation, action, next_observation, reward, done, info):
         """
@@ -257,16 +267,19 @@ class DQN_RC:
         reward_batch = np.array(reward_batch)
         action_batch = np.array(action_batch)
 
-        next_target = self.model.predict_on_batch(state1_batch)
-        discounted_reward_batch = self.gamma * np.amax(next_target, axis=1)
-        discounted_reward_batch = discounted_reward_batch * terminal1_batch
-        delta_targets = (reward_batch + discounted_reward_batch).reshape(num_samples, 1)
+        q_now = self.model.predict_on_batch(state0_batch)
+        q_next = self.model.predict_on_batch(state1_batch)
+        q_now_i = np.take(q_now, action_batch)
+        q_next_i = np.take(q_next, action_batch)
 
-        target_f = self.model.predict_on_batch(state0_batch)
-        indexes = action_batch
-        target_f_after = target_f
-        target_f_after[:, indexes] = delta_targets
+        discounted_reward_batch = q_now_i + (0.1 * (reward_batch + (self.gamma * q_next_i) - q_now_i))
+        # discounted_reward_batch = discounted_reward_batch * terminal1_batch
+        delta_targets = discounted_reward_batch.reshape(num_samples, 1)
+        target_f_after = q_now
+        actions = np.expand_dims(action_batch, axis=1)
+        np.put_along_axis(arr=target_f_after, indices=actions, values=delta_targets, axis=1)
         logs = self.model.train_on_batch(state0_batch, target_f_after)
+
         train_names = ['train_loss', 'train_accuracy']
         self._write_log(self.tensorBoard, train_names, logs, int(self.steps / self.batch_size))
 

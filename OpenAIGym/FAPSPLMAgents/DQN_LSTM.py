@@ -47,7 +47,7 @@ class DQN_LSTM:
         self.initialized = False
 
         # initialize specific DQN parameters
-        self.time_slice = 10
+        self.time_slice = 4
         self.env_brains = envs
         self.state_size = 0
         self.action_size = 0
@@ -117,9 +117,9 @@ class DQN_LSTM:
                     h = LSTM(self.hidden_units, activation='relu', dropout=0.2, recurrent_dropout=0.2,
                              return_sequences=True, name="lstm_{}".format(x))(h)
 
-            h = LSTM(self.hidden_units, activation="relu", name="lstm_input", dropout=0.2, recurrent_dropout=0.2)(h)
+            h = LSTM(self.hidden_units, activation="relu", name="lstm_hidden", dropout=0.2, recurrent_dropout=0.2)(h)
         else:
-            h = LSTM(self.hidden_units, activation="relu", name="lstm_input", dropout=0.2,
+            h = LSTM(self.hidden_units, activation="relu", name="lstm_hidden", dropout=0.2,
                      recurrent_dropout=0.2)(a)
 
         o = Dense(self.action_size, activation='softmax', kernel_initializer='he_uniform')(h)
@@ -137,8 +137,8 @@ class DQN_LSTM:
         Initialize the trainer
         """
         self.model = self._build_model()
-        self.model.compile(loss='mse', optimizer=Adam(lr=self.learning_rate),
-                           metrics=['mse'])
+        self.model.compile(loss='categorical_crossentropy', optimizer=Adam(lr=self.learning_rate),
+                           metrics=['accuracy'])
         print(self.model.summary())
 
         self.initialized = True
@@ -160,10 +160,10 @@ class DQN_LSTM:
         if os.path.exists(model_path + '/DQN.h5'):
             self.model = self._build_model()
             self.model.load_weights(model_path)
-            self.model.compile(loss='mse', optimizer=Adam(lr=self.learning_rate))
+            self.model.compile(loss='categorical_crossentropy', optimizer=Adam(lr=self.learning_rate))
         else:
             self.model = self._build_model()
-            self.model.compile(loss='mse', optimizer=Adam(lr=self.learning_rate))
+            self.model.compile(loss='categorical_crossentropy', optimizer=Adam(lr=self.learning_rate))
 
     def increment_step(self):
         """
@@ -191,7 +191,12 @@ class DQN_LSTM:
             last_elements.append(observation)
             arr_last_elements = np.array([last_elements])
             act_values = self.model.predict(arr_last_elements)
-            return np.argmax(act_values[0])
+
+            _max = np.nanmax(act_values[0])
+            indices = np.argwhere(act_values[0] == _max)
+            choice = np.random.choice(indices.size)
+
+            return indices[choice, 0]
 
     def add_experiences(self, observation, action, next_observation, reward, done, info):
         """
@@ -268,17 +273,31 @@ class DQN_LSTM:
         reward_batch = np.array(reward_batch)
         action_batch = np.array(action_batch)
 
-        next_target = self.model.predict_on_batch(state1_batch)
-        discounted_reward_batch = self.gamma * np.amax(next_target, axis=1)
-        discounted_reward_batch = discounted_reward_batch * terminal1_batch
-        delta_targets = (reward_batch + discounted_reward_batch).reshape(num_samples, 1)
+        # next_target = self.model.predict_on_batch(state1_batch)
+        # discounted_reward_batch = self.gamma * np.amax(next_target, axis=1)
+        # discounted_reward_batch = discounted_reward_batch * terminal1_batch
+        # delta_targets = (reward_batch + discounted_reward_batch).reshape(num_samples, 1)
+        #
+        # target_f = self.model.predict_on_batch(state0_batch)
+        # indexes = action_batch
+        # target_f_after = target_f
+        # target_f_after[:, indexes] = delta_targets
+        # logs = self.model.train_on_batch(state0_batch, target_f_after)
 
-        target_f = self.model.predict_on_batch(state0_batch)
-        indexes = action_batch
-        target_f_after = target_f
-        target_f_after[:, indexes] = delta_targets
+        q_now = self.model.predict_on_batch(state0_batch)
+        q_next = self.model.predict_on_batch(state1_batch)
+        q_now_i = np.take(q_now, action_batch)
+        q_next_i = np.take(q_next, action_batch)
+
+        discounted_reward_batch = q_now_i + (0.1 * (reward_batch + (self.gamma * q_next_i) - q_now_i))
+        # discounted_reward_batch = discounted_reward_batch * terminal1_batch
+        delta_targets = discounted_reward_batch.reshape(num_samples, 1)
+        target_f_after = q_now
+        actions = np.expand_dims(action_batch, axis=1)
+        np.put_along_axis(arr=target_f_after, indices=actions, values=delta_targets, axis=1)
         logs = self.model.train_on_batch(state0_batch, target_f_after)
-        train_names = ['train_loss', 'train_mse']
+
+        train_names = ['train_loss', 'train_accuracy']
         self._write_log(self.tensorBoard, train_names, logs, int(self.steps / self.batch_size))
 
         # TODO: check the performance with the following trick - Jupiter

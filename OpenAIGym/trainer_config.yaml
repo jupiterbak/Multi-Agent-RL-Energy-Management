@@ -6,7 +6,7 @@ default:
     epsilon: 0.2            # exploration rate
     epsilon_min: 0.01       # minimal exploration rate
     epsilon_decay: 0.999
-    alpha: 0.1              #
+    alpha: 0.1              # learning factor
     gamma: 0.99             # discount factor
     tau: .125               # soft target model updates
     num_layers: 2           # number of hidden layers
@@ -25,18 +25,18 @@ default:
 MCD_DQN_LSTM:
     trainer: DQN_LSTM       # trainer type
     batch_size: 512         # batch size
-    memory_size: 10240      # allocated memory size
+    memory_size: 5120       # allocated memory size
     beta: 5.0e-3
-    epsilon: 0.2            # exploration rate
+    epsilon: 0.3            # exploration rate
     epsilon_min: 0.01       # minimal exploration rate
     epsilon_decay: 0.999
     gamma: 0.99             # discount factor
     tau: .001               # soft target model updates
     num_layers: 1           # number of hidden layers
-    hidden_units: 112       # number of hidden unit in the hidden layer
+    hidden_units: 32        # number of hidden unit in the hidden layer
     use_recurrent: false    # use R-NN
     lambd: 0.95
-    learning_rate: 0.001    # learning rate
+    learning_rate: 0.001    # learning rate or learning factor
     max_steps: 5000000      # maximum number of state for an episode
     normalize: false        # add nomalization layer to the associated NN
     num_epoch: 10000        # total number of epochs
@@ -47,9 +47,9 @@ MCD_DQN_LSTM:
 MCD_DQN_RC:
     trainer: DQN_RC         # trainer type
     batch_size: 512         # batch size
-    memory_size: 10240      # allocated memory size
+    memory_size: 5120       # allocated memory size
     beta: 5.0e-3
-    epsilon: 0.2            # exploration rate
+    epsilon: 0.3            # exploration rate
     epsilon_min: 0.01       # minimal exploration rate
     epsilon_decay: 0.999
     gamma: 0.99             # discount factor
@@ -58,7 +58,7 @@ MCD_DQN_RC:
     hidden_units: 64        # number of hidden unit in the hidden layer
     use_recurrent: false    # use R-NN
     lambd: 0.95
-    learning_rate: 0.001    # learning rate
+    learning_rate: 0.001    # learning rate or learning factor
     max_steps: 5000000      # maximum number of state for an episode
     normalize: false        # add normalization layer to the associated NN
     num_epoch: 10000        # total number of epochs
@@ -92,8 +92,8 @@ MCD_SARSA:
     trainer: SARSA          # trainer type
     batch_size: 512         # batch size
     memory_size: 10240      # allocated memory size
-    alpha: 0.1              #
-    epsilon: 0.5            # exploration rate
+    alpha: 0.1              # learning factor
+    epsilon: 0.3            # exploration rate
     epsilon_min: 0.01       # minimal exploration rate
     epsilon_decay: 0.999
     gamma: 0.99             # discount factor

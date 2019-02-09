@@ -160,7 +160,7 @@ class SARSA:
             _max = np.nanmax(self.model[np.argmax(observation)])
             indices = np.argwhere(self.model[np.argmax(observation)] == _max)
             choice = np.random.choice(indices.size)
-            return indices[choice,0]
+            return indices[choice, 0]
 
     def add_experiences(self, observation, action, next_observation, reward, done, info):
         """
