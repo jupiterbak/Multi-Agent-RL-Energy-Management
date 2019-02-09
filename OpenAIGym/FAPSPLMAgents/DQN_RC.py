@@ -124,7 +124,7 @@ class DQN_RC:
         Initialize the trainer
         """
         self.model = self._build_model()
-        self.model.compile(loss='mse', optimizer=Adam(lr=self.learning_rate), metrics=['mse'])
+        self.model.compile(loss='rmse', optimizer=Adam(lr=self.learning_rate), metrics=['rmse'])
         print(self.model.summary())
 
         self.initialized = True
@@ -268,9 +268,7 @@ class DQN_RC:
         target_f_after[:, indexes] = delta_targets
         logs = self.model.train_on_batch(state0_batch, target_f_after)
         train_names = ['train_loss', 'train_accuracy']
-        val_names = ['val_loss', 'val_accuracy']
-        self._write_log(self.tensorBoard, train_names, logs, self.steps % self.batch_size)
-        self._write_log(self.tensorBoard, val_names, logs, self.steps % self.batch_size)
+        self._write_log(self.tensorBoard, train_names, logs, int(self.steps / self.batch_size))
 
         # TODO: check the performance with the following trick - Jupiter
         if self.epsilon > self.epsilon_min:
@@ -300,17 +298,28 @@ class DQN_RC:
         :param key: The name of the text.
         :param input_dict: A dictionary that will be displayed in a table on Tensorboard.
         """
-        # TODO: Add Tensorboard support
-        # try:
-        #     s_op = tf.summary.text(key,
-        #                            tf.convert_to_tensor(([[str(x), str(input_dict[x])] for x in input_dict]))
-        #                            )
-        #     s = self.sess.run(s_op)
-        #     self.summary_writer.add_summary(s, self.get_step)
-        # except:
-        #     logger.info("Cannot write text summary for Tensorboard. Tensorflow version must be r1.2 or above.")
+        try:
+            s_op = tf.summary.text(key,
+                                   ([[str(x), str(input_dict[x])] for x in input_dict])
+                                   )
 
-        # print("Key: " + key + " - Value: " + input_dict)
+            self.tensorBoard.add_summary(s_op, int(self.steps / self.batch_size))
+        except:
+            logger.info("Cannot write text summary for Tensorboard. Tensorflow version must be r1.2 or above.")
+
+    def write_tensorboard_value(self, key, value):
+        """
+        Saves text to Tensorboard.
+        Note: Only works on tensorflow r1.2 or above.
+        :param key: The name of the text.
+        :param value: A value that will bw displayed on Tensorboard.
+        """
+        summary = tf.Summary()
+        summary_value = summary.value.add()
+        summary_value.simple_value = value
+        summary_value.tag = key
+        self.tensorBoard.add_summary(summary, int(self.steps / self.batch_size))
+        self.tensorBoard.flush()
 
     @staticmethod
     def _write_log(callback, names, logs, batch_no):

@@ -257,6 +257,9 @@ class TrainerController(object):
                         if self.render:
                             env.render()
                             # print("CUL. REWARD: {}".format(cumulated_reward))
+                    if self.render:
+                        # Write to tensorborad
+                        trainer.write_tensorboard_value('cul_reward', cumulated_reward)
 
                     self.observations = new_observations
 

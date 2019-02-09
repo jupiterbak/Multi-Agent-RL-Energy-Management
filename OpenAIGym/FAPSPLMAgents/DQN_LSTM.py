@@ -108,14 +108,20 @@ class DQN_LSTM:
         # Neural Net for Deep-Q learning Model
 
         a = Input(shape=(self.time_slice, self.state_size), name='state_input')
-        h = LSTM(self.hidden_units, activation="relu", name="lstm_input", dropout=0.2,
-                 recurrent_dropout=0.2)(a)
-        # h = LSTM(self.hidden_units, activation="relu", name="lstm_input", dropout=0.2,
-        #          recurrent_dropout=0.2, return_sequences=True)(a)
-        # for x in range(1, self.num_layers):
-        #      h = LSTM(self.hidden_units,activation='relu', dropout=0.2,
-        #               recurrent_dropout=0.2, name="lstm_{}".format(x))(h)
-        h = Dropout(0.2)(h)
+        h = None
+        if self.num_layers > 1:
+            h = LSTM(self.hidden_units, activation="relu", name="lstm_input", dropout=0.2, recurrent_dropout=0.2,
+                     return_sequences=True)(a)
+            if self.num_layers > 2:
+                for x in range(1, self.num_layers - 1):
+                    h = LSTM(self.hidden_units, activation='relu', dropout=0.2, recurrent_dropout=0.2,
+                             return_sequences=True, name="lstm_{}".format(x))(h)
+
+            h = LSTM(self.hidden_units, activation="relu", name="lstm_input", dropout=0.2, recurrent_dropout=0.2)(h)
+        else:
+            h = LSTM(self.hidden_units, activation="relu", name="lstm_input", dropout=0.2,
+                     recurrent_dropout=0.2)(a)
+
         o = Dense(self.action_size, activation='softmax', kernel_initializer='he_uniform')(h)
         model = Model(inputs=a, outputs=o)
         return model
@@ -131,8 +137,8 @@ class DQN_LSTM:
         Initialize the trainer
         """
         self.model = self._build_model()
-        self.model.compile(loss='categorical_crossentropy', optimizer=Adam(lr=self.learning_rate),
-                           metrics=['accuracy'])
+        self.model.compile(loss='mse', optimizer=Adam(lr=self.learning_rate),
+                           metrics=['mse'])
         print(self.model.summary())
 
         self.initialized = True
@@ -154,10 +160,10 @@ class DQN_LSTM:
         if os.path.exists(model_path + '/DQN.h5'):
             self.model = self._build_model()
             self.model.load_weights(model_path)
-            self.model.compile(loss='categorical_crossentropy', optimizer=Adam(lr=self.learning_rate))
+            self.model.compile(loss='mse', optimizer=Adam(lr=self.learning_rate))
         else:
             self.model = self._build_model()
-            self.model.compile(loss='categorical_crossentropy', optimizer=Adam(lr=self.learning_rate))
+            self.model.compile(loss='mse', optimizer=Adam(lr=self.learning_rate))
 
     def increment_step(self):
         """
@@ -272,10 +278,8 @@ class DQN_LSTM:
         target_f_after = target_f
         target_f_after[:, indexes] = delta_targets
         logs = self.model.train_on_batch(state0_batch, target_f_after)
-        train_names = ['train_loss', 'train_accuracy']
-        val_names = ['val_loss', 'val_accuracy']
-        self._write_log(self.tensorBoard, train_names, logs, self.steps % self.batch_size)
-        self._write_log(self.tensorBoard, val_names, logs, self.steps % self.batch_size)
+        train_names = ['train_loss', 'train_mse']
+        self._write_log(self.tensorBoard, train_names, logs, int(self.steps / self.batch_size))
 
         # TODO: check the performance with the following trick - Jupiter
         if self.epsilon > self.epsilon_min:
@@ -305,17 +309,28 @@ class DQN_LSTM:
         :param key: The name of the text.
         :param input_dict: A dictionary that will be displayed in a table on Tensorboard.
         """
-        # TODO: Add Tensorboard support
-        # try:
-        #     s_op = tf.summary.text(key,
-        #                            tf.convert_to_tensor(([[str(x), str(input_dict[x])] for x in input_dict]))
-        #                            )
-        #     s = self.sess.run(s_op)
-        #     self.summary_writer.add_summary(s, self.get_step)
-        # except:
-        #     logger.info("Cannot write text summary for Tensorboard. Tensorflow version must be r1.2 or above.")
+        try:
+            s_op = tf.summary.text(key,
+                                   ([[str(x), str(input_dict[x])] for x in input_dict])
+                                   )
 
-        # print("Key: " + key + " - Value: " + input_dict)
+            self.tensorBoard.add_summary(s_op, int(self.steps / self.batch_size))
+        except:
+            logger.info("Cannot write text summary for Tensorboard. Tensorflow version must be r1.2 or above.")
+
+    def write_tensorboard_value(self, key, value):
+        """
+        Saves text to Tensorboard.
+        Note: Only works on tensorflow r1.2 or above.
+        :param key: The name of the text.
+        :param value: A value that will bw displayed on Tensorboard.
+        """
+        summary = tf.Summary()
+        summary_value = summary.value.add()
+        summary_value.simple_value = value
+        summary_value.tag = key
+        self.tensorBoard.add_summary(summary, int(self.steps / self.batch_size))
+        self.tensorBoard.flush()
 
     @staticmethod
     def _write_log(callback, names, logs, batch_no):

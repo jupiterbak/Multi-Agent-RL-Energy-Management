@@ -5,7 +5,7 @@ default:
     beta: 5.0e-3
     epsilon: 0.2            # exploration rate
     epsilon_min: 0.01       # minimal exploration rate
-    epsilon_decay: 0.995
+    epsilon_decay: 0.999
     gamma: 0.95             # discount factor
     tau: .125               # soft target model updates
     num_layers: 2           # number of hidden layers
@@ -28,11 +28,11 @@ MCD_DQN_LSTM:
     beta: 5.0e-3
     epsilon: 0.2            # exploration rate
     epsilon_min: 0.01       # minimal exploration rate
-    epsilon_decay: 0.995
+    epsilon_decay: 0.999
     gamma: 0.99             # discount factor
     tau: .001               # soft target model updates
-    num_layers: 2           # number of hidden layers
-    hidden_units: 64        # number of hidden unit in the hidden layer
+    num_layers: 1           # number of hidden layers
+    hidden_units: 32        # number of hidden unit in the hidden layer
     use_recurrent: false    # use R-NN
     lambd: 0.95
     learning_rate: 0.001    # learning rate
@@ -50,11 +50,11 @@ MCD_DQN_RC:
     beta: 5.0e-3
     epsilon: 0.2            # exploration rate
     epsilon_min: 0.01       # minimal exploration rate
-    epsilon_decay: 0.995
+    epsilon_decay: 0.999
     gamma: 0.99             # discount factor
     tau: .001               # soft target model updates
     num_layers: 2           # number of hidden layers
-    hidden_units: 32        # number of hidden unit in the hidden layer
+    hidden_units: 64        # number of hidden unit in the hidden layer
     use_recurrent: false    # use R-NN
     lambd: 0.95
     learning_rate: 0.001    # learning rate
@@ -72,7 +72,7 @@ MCD_DQN:
     beta: 5.0e-3
     epsilon: 0.2            # exploration rate
     epsilon_min: 0.01       # minimal exploration rate
-    epsilon_decay: 0.995
+    epsilon_decay: 0.999
     gamma: 0.99             # discount factor
     tau: .001               # soft target model updates
     num_layers: 2           # number of hidden layers
