@@ -47,7 +47,7 @@ MCD_DQN_LSTM:
 MCD_DQN_RC:
     trainer: DQN_RC         # trainer type
     batch_size: 512         # batch size
-    memory_size: 5120       # allocated memory size
+    memory_size: 512       # allocated memory size
     beta: 5.0e-3
     epsilon: 0.3            # exploration rate
     epsilon_min: 0.01       # minimal exploration rate

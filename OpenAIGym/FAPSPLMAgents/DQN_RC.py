@@ -8,7 +8,7 @@ import numpy as np
 import tensorflow as tf
 from keras import backend as k, Input, Model
 from keras.layers import Dense, Dropout
-from keras.optimizers import Adam
+from keras.optimizers import Adam, RMSprop
 
 from OpenAIGym.exception import FAPSPLMEnvironmentException
 
@@ -68,6 +68,7 @@ class DQN_RC:
         self.summary = self.trainer_parameters['summary_path']
         self.tensorBoard = tf.summary.FileWriter(logdir=self.summary)
         self.model = None
+        self.target_model = None
 
     def __str__(self):
         return '''DQN RC Trainer'''
@@ -121,15 +122,25 @@ class DQN_RC:
         """
         return self.initialized
 
+    def _update_target_model(self):
+        # copy weights from model to target_model
+        self.target_model.set_weights(self.model.get_weights())
+
     def initialize(self):
         """
         Initialize the trainer
         """
         self.model = self._build_model()
-        self.model.compile(loss='categorical_crossentropy', optimizer=Adam(lr=self.learning_rate),
-                           metrics=['accuracy'])
+        self.model.compile(loss='mse', optimizer=RMSprop(lr=self.learning_rate),
+                           metrics=['mse'])
         print(self.model.summary())
 
+        self.target_model = self._build_model()
+        self.target_model.compile(loss='mse', optimizer=RMSprop(lr=self.learning_rate),
+                                  metrics=['mse'])
+        print(self.target_model.summary())
+
+        self._update_target_model()
         self.initialized = True
 
     def clear(self):
@@ -146,15 +157,23 @@ class DQN_RC:
 
         :param model_path: saved model.
         """
-        if os.path.exists(model_path + '/DQN.h5'):
+        if os.path.exists(model_path + '/DQN_RC.h5'):
             self.model = self._build_model()
             self.model.load_weights(model_path)
-            self.model.compile(loss='categorical_crossentropy', optimizer=Adam(lr=self.learning_rate),
-                               metrics=['accuracy'])
+            self.model.compile(loss='mse', optimizer=RMSprop(lr=self.learning_rate),
+                               metrics=['mse'])
         else:
             self.model = self._build_model()
-            self.model.compile(loss='categorical_crossentropy', optimizer=Adam(lr=self.learning_rate),
-                               metrics=['accuracy'])
+            self.model.compile(loss='mse', optimizer=RMSprop(lr=self.learning_rate),
+                               metrics=['mse'])
+
+        if os.path.exists(model_path + '/DQN_RC_target.h5'):
+            self.target_model = self._build_model()
+            self.target_model.load_weights(model_path)
+            self.target_model.compile(loss='mse', optimizer=RMSprop(lr=self.learning_rate), metrics=['mse'])
+        else:
+            self.target_model = self._build_model()
+            self.target_model.compile(loss='mse', optimizer=RMSprop(lr=self.learning_rate), metrics=['mse'])
 
     def increment_step(self):
         """
@@ -267,6 +286,17 @@ class DQN_RC:
         reward_batch = np.array(reward_batch)
         action_batch = np.array(action_batch)
 
+        # next_target = self.target_model.predict_on_batch(state1_batch)
+        # discounted_reward_batch = self.gamma * np.amax(next_target, axis=1)
+        # discounted_reward_batch = discounted_reward_batch * terminal1_batch
+        # delta_targets = (reward_batch + discounted_reward_batch).reshape(num_samples, 1)
+        #
+        # q_now = self.model.predict_on_batch(state0_batch)
+        # q_target = q_now
+        # actions = np.expand_dims(action_batch, axis=1)
+        # np.put_along_axis(arr=q_target, indices=actions, values=delta_targets, axis=1)
+        # logs = self.model.train_on_batch(state0_batch, q_target)
+
         q_now = self.model.predict_on_batch(state0_batch)
         q_next = self.model.predict_on_batch(state1_batch)
         q_now_i = np.take(q_now, action_batch)
@@ -280,12 +310,16 @@ class DQN_RC:
         np.put_along_axis(arr=target_f_after, indices=actions, values=delta_targets, axis=1)
         logs = self.model.train_on_batch(state0_batch, target_f_after)
 
-        train_names = ['train_loss', 'train_accuracy']
+        train_names = ['train_loss', 'train_mse']
         self._write_log(self.tensorBoard, train_names, logs, int(self.steps / self.batch_size))
 
         # TODO: check the performance with the following trick - Jupiter
         if self.epsilon > self.epsilon_min:
             self.epsilon *= self.epsilon_decay
+
+        # Update the target network
+        if self.get_step % (4 * self.batch_size):
+            self._update_target_model()
 
     def save_model(self, model_path):
         """
@@ -294,6 +328,11 @@ class DQN_RC:
         """
         if os.path.exists(model_path):
             self.model.save(model_path + '/DQN_RC.h5')
+        else:
+            raise FAPSTrainerException("The model path doesn't exist. model_path : " + model_path)
+
+        if os.path.exists(model_path):
+            self.target_model.save(model_path + '/DQN_RC_target.h5')
         else:
             raise FAPSTrainerException("The model path doesn't exist. model_path : " + model_path)
 
