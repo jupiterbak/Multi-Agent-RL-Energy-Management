@@ -62,6 +62,9 @@ class DQN_LSTM:
         self.replay_memory = deque(maxlen=self.trainer_parameters['memory_size'])
         self.replay_sequence = deque(maxlen=self.time_slice)
         self.gamma = self.trainer_parameters['gamma']  # discount rate
+        self.alpha = self.trainer_parameters['alpha']
+        self.alpha_decay = self.trainer_parameters['alpha_decay']
+        self.alpha_min = self.trainer_parameters['alpha_min']
         self.epsilon = self.trainer_parameters['epsilon']  # exploration rate
         self.epsilon_min = self.trainer_parameters['epsilon_min']
         self.epsilon_decay = self.trainer_parameters['epsilon_decay']
@@ -289,7 +292,7 @@ class DQN_LSTM:
         q_now_i = np.take(q_now, action_batch)
         q_next_i = np.take(q_next, action_batch)
 
-        discounted_reward_batch = q_now_i + (0.1 * (reward_batch + (self.gamma * q_next_i) - q_now_i))
+        discounted_reward_batch = q_now_i + (0.2 * (reward_batch + (self.gamma * q_next_i) - q_now_i))
         # discounted_reward_batch = discounted_reward_batch * terminal1_batch
         delta_targets = discounted_reward_batch.reshape(num_samples, 1)
         target_f_after = q_now
@@ -300,9 +303,11 @@ class DQN_LSTM:
         train_names = ['train_loss', 'train_accuracy']
         self._write_log(self.tensorBoard, train_names, logs, int(self.steps / self.batch_size))
 
-        # TODO: check the performance with the following trick - Jupiter
         if self.epsilon > self.epsilon_min:
             self.epsilon *= self.epsilon_decay
+
+        if self.alpha > self.alpha_min:
+            self.alpha *= self.alpha_decay
 
     def save_model(self, model_path):
         """

@@ -62,6 +62,9 @@ class DDQN:
         self.epsilon = self.trainer_parameters['epsilon']  # exploration rate
         self.epsilon_min = self.trainer_parameters['epsilon_min']
         self.epsilon_decay = self.trainer_parameters['epsilon_decay']
+        self.alpha = self.trainer_parameters['alpha']
+        self.alpha_decay = self.trainer_parameters['alpha_decay']
+        self.alpha_min = self.trainer_parameters['alpha_min']
         self.learning_rate = self.trainer_parameters['learning_rate']
         self.model = None
         self.target_model = None

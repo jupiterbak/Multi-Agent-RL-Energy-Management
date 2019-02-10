@@ -7,6 +7,8 @@ default:
     epsilon_min: 0.01       # minimal exploration rate
     epsilon_decay: 0.999
     alpha: 0.1              # learning factor
+    alpha_min: 0.01         # learning factor min
+    alpha_decay: 0.995      # learning factor decay
     gamma: 0.99             # discount factor
     tau: .125               # soft target model updates
     num_layers: 2           # number of hidden layers
@@ -25,10 +27,13 @@ default:
 MCD_DQN_LSTM:
     trainer: DQN_LSTM       # trainer type
     batch_size: 512         # batch size
-    memory_size: 5120       # allocated memory size
+    memory_size: 512        # allocated memory size
     beta: 5.0e-3
+    alpha: 0.2              # learning factor
+    alpha_min: 0.01         # learning factor min
+    alpha_decay: 0.995      # learning factor decay
     epsilon: 0.3            # exploration rate
-    epsilon_min: 0.01       # minimal exploration rate
+    epsilon_min: 0.1        # minimal exploration rate
     epsilon_decay: 0.999
     gamma: 0.99             # discount factor
     tau: .001               # soft target model updates
@@ -47,10 +52,13 @@ MCD_DQN_LSTM:
 MCD_DQN_RC:
     trainer: DQN_RC         # trainer type
     batch_size: 512         # batch size
-    memory_size: 512       # allocated memory size
+    memory_size: 5120       # allocated memory size
     beta: 5.0e-3
+    alpha: 0.2              # learning factor
+    alpha_min: 0.01         # learning factor min
+    alpha_decay: 0.995      # learning factor decay
     epsilon: 0.3            # exploration rate
-    epsilon_min: 0.01       # minimal exploration rate
+    epsilon_min: 0.1        # minimal exploration rate
     epsilon_decay: 0.999
     gamma: 0.99             # discount factor
     tau: .001               # soft target model updates
@@ -71,6 +79,9 @@ MCD_DQN:
     batch_size: 512         # batch size
     memory_size: 10240      # allocated memory size
     beta: 5.0e-3
+    alpha: 0.2              # learning factor
+    alpha_min: 0.01         # learning factor min
+    alpha_decay: 0.995      # learning factor decay
     epsilon: 0.2            # exploration rate
     epsilon_min: 0.01       # minimal exploration rate
     epsilon_decay: 0.999
@@ -91,9 +102,11 @@ MCD_DQN:
 MCD_SARSA:
     trainer: SARSA          # trainer type
     batch_size: 512         # batch size
-    memory_size: 10240      # allocated memory size
-    alpha: 0.1              # learning factor
-    epsilon: 0.3            # exploration rate
+    memory_size: 5120       # allocated memory size
+    alpha: 0.2              # learning factor
+    alpha_min: 0.01         # learning factor min
+    alpha_decay: 0.995      # learning factor decay
+    epsilon: 0.1            # exploration rate
     epsilon_min: 0.01       # minimal exploration rate
     epsilon_decay: 0.999
     gamma: 0.99             # discount factor

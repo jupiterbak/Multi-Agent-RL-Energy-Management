@@ -46,7 +46,7 @@ class DQN_RC:
         self.initialized = False
 
         # initialize specific DQN parameters
-        self.time_slice = 10
+        self.time_slice = 4
         self.env_brains = envs
         self.state_size = 0
         self.action_size = 0
@@ -64,6 +64,9 @@ class DQN_RC:
         self.epsilon = self.trainer_parameters['epsilon']  # exploration rate
         self.epsilon_min = self.trainer_parameters['epsilon_min']
         self.epsilon_decay = self.trainer_parameters['epsilon_decay']
+        self.alpha = self.trainer_parameters['alpha']
+        self.alpha_decay = self.trainer_parameters['alpha_decay']
+        self.alpha_min = self.trainer_parameters['alpha_min']
         self.learning_rate = self.trainer_parameters['learning_rate']
         self.summary = self.trainer_parameters['summary_path']
         self.tensorBoard = tf.summary.FileWriter(logdir=self.summary)
@@ -286,36 +289,38 @@ class DQN_RC:
         reward_batch = np.array(reward_batch)
         action_batch = np.array(action_batch)
 
-        # next_target = self.target_model.predict_on_batch(state1_batch)
-        # discounted_reward_batch = self.gamma * np.amax(next_target, axis=1)
-        # discounted_reward_batch = discounted_reward_batch * terminal1_batch
-        # delta_targets = (reward_batch + discounted_reward_batch).reshape(num_samples, 1)
-        #
-        # q_now = self.model.predict_on_batch(state0_batch)
-        # q_target = q_now
-        # actions = np.expand_dims(action_batch, axis=1)
-        # np.put_along_axis(arr=q_target, indices=actions, values=delta_targets, axis=1)
-        # logs = self.model.train_on_batch(state0_batch, q_target)
+        next_target = self.target_model.predict_on_batch(state1_batch)
+        discounted_reward_batch = self.gamma * np.amax(next_target, axis=1)
+        discounted_reward_batch = discounted_reward_batch * terminal1_batch
+        delta_targets = (reward_batch + discounted_reward_batch).reshape(num_samples, 1)
 
         q_now = self.model.predict_on_batch(state0_batch)
-        q_next = self.model.predict_on_batch(state1_batch)
-        q_now_i = np.take(q_now, action_batch)
-        q_next_i = np.take(q_next, action_batch)
-
-        discounted_reward_batch = q_now_i + (0.1 * (reward_batch + (self.gamma * q_next_i) - q_now_i))
-        # discounted_reward_batch = discounted_reward_batch * terminal1_batch
-        delta_targets = discounted_reward_batch.reshape(num_samples, 1)
-        target_f_after = q_now
+        q_target = q_now
         actions = np.expand_dims(action_batch, axis=1)
-        np.put_along_axis(arr=target_f_after, indices=actions, values=delta_targets, axis=1)
-        logs = self.model.train_on_batch(state0_batch, target_f_after)
+        np.put_along_axis(arr=q_target, indices=actions, values=delta_targets, axis=1)
+        logs = self.model.train_on_batch(state0_batch, q_target)
+
+        # q_now = self.model.predict_on_batch(state0_batch)
+        # q_next = self.model.predict_on_batch(state1_batch)
+        # q_now_i = np.take(q_now, action_batch)
+        # q_next_i = np.take(q_next, action_batch)
+        #
+        # discounted_reward_batch = q_now_i + (0.2 * (reward_batch + (self.gamma * q_next_i) - q_now_i))
+        # # discounted_reward_batch = discounted_reward_batch * terminal1_batch
+        # delta_targets = discounted_reward_batch.reshape(num_samples, 1)
+        # target_f_after = q_now
+        # actions = np.expand_dims(action_batch, axis=1)
+        # np.put_along_axis(arr=target_f_after, indices=actions, values=delta_targets, axis=1)
+        # logs = self.model.train_on_batch(state0_batch, target_f_after)
 
         train_names = ['train_loss', 'train_mse']
         self._write_log(self.tensorBoard, train_names, logs, int(self.steps / self.batch_size))
 
-        # TODO: check the performance with the following trick - Jupiter
         if self.epsilon > self.epsilon_min:
             self.epsilon *= self.epsilon_decay
+
+        if self.alpha > self.alpha_min:
+            self.alpha *= self.alpha_decay
 
         # Update the target network
         if self.get_step % (4 * self.batch_size):

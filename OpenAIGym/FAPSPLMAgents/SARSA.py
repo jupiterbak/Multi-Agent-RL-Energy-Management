@@ -54,6 +54,8 @@ class SARSA:
         self.batch_size = self.trainer_parameters['batch_size']
         self.gamma = self.trainer_parameters['gamma']  # discount rate
         self.alpha = self.trainer_parameters['alpha']
+        self.alpha_decay = self.trainer_parameters['alpha_decay']
+        self.alpha_min = self.trainer_parameters['alpha_min']
         self.epsilon = self.trainer_parameters['epsilon']  # exploration rate
         self.epsilon_min = self.trainer_parameters['epsilon_min']
         self.epsilon_decay = self.trainer_parameters['epsilon_decay']
@@ -215,16 +217,22 @@ class SARSA:
         # Start by extracting the necessary parameters (we use a vectorized implementation).
         for state, action, next_state, reward, done, info in mini_batch:
             next_action = np.argmax(self.model[np.argmax(next_state)])
-            self.model[np.argmax(state), action] = self.model[np.argmax(state), action] \
-                                                   + self.alpha * \
-                                                   (
-                                                           reward +
-                                                           (self.gamma * self.model[np.argmax(next_state), next_action])
-                                                           - self.model[np.argmax(state), action]
-                                                   )
+            delta = self.alpha * \
+                           (
+                                   reward +
+                                   (self.gamma * self.model[np.argmax(next_state), next_action])
+                                   - self.model[np.argmax(state), action]
+                           )
+            if done:
+                self.model[np.argmax(state), action] = self.model[np.argmax(state), action]
+            else:
+                self.model[np.argmax(state), action] = self.model[np.argmax(state), action] + delta
         # TODO: check the performance with the following trick - Jupiter
         if self.epsilon > self.epsilon_min:
             self.epsilon *= self.epsilon_decay
+
+        if self.alpha > self.alpha_min:
+            self.alpha *= self.alpha_decay
 
         print('Actual Q-Matrix ({},{}): \n{}\n'.format(self.state_size, self.action_size, self.model))
 
