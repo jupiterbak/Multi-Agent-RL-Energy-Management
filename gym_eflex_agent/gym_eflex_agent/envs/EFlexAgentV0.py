@@ -254,7 +254,7 @@ class EFlexAgentV0(gym.Env):
                 self.current_reward = -0.1
             elif action == EFLEXAgentTransition.UnHold:
                 self.current_state = EFLEXAgentState.Execute
-                self.current_reward = 0.0
+                self.current_reward = 0.1
             elif action == EFLEXAgentTransition.Suspend:
                 self.current_state = EFLEXAgentState.Suspended
                 self.current_reward = 0.0
@@ -274,7 +274,7 @@ class EFlexAgentV0(gym.Env):
                 self.current_reward = -0.1
             elif action == EFLEXAgentTransition.Unsuspend:
                 self.current_state = EFLEXAgentState.Execute
-                self.current_reward = 0.0
+                self.current_reward = 0.1
             elif action == EFLEXAgentTransition.Hold:
                 self.current_state = EFLEXAgentState.Held
                 self.current_reward = 0.0
