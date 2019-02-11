@@ -110,10 +110,10 @@ class DQN_RC:
     def _build_model(self):
         # Neural Net for Deep-Q learning Model
         a = Input(shape=[self.state_size * self.time_slice], name='actor_state')
-        h = Dense(self.hidden_units, activation='relu', kernel_initializer='he_uniform', name="dense_actor")(a)
+        h = Dense(self.hidden_units, activation='linear', kernel_initializer='he_uniform', name="dense_actor")(a)
         h = Dropout(0.2)(h)
         for x in range(1, self.num_layers):
-            h = Dense(self.hidden_units, activation='relu', kernel_initializer='he_uniform')(h)
+            h = Dense(self.hidden_units, activation='linear', kernel_initializer='he_uniform')(h)
             h = Dropout(0.2)(h)
         o = Dense(self.action_size, activation='softmax', kernel_initializer='he_uniform')(h)
         model = Model(inputs=a, outputs=o)
@@ -160,9 +160,9 @@ class DQN_RC:
 
         :param model_path: saved model.
         """
-        if os.path.exists(model_path + '/DQN_RC.h5'):
+        if os.path.exists('./' + model_path + '/DQN_RC.h5'):
             self.model = self._build_model()
-            self.model.load_weights(model_path)
+            self.model.load_weights('./' + model_path + '/DQN_RC.h5')
             self.model.compile(loss='mse', optimizer=RMSprop(lr=self.learning_rate),
                                metrics=['mse'])
         else:
@@ -170,9 +170,9 @@ class DQN_RC:
             self.model.compile(loss='mse', optimizer=RMSprop(lr=self.learning_rate),
                                metrics=['mse'])
 
-        if os.path.exists(model_path + '/DQN_RC_target.h5'):
+        if os.path.exists('./' + model_path + '/DQN_RC_target.h5'):
             self.target_model = self._build_model()
-            self.target_model.load_weights(model_path)
+            self.target_model.load_weights('./' + model_path + '/DQN_RC_target.h5')
             self.target_model.compile(loss='mse', optimizer=RMSprop(lr=self.learning_rate), metrics=['mse'])
         else:
             self.target_model = self._build_model()
@@ -198,7 +198,7 @@ class DQN_RC:
         :return: the action array and an object as cookie
         """
 
-        if np.random.rand() <= self.epsilon or len(self.replay_sequence) < (self.time_slice - 1):
+        if (self.is_training and np.random.rand() <= self.epsilon) or len(self.replay_sequence) < (self.time_slice - 1):
             return np.argmax(np.random.randint(0, 2, self.action_size))
         else:
             last_elements = self.replay_sequence.copy()
@@ -291,7 +291,7 @@ class DQN_RC:
 
         next_target = self.target_model.predict_on_batch(state1_batch)
         discounted_reward_batch = self.gamma * np.amax(next_target, axis=1)
-        discounted_reward_batch = discounted_reward_batch * terminal1_batch
+        # discounted_reward_batch = discounted_reward_batch * terminal1_batch
         delta_targets = (reward_batch + discounted_reward_batch).reshape(num_samples, 1)
 
         q_now = self.model.predict_on_batch(state0_batch)

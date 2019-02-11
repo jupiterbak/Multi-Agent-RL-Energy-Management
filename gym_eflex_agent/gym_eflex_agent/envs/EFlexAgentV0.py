@@ -1,4 +1,6 @@
 from enum import Enum
+from random import randint
+
 import gym
 import numpy as np
 from gym import spaces
@@ -107,7 +109,9 @@ class EFlexAgentV0(gym.Env):
                                                                           , next_state)}
 
     def reset(self):
-        self.current_state = EFLEXAgentState.Stopped
+        self.current_state = EFLEXAgentState(randint(0, len(EFLEXAgentState)-1))
+        while self.current_state == EFLEXAgentState.LoadChange:
+            self.current_state = EFLEXAgentState(randint(0, len(EFLEXAgentState) -1))
         self.current_reward = 0.0
         return self._get_state()
 
@@ -134,10 +138,10 @@ class EFlexAgentV0(gym.Env):
         elif self.current_state == EFLEXAgentState.Stopped:
             if action == EFLEXAgentTransition.Abort:
                 self.current_state = EFLEXAgentState.Aborted
-                self.current_reward = -0.0
+                self.current_reward = -0.1
             elif action == EFLEXAgentTransition.Reset:
                 self.current_state = EFLEXAgentState.Idle
-                self.current_reward = 0.0
+                self.current_reward = 0.1
             else:
                 self.current_state = EFLEXAgentState.Stopped
                 self.current_reward = 0.0
@@ -145,7 +149,7 @@ class EFlexAgentV0(gym.Env):
         elif self.current_state == EFLEXAgentState.Idle:
             if action == EFLEXAgentTransition.Abort:
                 self.current_state = EFLEXAgentState.Aborted
-                self.current_reward = -0.0
+                self.current_reward = -0.1
             elif action == EFLEXAgentTransition.Start:
                 self.current_state = EFLEXAgentState.Execute
                 self.current_reward = 0.5
@@ -168,7 +172,7 @@ class EFlexAgentV0(gym.Env):
         elif self.current_state == EFLEXAgentState.PowerOff:
             if action == EFLEXAgentTransition.Abort:
                 self.current_state = EFLEXAgentState.Aborted
-                self.current_reward = -0.0
+                self.current_reward = -0.1
             elif action == EFLEXAgentTransition.PowerOn:
                 self.current_state = EFLEXAgentState.StartedUp
                 self.current_reward = 0.0
@@ -182,10 +186,10 @@ class EFlexAgentV0(gym.Env):
         elif self.current_state == EFLEXAgentState.StandBy:
             if action == EFLEXAgentTransition.Abort:
                 self.current_state = EFLEXAgentState.Aborted
-                self.current_reward = -0.0
+                self.current_reward = -0.1
             elif action == EFLEXAgentTransition.PowerOn:
                 self.current_state = EFLEXAgentState.StartedUp
-                self.current_reward = 0.0
+                self.current_reward = 0.1
             elif action == EFLEXAgentTransition.Stop:
                 self.current_state = EFLEXAgentState.Stopped
                 self.current_reward = 0.0
@@ -196,10 +200,10 @@ class EFlexAgentV0(gym.Env):
         elif self.current_state == EFLEXAgentState.StartedUp:
             if action == EFLEXAgentTransition.Abort:
                 self.current_state = EFLEXAgentState.Aborted
-                self.current_reward = -0.0
+                self.current_reward = -0.1
             elif action == EFLEXAgentTransition.Reset:
                 self.current_state = EFLEXAgentState.Idle
-                self.current_reward = 0.0
+                self.current_reward = 0.3
             elif action == EFLEXAgentTransition.Stop:
                 self.current_state = EFLEXAgentState.Stopped
                 self.current_reward = 0.0
@@ -210,7 +214,7 @@ class EFlexAgentV0(gym.Env):
         elif self.current_state == EFLEXAgentState.Execute:
             if action == EFLEXAgentTransition.Abort:
                 self.current_state = EFLEXAgentState.Aborted
-                self.current_reward = -0.0
+                self.current_reward = -0.1
             elif action == EFLEXAgentTransition.SC:
                 self.current_state = EFLEXAgentState.Completed
                 self.current_reward = 0.5
@@ -233,7 +237,7 @@ class EFlexAgentV0(gym.Env):
         elif self.current_state == EFLEXAgentState.Completed:
             if action == EFLEXAgentTransition.Abort:
                 self.current_state = EFLEXAgentState.Aborted
-                self.current_reward = -0.0
+                self.current_reward = -0.1
             elif action == EFLEXAgentTransition.SC:
                 self.current_state = EFLEXAgentState.Idle
                 self.current_reward = 0.5
@@ -247,7 +251,7 @@ class EFlexAgentV0(gym.Env):
         elif self.current_state == EFLEXAgentState.Held:
             if action == EFLEXAgentTransition.Abort:
                 self.current_state = EFLEXAgentState.Aborted
-                self.current_reward = -0.0
+                self.current_reward = -0.1
             elif action == EFLEXAgentTransition.UnHold:
                 self.current_state = EFLEXAgentState.Execute
                 self.current_reward = 0.0
@@ -267,7 +271,7 @@ class EFlexAgentV0(gym.Env):
         elif self.current_state == EFLEXAgentState.Suspended:
             if action == EFLEXAgentTransition.Abort:
                 self.current_state = EFLEXAgentState.Aborted
-                self.current_reward = -0.0
+                self.current_reward = -0.1
             elif action == EFLEXAgentTransition.Unsuspend:
                 self.current_state = EFLEXAgentState.Execute
                 self.current_reward = 0.0

@@ -16,7 +16,7 @@ default:
     use_recurrent: false    # use R-NN
     lambd: 0.95
     learning_rate: 0.001    # learning rate
-    max_steps: 500000       # maximum number of state for an episode
+    max_steps: 10000       # maximum number of state for an episode
     normalize: false        # add nomalization layer to the associated NN
     num_epoch: 5000         # total number of epochs
     time_horizon: 64        # time horizon

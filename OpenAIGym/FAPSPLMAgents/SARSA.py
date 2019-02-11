@@ -131,9 +131,10 @@ class SARSA:
 
         :param model_path: saved model.
         """
-        if os.path.exists(model_path + '/SARSA.h5.npy'):
+        if os.path.exists('./' +model_path + '/SARSA.h5.npy'):
             self.model = self._build_model()
-            self.model = np.load(model_path + '/SARSA.h5.npy')
+            self.model = np.load('./' +model_path + '/SARSA.h5.npy')
+            print('Summary SARSA Q-Matrix ({},{}): \n{}\n'.format(self.state_size, self.action_size, self.model))
         else:
             self.model = self._build_model()
 
@@ -156,7 +157,7 @@ class SARSA:
         :param _env: The environment.
         :return: the action array and an object as cookie
         """
-        if np.random.rand() <= self.epsilon:
+        if self.is_training and np.random.rand() <= self.epsilon:
             return np.argmax(np.random.randint(0, 2, self.action_size))
         else:
             _max = np.nanmax(self.model[np.argmax(observation)])
@@ -193,7 +194,7 @@ class SARSA:
         A signal that the Episode has ended. The buffer must be reset.
         Get only called when the academy resets.
         """
-        self.replay_memory.clear()
+        # self.replay_memory.clear()
         pass
 
     def is_ready_update(self):
@@ -223,10 +224,7 @@ class SARSA:
                                    (self.gamma * self.model[np.argmax(next_state), next_action])
                                    - self.model[np.argmax(state), action]
                            )
-            if done:
-                self.model[np.argmax(state), action] = self.model[np.argmax(state), action]
-            else:
-                self.model[np.argmax(state), action] = self.model[np.argmax(state), action] + delta
+            self.model[np.argmax(state), action] = self.model[np.argmax(state), action] + delta
         # TODO: check the performance with the following trick - Jupiter
         if self.epsilon > self.epsilon_min:
             self.epsilon *= self.epsilon_decay
