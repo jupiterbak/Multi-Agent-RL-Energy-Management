@@ -109,9 +109,10 @@ class EFlexAgentV0(gym.Env):
                                                                           , next_state)}
 
     def reset(self):
-        self.current_state = EFLEXAgentState(randint(0, len(EFLEXAgentState)-1))
-        while self.current_state == EFLEXAgentState.LoadChange:
-            self.current_state = EFLEXAgentState(randint(0, len(EFLEXAgentState) -1))
+        # self.current_state = EFLEXAgentState(randint(0, len(EFLEXAgentState)-1))
+        # while self.current_state == EFLEXAgentState.LoadChange:
+        #     self.current_state = EFLEXAgentState(randint(0, len(EFLEXAgentState) -1))
+        self.current_state = EFLEXAgentState.Stopped
         self.current_reward = 0.0
         return self._get_state()
 

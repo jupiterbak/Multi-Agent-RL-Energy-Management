@@ -114,18 +114,18 @@ class DQN_LSTM:
         a = Input(shape=(self.time_slice, self.state_size), name='state_input')
         h = None
         if self.num_layers > 1:
-            h = LSTM(self.hidden_units, activation="linear", name="lstm_input", dropout=0.2, recurrent_dropout=0.2,
+            h = LSTM(self.hidden_units, activation="tanh", name="lstm_input", dropout=0.2, recurrent_dropout=0.2,
                      return_sequences=True)(a)
             if self.num_layers > 2:
                 for x in range(1, self.num_layers - 1):
                     h = LSTM(self.hidden_units, activation='linear', dropout=0.2, recurrent_dropout=0.2,
                              return_sequences=True, name="lstm_{}".format(x))(h)
 
-            h = LSTM(self.hidden_units, activation="linear", name="lstm_hidden", dropout=0.2, recurrent_dropout=0.2)(h)
+            h = LSTM(self.hidden_units, activation="tanh", name="lstm_hidden", dropout=0.2, recurrent_dropout=0.2)(h)
         else:
-            h = LSTM(self.hidden_units, activation="linear", name="lstm_hidden", dropout=0.2,
+            h = LSTM(self.hidden_units, activation="tanh", name="lstm_hidden", dropout=0.2,
                      recurrent_dropout=0.2)(a)
-        o = Dense(self.action_size, activation='linear', kernel_initializer='he_uniform')(h)
+        o = Dense(self.action_size, activation='softmax', kernel_initializer='he_uniform')(h)
         model = Model(inputs=a, outputs=o)
         return model
 
@@ -306,31 +306,31 @@ class DQN_LSTM:
         # target_f_after[:, indexes] = delta_targets
         # logs = self.model.train_on_batch(state0_batch, target_f_after)
 
-        # q_now = self.model.predict_on_batch(state0_batch)
-        # q_next = self.model.predict_on_batch(state1_batch)
-        # q_now_i = np.take(q_now, action_batch)
-        # q_next_i = np.take(q_next, action_batch)
-        #
-        # discounted_reward_batch = q_now_i + (0.2 * (reward_batch + (self.gamma * q_next_i) - q_now_i))
-        # # discounted_reward_batch = discounted_reward_batch * terminal1_batch
-        # delta_targets = discounted_reward_batch.reshape(num_samples, 1)
-        # target_f_after = q_now
-        # actions = np.expand_dims(action_batch, axis=1)
-        # np.put_along_axis(arr=target_f_after, indices=actions, values=delta_targets, axis=1)
-        # logs = self.model.train_on_batch(state0_batch, target_f_after)
-
-        next_target = self.model.predict_on_batch(state1_batch)
-        discounted_reward_batch = self.gamma * np.amax(next_target, axis=1)
-        # discounted_reward_batch = discounted_reward_batch * terminal1_batch
-        delta_targets = (reward_batch + discounted_reward_batch).reshape(num_samples, 1)
-
         q_now = self.model.predict_on_batch(state0_batch)
-        q_target = q_now
-        actions = np.expand_dims(action_batch, axis=1)
-        np.put_along_axis(arr=q_target, indices=actions, values=delta_targets, axis=1)
-        logs = self.model.train_on_batch(state0_batch, q_target)
+        q_next = self.model.predict_on_batch(state1_batch)
+        q_now_i = np.take(q_now, action_batch)
+        q_next_i = np.take(q_next, action_batch)
 
-        train_names = ['train_loss', 'train_accuracy']
+        discounted_reward_batch = q_now_i + (0.2 * (reward_batch + (self.gamma * q_next_i) - q_now_i))
+        # discounted_reward_batch = discounted_reward_batch * terminal1_batch
+        delta_targets = discounted_reward_batch.reshape(num_samples, 1)
+        target_f_after = q_now
+        actions = np.expand_dims(action_batch, axis=1)
+        np.put_along_axis(arr=target_f_after, indices=actions, values=delta_targets, axis=1)
+        logs = self.model.train_on_batch(state0_batch, target_f_after)
+
+        # next_target = self.target_model.predict_on_batch(state1_batch)
+        # discounted_reward_batch = self.gamma * np.amax(next_target, axis=1)
+        # # discounted_reward_batch = discounted_reward_batch * terminal1_batch
+        # delta_targets = (reward_batch + discounted_reward_batch).reshape(num_samples, 1)
+        #
+        # q_now = self.model.predict_on_batch(state0_batch)
+        # q_target = q_now
+        # actions = np.expand_dims(action_batch, axis=1)
+        # np.put_along_axis(arr=q_target, indices=actions, values=delta_targets, axis=1)
+        # logs = self.model.train_on_batch(state0_batch, q_target)
+
+        train_names = ['train_loss', 'train_amse']
         self._write_log(self.tensorBoard, train_names, logs, int(self.steps / self.batch_size))
 
         if self.epsilon > self.epsilon_min:

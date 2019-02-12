@@ -52,7 +52,7 @@ MCD_DQN_LSTM:
 MCD_DQN_RC:
     trainer: DQN_RC         # trainer type
     batch_size: 512         # batch size
-    memory_size: 5120       # allocated memory size
+    memory_size: 512       # allocated memory size
     beta: 5.0e-3
     alpha: 0.2              # learning factor
     alpha_min: 0.01         # learning factor min

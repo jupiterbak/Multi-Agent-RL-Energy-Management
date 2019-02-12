@@ -110,10 +110,10 @@ class DQN_RC:
     def _build_model(self):
         # Neural Net for Deep-Q learning Model
         a = Input(shape=[self.state_size * self.time_slice], name='actor_state')
-        h = Dense(self.hidden_units, activation='linear', kernel_initializer='he_uniform', name="dense_actor")(a)
+        h = Dense(self.hidden_units, activation='relu', kernel_initializer='he_uniform', name="dense_actor")(a)
         h = Dropout(0.2)(h)
         for x in range(1, self.num_layers):
-            h = Dense(self.hidden_units, activation='linear', kernel_initializer='he_uniform')(h)
+            h = Dense(self.hidden_units, activation='relu', kernel_initializer='he_uniform')(h)
             h = Dropout(0.2)(h)
         o = Dense(self.action_size, activation='softmax', kernel_initializer='he_uniform')(h)
         model = Model(inputs=a, outputs=o)
