@@ -249,6 +249,10 @@ class TrainerController(object):
                             trainer.update_model()
                             # Write training statistics.
                             trainer.write_summary()
+                            if self.render:
+                                # Write to tensorborad
+                                trainer.write_tensorboard_value('cul_reward', cumulated_reward)
+                                cumulated_reward = 0
                         if self.train_model and trainer.get_step <= trainer.get_max_steps:
                             trainer.increment_step()
                             trainer.update_last_reward(self.rewards[e])
@@ -257,9 +261,6 @@ class TrainerController(object):
                         if self.render:
                             env.render()
                             # print("CUL. REWARD: {}".format(cumulated_reward))
-                    if self.render:
-                        # Write to tensorborad
-                        trainer.write_tensorboard_value('cul_reward', cumulated_reward)
 
                     self.observations = new_observations
 
