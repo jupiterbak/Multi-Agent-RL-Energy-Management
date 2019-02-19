@@ -137,6 +137,16 @@ class DDPG(object):
         """
         return self.last_reward
 
+    def get_actor_optimizer(self):
+        """
+        Actor Optimizer
+        """
+        action_gdts = k.placeholder(shape=(None, self.action_size))
+        params_grad = tf.gradients(self.actor_model.output, self.actor_model.trainable_weights, -action_gdts)
+        grads = zip(params_grad, self.actor_model.trainable_weights)
+        return k.function([self.actor_model.input, action_gdts],
+                          [tf.train.AdamOptimizer(self.learning_rate).apply_gradients(grads)][1:])
+
     def _create_actor_model(self):
         a = Input(shape=[self.state_size * self.time_slice])
         h = Dense(self.hidden_units, activation='relu', kernel_initializer='he_uniform')(a)
@@ -153,8 +163,8 @@ class DDPG(object):
         a = Input(shape=[self.action_size], name='critic_action')
         w1 = Dense(self.hidden_units, activation='relu', kernel_initializer='he_uniform')(s)
         h1 = Dropout(0.2)(w1)
-        # h1 = Dense(self.hidden_units, activation='relu', kernel_initializer='he_uniform')(h1)
-        # h1 = Dropout(0.2)(h1)
+        h1 = Dense(self.hidden_units, activation='relu', kernel_initializer='he_uniform')(h1)
+        h1 = Dropout(0.2)(h1)
 
         a1 = Dense(self.hidden_units, activation='relu')(a)
         a1 = Dropout(0.2)(a1)
@@ -208,22 +218,22 @@ class DDPG(object):
         Initialize the trainer
         """
         self.actor_model, self.actor_trainable_weights, self.actor_input = self._create_actor_model()
-        self.actor_model.compile(loss='mse', metrics=['mse'], optimizer=RMSprop(lr=self.learning_rate))
+        self.actor_model.compile(loss='mse', metrics=['mse'], optimizer=Adam(lr=self.learning_rate))
         print('\n##### Actor Model ')
         print(self.actor_model.summary())
 
         self.target_model, target_actor_trainable_weights, target_actor_input = self._create_actor_model()
-        self.target_model.compile(loss='mse', metrics=['mse'], optimizer=RMSprop(lr=self.learning_rate))
+        self.target_model.compile(loss='mse', metrics=['mse'], optimizer=Adam(lr=self.learning_rate))
         print('\n##### Actor Target Model ')
         print(self.target_model.summary())
 
         self.critic_target_model, target_critic_state_input, target_critic_action_input = self._create_critic_model()
-        self.critic_target_model.compile(loss='mse', metrics=['mse'], optimizer=RMSprop(lr=self.learning_rate))
+        self.critic_target_model.compile(loss='mse', metrics=['mse'], optimizer=Adam(lr=self.learning_rate))
         print('\n##### Critic Target Model ')
         print(self.critic_target_model.summary())
 
         self.critic_model, self.critic_state, self.critic_action = self._create_critic_model()
-        self.critic_model.compile(loss=self._clipped_error, metrics=['mse'], optimizer=RMSprop(lr=self.learning_rate))
+        self.critic_model.compile(loss=self._clipped_error, metrics=['mse'], optimizer=Adam(lr=self.learning_rate))
         print('\n##### Critic Model ')
         print(self.critic_model.summary())
 
@@ -235,24 +245,14 @@ class DDPG(object):
         else:
             raise RuntimeError('Unknown backend "{}".'.format(k.backend()))
 
-        # # Create a fuction that update the gradient of the actor
-        # self.actor_target_weights = self.actor_model.trainable_weights
-        # self.action_gradient = tf.placeholder(tf.float32, [None, self.action_size])
-        #
-        # self.params_grad = k.gradients(self.actor_model.output, self.actor_trainable_weights, -self.action_gradient)
-        # grads = zip(self.params_grad, self.actor_trainable_weights)
-        # self.optimize = Adam(self.learning_rate).apply_gradients(grads)
-        #
-        # if k.backend() == 'tensorflow':
-        #     self.actor_apply_gradient_fn = k.function([self.action_gradient], [])
-        # else:
-        #     raise RuntimeError('Unknown backend "{}".'.format(k.backend()))
+        # Create a function that update the gradient of the actor
+        if k.backend() == 'tensorflow':
+            self.actor_apply_gradient_fn = self.get_actor_optimizer()
+        else:
+            raise RuntimeError('Unknown backend "{}".'.format(k.backend()))
 
         # Define a random process
-        self.random_process = OrnsteinUhlenbeckProcess(size=self.action_size, theta=.15, mu=0., sigma=.2)
-
-
-
+        self.random_process = OrnsteinUhlenbeckProcess(size=self.action_size, theta=.10, mu=0., sigma=0.3)
 
         self.initialized = True
 
@@ -276,22 +276,22 @@ class DDPG(object):
         self.actor_model, self.actor_trainable_weights, self.actor_input = self._create_actor_model()
         if os.path.exists('./' + model_path + '/DPPG_actor_model.h5'):
             self.actor_model.load_weights('./' + model_path + '/DPPG_actor_model.h5')
-        self.actor_model.compile(loss='mse', metrics=['mse'], optimizer=RMSprop(lr=self.learning_rate))
+        self.actor_model.compile(loss='mse', metrics=['mse'], optimizer=Adam(lr=self.learning_rate))
 
         self.target_model, t_weigth, t_input = self._create_actor_model()
         if os.path.exists('./' + model_path + '/DPPG_actor_target_model.h5'):
             self.target_model.load_weights('./' + model_path + '/DPPG_actor_target_model.h5')
-        self.target_model.compile(loss='mse', metrics=['mse'], optimizer=RMSprop(lr=self.learning_rate))
+        self.target_model.compile(loss='mse', metrics=['mse'], optimizer=Adam(lr=self.learning_rate))
 
         self.critic_target_model, target_critic_state_input, target_critic_action_input = self._create_critic_model()
         if os.path.exists('./' + model_path + '/DPPG_critic_target_model.h5'):
             self.critic_target_model.load_weights('./' + model_path + '/DPPG_critic_target_model.h5')
-        self.critic_target_model.compile(loss='mse', metrics=['mse'], optimizer=RMSprop(lr=self.learning_rate))
+        self.critic_target_model.compile(loss='mse', metrics=['mse'], optimizer=Adam(lr=self.learning_rate))
 
         self.critic_model, self.critic_state, self.critic_action = self._create_critic_model()
         if os.path.exists('./' + model_path + '/DPPG_critic_model.h5'):
             self.critic_model.load_weights('./' + model_path + '/DPPG_critic_model.h5')
-        self.critic_model.compile(loss='mse', metrics=['mse'], optimizer=RMSprop(lr=self.learning_rate))
+        self.critic_model.compile(loss='mse', metrics=['mse'], optimizer=Adam(lr=self.learning_rate))
 
     def increment_step(self):
         """
@@ -403,66 +403,6 @@ class DDPG(object):
         num_samples = min(self.batch_size, len(self.replay_memory))
         mini_batch = random.sample(self.replay_memory, num_samples)
 
-        # # Start by extracting the necessary parameters (we use a vectorized implementation).
-        # state0_batch = []
-        # reward_batch = []
-        # action_batch = []
-        # terminal1_batch = []
-        # state1_batch = []
-        # for state, action, next_state, reward, done, info in mini_batch:
-        #     state0_batch.append(state)
-        #     state1_batch.append(next_state)
-        #     reward_batch.append(reward)
-        #     action_batch.append(action)
-        #     terminal1_batch.append(0. if done else 1.)
-        #
-        # state0_batch = np.array(state0_batch).reshape((num_samples, self.state_size * self.time_slice))
-        # state1_batch = np.array(state1_batch).reshape((num_samples, self.state_size * self.time_slice))
-        # terminal1_batch = np.array(terminal1_batch)
-        # reward_batch = np.array(reward_batch)
-        # action_batch = np.array(action_batch)
-        #
-        # next_target = self.target_model.predict_on_batch(state1_batch)
-        # discounted_reward_batch = self.gamma * np.amax(next_target, axis=1)
-        # # discounted_reward_batch = discounted_reward_batch * terminal1_batch
-        # delta_targets = (reward_batch + discounted_reward_batch).reshape(num_samples, 1)
-        #
-        # q_now = self.actor_model.predict_on_batch(state0_batch)
-        # q_target = q_now
-        # actions = np.expand_dims(action_batch, axis=1)
-        # np.put_along_axis(arr=q_target, indices=actions, values=delta_targets, axis=1)
-        # logs = self.actor_model.train_on_batch(state0_batch, q_target)
-        #
-        # # q_now = self.model.predict_on_batch(state0_batch)
-        # # q_next = self.model.predict_on_batch(state1_batch)
-        # # q_now_i = np.take(q_now, action_batch)
-        # # q_next_i = np.take(q_next, action_batch)
-        # #
-        # # discounted_reward_batch = q_now_i + (0.2 * (reward_batch + (self.gamma * q_next_i) - q_now_i))
-        # # # discounted_reward_batch = discounted_reward_batch * terminal1_batch
-        # # delta_targets = discounted_reward_batch.reshape(num_samples, 1)
-        # # target_f_after = q_now
-        # # actions = np.expand_dims(action_batch, axis=1)
-        # # np.put_along_axis(arr=target_f_after, indices=actions, values=delta_targets, axis=1)
-        # # logs = self.model.train_on_batch(state0_batch, target_f_after)
-        #
-        # train_names = ['train_loss', 'train_mse']
-        # self._write_log(self.tensorBoard, train_names, logs, int(self.steps / self.batch_size))
-        #
-        # if self.epsilon > self.epsilon_min:
-        #     self.epsilon *= self.epsilon_decay
-        #
-        # if self.alpha > self.alpha_min:
-        #     self.alpha *= self.alpha_decay
-        #
-        # # Update the target network
-        # if self.get_step % (4 * self.batch_size):
-        #     self._copy_target_models()
-
-        ###############################################################
-        num_samples = min(self.batch_size, len(self.replay_memory))
-        mini_batch = random.sample(self.replay_memory, num_samples)
-
         # Start by extracting the necessary parameters (we use a vectorized implementation).
         state0_batch = []
         reward_batch = []
@@ -485,12 +425,14 @@ class DDPG(object):
         # Update critic
         target_q_values = self.critic_target_model.predict_on_batch([state1_batch,
                                                                      self.actor_model.predict_on_batch(state1_batch)])
+        self.write_tensorboard_value('target_v_values', target_q_values.mean())
         discounted_reward_batch = self.gamma * target_q_values
         discounted_reward_batch = discounted_reward_batch * terminal1_batch
         y_critic_t = (reward_batch + discounted_reward_batch).reshape(num_samples, 1)
         train_action_batch = np.zeros((num_samples, self.action_size))
         np.put_along_axis(arr=train_action_batch, indices=action_batch, values=1, axis=1)
         logs = self.critic_model.train_on_batch([state0_batch, train_action_batch], y_critic_t)
+        self.write_tensorboard_value('y_critic_t', y_critic_t.mean())
 
         train_names = ['critic_train_loss', 'critic_train_mse']
         self._write_log(self.tensorBoard, train_names, logs, int(self.steps / self.batch_size))
@@ -500,7 +442,9 @@ class DDPG(object):
         a_for_grad = self.actor_model.predict(state0_batch)
         critic_gradients = self.critic_gradient_wrt_action_fn([state0_batch, a_for_grad])[0]
         assert critic_gradients.shape == (num_samples, self.action_size)
-        # apply the actor gradient to the actor model
+
+        # apply the critic gradient to the actor model
+        self.actor_apply_gradient_fn([state0_batch, critic_gradients])
 
         # Copy target model
         self._copy_target_models()

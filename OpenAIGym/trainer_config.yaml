@@ -116,8 +116,8 @@ MCD_SARSA:
 
 MCD_DDPG:
     trainer: DDPG           # trainer type
-    batch_size: 512         # batch size
-    memory_size: 512        # allocated memory size
+    batch_size: 512        # batch size
+    memory_size: 10240      # allocated memory size
     beta: 5.0e-3
     alpha: 0.2              # learning factor
     alpha_min: 0.01         # learning factor min
@@ -126,9 +126,9 @@ MCD_DDPG:
     epsilon_min: 0.1        # minimal exploration rate
     epsilon_decay: 0.999
     gamma: 0.99             # discount factor
-    tau: .001               # soft target model updates
+    tau: .1               # soft target model updates
     num_layers: 2           # number of hidden layers
-    hidden_units: 64        # number of hidden unit in the hidden layer
+    hidden_units: 32        # number of hidden unit in the hidden layer
     use_recurrent: false    # use R-NN
     lambd: 0.95
     learning_rate: 0.001    # learning rate or learning factor
