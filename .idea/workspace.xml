@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac5cb565-613a-4825-b8bb-08171f326be0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/A2C.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/03_Pythom_Workspace.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/03_Pythom_Workspace.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/DDPG.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/DDPG.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/DQN_RC.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/DQN_RC.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/utils/random.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/utils/random.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OpenAIGym/trainer_config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/trainer_config.yaml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,8 +22,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/DQN_RC.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3330">
-              <caret line="298" column="8" selection-start-line="298" selection-start-column="8" selection-end-line="298" selection-end-column="54" />
+            <state relative-caret-position="119">
+              <caret line="165" column="60" selection-start-line="165" selection-start-column="53" selection-end-line="165" selection-end-column="60" />
               <folding>
                 <element signature="e#19#33#0" expanded="true" />
               </folding>
@@ -29,19 +32,43 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/_DDPG.py">
+        <entry file="file://$PROJECT_DIR$/OpenAIGym/trainer_config.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="20">
-              <caret line="201" column="67" selection-start-line="201" selection-start-column="63" selection-end-line="201" selection-end-column="67" />
+            <state relative-caret-position="240">
+              <caret line="144" column="50" selection-start-line="144" selection-start-column="50" selection-end-line="144" selection-end-column="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/A2C.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="175">
+              <caret line="178" column="71" lean-forward="true" selection-start-line="178" selection-start-column="71" selection-end-line="178" selection-end-column="71" />
+              <folding>
+                <element signature="e#20#34#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/OpenAIGym/trainer_config.yaml">
+        <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/_A2C.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="236">
-              <caret line="128" column="10" selection-start-line="128" selection-start-column="10" selection-end-line="128" selection-end-column="10" />
+            <state relative-caret-position="-561">
+              <caret line="191" column="19" selection-start-line="186" selection-start-column="8" selection-end-line="191" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/DDPG.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="164" selection-start-line="164" selection-end-line="164" />
+              <folding>
+                <element signature="e#20#34#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -49,20 +76,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/OpenAIGym/trainer_controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2845">
-              <caret line="248" selection-start-line="248" selection-end-line="248" />
+            <state relative-caret-position="175">
+              <caret line="222" column="16" selection-start-line="222" selection-start-column="16" selection-end-line="222" selection-end-column="16" />
               <folding>
                 <element signature="e#51#65#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/DDPG.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1592">
-              <caret line="230" column="84" selection-start-line="230" selection-start-column="80" selection-end-line="230" selection-end-column="84" />
             </state>
           </provider>
         </entry>
@@ -99,6 +117,9 @@
       <find>critic_action_grads</find>
       <find>_huber_loss</find>
       <find>_clipped_error</find>
+      <find>sequence_length</find>
+      <find>time_horizon</find>
+      <find>beta</find>
     </findStrings>
     <replaceStrings>
       <replace>.value:</replace>
@@ -154,14 +175,16 @@
         <option value="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/SARSA.py" />
         <option value="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/DQN_GRU.py" />
         <option value="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexAgentV0.py" />
-        <option value="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/DQN_RC.py" />
         <option value="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/DQN_LSTM.py" />
-        <option value="$PROJECT_DIR$/OpenAIGym/trainer_controller.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/_DDPG.py" />
         <option value="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/utils/random.py" />
-        <option value="$PROJECT_DIR$/OpenAIGym/trainer_config.yaml" />
+        <option value="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/A3C.py" />
+        <option value="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/DQN_RC.py" />
         <option value="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/DDPG.py" />
+        <option value="$PROJECT_DIR$/OpenAIGym/trainer_config.yaml" />
+        <option value="$PROJECT_DIR$/OpenAIGym/trainer_controller.py" />
+        <option value="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/A2C.py" />
       </list>
     </option>
   </component>
@@ -181,12 +204,12 @@
         <subPane>
           <expand>
             <path>
-              <item name="Multi-Agent-RL-Energy-Management" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Multi-Agent-RL-Energy-Management" type="462c0819:PsiDirectoryNode" />
+              <item name="03_Pythom_Workspace" type="b2602c69:ProjectViewProjectNode" />
+              <item name="03_Pythom_Workspace" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Multi-Agent-RL-Energy-Management" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Multi-Agent-RL-Energy-Management" type="462c0819:PsiDirectoryNode" />
+              <item name="03_Pythom_Workspace" type="b2602c69:ProjectViewProjectNode" />
+              <item name="03_Pythom_Workspace" type="462c0819:PsiDirectoryNode" />
               <item name="OpenAIGym" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -228,7 +251,28 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.main_MCD_DDPG">
+  <component name="RunManager" selected="Python.main_MCD_A2C">
+    <configuration name="main_MCD_A2C" type="PythonConfigurationType" factoryName="Python">
+      <module name="03_Pythom_Workspace" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/OpenAIGym" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/OpenAIGym/main_01.py" />
+      <option name="PARAMETERS" value="--load --use-gpu --environment=eflex-agent-v0 --brain_name=MCD_A2C --render --seed=11" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main_MCD_DDPG" type="PythonConfigurationType" factoryName="Python">
       <module name="03_Pythom_Workspace" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -339,6 +383,7 @@
       <item itemvalue="Python.main_MCD_SARSA" />
       <item itemvalue="Python.main_MCD_DQN_RC" />
       <item itemvalue="Python.main_MCD_DDPG" />
+      <item itemvalue="Python.main_MCD_A2C" />
       <item itemvalue="Python.main_MCD_DQN" />
     </list>
     <recent_temporary>
@@ -432,22 +477,21 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24973656" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32852387" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49051633" visible="true" weight="0.43063262" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.63751316" weight="0.40399557" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.48946258" weight="0.45019156" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.5194942" weight="0.51341" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.6492786" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5094837" side_tool="true" visible="true" weight="0.43063262" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.4805058" side_tool="true" visible="true" weight="0.45019156" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32963374" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -506,14 +550,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/DDPG.py</url>
-          <line>446</line>
+          <line>401</line>
           <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/A2C.py</url>
+          <line>335</line>
+          <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://C:/ProgramData/Anaconda3/envs/OPENAI/Lib/site-packages/opcua/ua/object_ids.py" />
     <entry file="file://C:/ProgramData/Anaconda3/envs/OPENAI/Lib/site-packages/opcua/common/node.py" />
     <entry file="file://C:/ProgramData/Anaconda3/envs/OPENAI/Lib/site-packages/opcua/ua/uatypes.py" />
     <entry file="file://$PROJECT_DIR$/README.md" />
@@ -605,17 +653,7 @@
     </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Continuum/anaconda3/envs/tensorflow/Lib/site-packages/keras/engine/training_utils.py" />
     <entry file="file://$USER_HOME$/AppData/Local/Continuum/anaconda3/envs/tensorflow/Lib/site-packages/numpy/core/fromnumeric.py" />
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/_A2C.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Continuum/anaconda3/envs/tensorflow/Lib/enum.py" />
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/DQN.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="969">
-          <caret line="69" selection-start-line="69" selection-end-line="69" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Continuum/anaconda3/envs/tensorflow/Lib/site-packages/numpy/lib/shape_base.py" />
     <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/SARSA_MLP.py" />
     <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/_DDQN.py">
@@ -670,45 +708,54 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/utils/random.py" />
-    <entry file="file://C:/ProgramData/Anaconda3/envs/OPENAI/Lib/site-packages/tensorflow/python/framework/ops.py" />
-    <entry file="file://C:/ProgramData/Anaconda3/envs/OPENAI/Lib/site-packages/keras/engine/training_utils.py" />
-    <entry file="file://C:/ProgramData/Anaconda3/envs/OPENAI/Lib/site-packages/keras/backend/tensorflow_backend.py" />
-    <entry file="file://$USER_HOME$/AppData/Local/Continuum/anaconda3/envs/tensorflow/Lib/site-packages/tensorflow/python/framework/errors_impl.py">
+    <entry file="file://C:/ProgramData/Anaconda3/envs/OPENAI/Lib/site-packages/tensorflow/python/framework/ops.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="523" selection-start-line="523" selection-end-line="523" />
+        <state relative-caret-position="210">
+          <caret line="3427" selection-start-line="3427" selection-end-line="3427" />
         </state>
       </provider>
     </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/envs/OPENAI/Lib/site-packages/keras/engine/training_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="137" selection-start-line="137" selection-end-line="137" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/envs/OPENAI/Lib/site-packages/keras/backend/tensorflow_backend.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Continuum/anaconda3/envs/tensorflow/Lib/site-packages/tensorflow/python/framework/errors_impl.py" />
     <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/_DDPG.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="201" column="67" selection-start-line="201" selection-start-column="63" selection-end-line="201" selection-end-column="67" />
+        <state relative-caret-position="199">
+          <caret line="231" column="40" selection-start-line="231" selection-start-column="40" selection-end-line="231" selection-end-column="40" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/trainer_controller.py">
+    <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/utils/random.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2845">
-          <caret line="248" selection-start-line="248" selection-end-line="248" />
-          <folding>
-            <element signature="e#51#65#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="649">
+          <caret line="56" column="12" selection-start-line="56" selection-start-column="12" selection-end-line="56" selection-end-column="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/trainer_config.yaml">
+    <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/DQN.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="128" column="10" selection-start-line="128" selection-start-column="10" selection-end-line="128" selection-end-column="10" />
+        <state relative-caret-position="-484">
+          <caret line="69" selection-start-line="69" selection-end-line="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/_A2C.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-561">
+          <caret line="191" column="19" selection-start-line="186" selection-start-column="8" selection-end-line="191" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/DQN_RC.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3330">
-          <caret line="298" column="8" selection-start-line="298" selection-start-column="8" selection-end-line="298" selection-end-column="54" />
+        <state relative-caret-position="119">
+          <caret line="165" column="60" selection-start-line="165" selection-start-column="53" selection-end-line="165" selection-end-column="60" />
           <folding>
             <element signature="e#19#33#0" expanded="true" />
           </folding>
@@ -717,8 +764,38 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/DDPG.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1592">
-          <caret line="230" column="84" selection-start-line="230" selection-start-column="80" selection-end-line="230" selection-end-column="84" />
+        <state relative-caret-position="170">
+          <caret line="164" selection-start-line="164" selection-end-line="164" />
+          <folding>
+            <element signature="e#20#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OpenAIGym/trainer_config.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="144" column="50" selection-start-line="144" selection-start-column="50" selection-end-line="144" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OpenAIGym/trainer_controller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="222" column="16" selection-start-line="222" selection-start-column="16" selection-end-line="222" selection-end-column="16" />
+          <folding>
+            <element signature="e#51#65#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/A2C.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="178" column="71" lean-forward="true" selection-start-line="178" selection-start-column="71" selection-end-line="178" selection-end-column="71" />
+          <folding>
+            <element signature="e#20#34#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

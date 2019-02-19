@@ -9,11 +9,10 @@ import keras.backend as k
 import numpy as np
 import tensorflow as tf
 from keras import Input
-from keras.layers import Dense, add, Dropout
+from keras.layers import Dense, Dropout
 from keras.models import Model
-from keras.optimizers import Adam
+from keras.optimizers import Adam, RMSprop
 
-from OpenAIGym.FAPSPLMAgents.utils.random import OrnsteinUhlenbeckProcess
 from OpenAIGym.exception import FAPSPLMEnvironmentException
 
 logger = logging.getLogger("FAPSPLMAgents")
@@ -26,7 +25,7 @@ class FAPSTrainerException(FAPSPLMEnvironmentException):
     pass
 
 
-class DDPG(object):
+class A2C(object):
     """This class is the abstract class for the faps trainers"""
 
     def __init__(self, envs, brain_name, trainer_parameters, training, seed):
@@ -63,29 +62,11 @@ class DDPG(object):
         self.replay_memory = deque(maxlen=self.trainer_parameters['memory_size'])
         self.replay_sequence = deque(maxlen=self.time_slice)
         self.gamma = self.trainer_parameters['gamma']  # discount rate
-        self.epsilon = self.trainer_parameters['epsilon']  # exploration rate
-        self.epsilon_min = self.trainer_parameters['epsilon_min']
-        self.epsilon_decay = self.trainer_parameters['epsilon_decay']
-        self.alpha = self.trainer_parameters['alpha']
-        self.alpha_decay = self.trainer_parameters['alpha_decay']
-        self.alpha_min = self.trainer_parameters['alpha_min']
         self.learning_rate = self.trainer_parameters['learning_rate']
-        self.tau = self.trainer_parameters['tau']
         self.summary = self.trainer_parameters['summary_path']
         self.tensorBoard = tf.summary.FileWriter(logdir=self.summary)
         self.actor_model = None
-        self.target_model = None
         self.critic_model = None
-        self.critic_target_model = None
-        self.critic_gradient_wrt_action = None  # GRADIENTS for policy update
-        self.critic_gradient_wrt_action_fn = None
-        self.actor_apply_gradient_fn = None
-        self.critic_state = None
-        self.critic_action = None
-        self.random_process = None
-        self.actor_trainable_weights = None
-        self.actor_input = None
-        self.action_gradient = None
 
     def __str__(self):
         return '''Deep Deterministic Policy Gradient Trainer'''
@@ -140,27 +121,18 @@ class DDPG(object):
             h = Dropout(0.2)(h)
         o = Dense(self.action_size, activation='softmax', kernel_initializer='he_uniform')(h)
         model = Model(inputs=a, outputs=o)
-        return model, model.trainable_weights, a
+        return model
 
     def _create_critic_model(self):
-        s = Input(shape=[self.state_size * self.time_slice], name='critic_state')
-        a = Input(shape=[self.action_size], name='critic_action')
-        h1 = Dense(self.hidden_units, activation='relu', kernel_initializer='he_uniform')(s)
-        h1 = Dropout(0.2)(h1)
-        # h1 = Dense(self.hidden_units, activation='relu', kernel_initializer='he_uniform')(h1)
-        # h1 = Dropout(0.2)(h1)
-        a1 = Dense(self.hidden_units, activation='relu')(a)
-        a1 = Dropout(0.2)(a1)
-
-        h2 = add([h1, a1])
+        a = Input(shape=[self.state_size * self.time_slice])
+        h = Dense(self.hidden_units, activation='relu', kernel_initializer='he_uniform')(a)
+        h = Dropout(0.2)(h)
         for x in range(1, self.num_layers):
-            h2 = Dense(self.hidden_units, activation='relu', kernel_initializer='he_uniform')(h2)
-            h2 = Dropout(0.2)(h2)
-
-        v = Dense(1, activation='tanh', kernel_initializer='he_uniform')(h2)
-        model = Model(inputs=[s, a], outputs=v)
-
-        return model, s, a
+            h = Dense(self.hidden_units, activation='relu', kernel_initializer='he_uniform')(h)
+            h = Dropout(0.2)(h)
+        o = Dense(1, activation='linear', kernel_initializer='he_uniform')(h)
+        model = Model(inputs=a, outputs=o)
+        return model
 
     def is_initialized(self):
         """
@@ -172,42 +144,16 @@ class DDPG(object):
         """
         Initialize the trainer
         """
-        self.actor_model, self.actor_trainable_weights, self.actor_input = self._create_actor_model()
-        self.actor_model.compile(loss='mse', metrics=['mse'], optimizer=Adam(lr=self.learning_rate))
+        self.actor_model = self._create_actor_model()
+        self.actor_model.compile(loss='categorical_crossentropy', metrics=['categorical_crossentropy'],
+                                 optimizer=Adam(lr=self.learning_rate))
         print('\n##### Actor Model ')
         print(self.actor_model.summary())
 
-        self.target_model, target_actor_trainable_weights, target_actor_input = self._create_actor_model()
-        self.target_model.compile(loss='mse', metrics=['mse'], optimizer=Adam(lr=self.learning_rate))
-        print('\n##### Actor Target Model ')
-        print(self.target_model.summary())
-
-        self.critic_target_model, target_critic_state_input, target_critic_action_input = self._create_critic_model()
-        self.critic_target_model.compile(loss='mse', metrics=['mse'], optimizer=Adam(lr=self.learning_rate))
-        print('\n##### Critic Target Model ')
-        print(self.critic_target_model.summary())
-
-        self.critic_model, self.critic_state, self.critic_action = self._create_critic_model()
-        self.critic_model.compile(loss='mse', metrics=['mse'], optimizer=Adam(lr=self.learning_rate))
+        self.critic_model = self._create_critic_model()
+        self.critic_model.compile(loss='mse', metrics=['mse'], optimizer=RMSprop(lr=self.learning_rate))
         print('\n##### Critic Model ')
         print(self.critic_model.summary())
-
-        # Create a function that calculate the critic gradient for policy update
-        self.critic_gradient_wrt_action = k.gradients(self.critic_model.output, self.critic_action)
-        if k.backend() == 'tensorflow':
-            self.critic_gradient_wrt_action_fn = k.function([self.critic_state, self.critic_action],
-                                                            self.critic_gradient_wrt_action)
-        else:
-            raise RuntimeError('Unknown backend "{}".'.format(k.backend()))
-
-        # Create a function that update the gradient of the actor
-        if k.backend() == 'tensorflow':
-            self.actor_apply_gradient_fn = self.get_actor_optimizer()
-        else:
-            raise RuntimeError('Unknown backend "{}".'.format(k.backend()))
-
-        # Define a random process
-        self.random_process = OrnsteinUhlenbeckProcess(size=self.action_size, theta=.10, mu=0., sigma=0.5)
 
         self.initialized = True
 
@@ -218,9 +164,7 @@ class DDPG(object):
         k.clear_session()
         self.replay_memory.clear()
         self.actor_model = None
-        self.target_model = None
         self.critic_model = None
-        self.critic_target_model = None
 
     def load_model_and_restore(self, model_path):
         """
@@ -228,25 +172,16 @@ class DDPG(object):
 
         :param model_path: Random seed.
         """
-        self.actor_model, self.actor_trainable_weights, self.actor_input = self._create_actor_model()
-        if os.path.exists('./' + model_path + '/DPPG_actor_model.h5'):
-            self.actor_model.load_weights('./' + model_path + '/DPPG_actor_model.h5')
-        self.actor_model.compile(loss='mse', metrics=['mse'], optimizer=Adam(lr=self.learning_rate))
+        self.actor_model = self._create_actor_model()
+        if os.path.exists('./' + model_path + '/A2C_actor_model.h5'):
+            self.actor_model.load_weights('./' + model_path + '/A2C_actor_model.h5')
+        self.actor_model.compile(loss='categorical_crossentropy', metrics=['categorical_crossentropy'],
+                                 optimizer=Adam(lr=self.learning_rate))
 
-        self.target_model, t_weigth, t_input = self._create_actor_model()
-        if os.path.exists('./' + model_path + '/DPPG_actor_target_model.h5'):
-            self.target_model.load_weights('./' + model_path + '/DPPG_actor_target_model.h5')
-        self.target_model.compile(loss='mse', metrics=['mse'], optimizer=Adam(lr=self.learning_rate))
-
-        self.critic_target_model, target_critic_state_input, target_critic_action_input = self._create_critic_model()
-        if os.path.exists('./' + model_path + '/DPPG_critic_target_model.h5'):
-            self.critic_target_model.load_weights('./' + model_path + '/DPPG_critic_target_model.h5')
-        self.critic_target_model.compile(loss='mse', metrics=['mse'], optimizer=Adam(lr=self.learning_rate))
-
-        self.critic_model, self.critic_state, self.critic_action = self._create_critic_model()
-        if os.path.exists('./' + model_path + '/DPPG_critic_model.h5'):
-            self.critic_model.load_weights('./' + model_path + '/DPPG_critic_model.h5')
-        self.critic_model.compile(loss='mse', metrics=['mse'], optimizer=Adam(lr=self.learning_rate))
+        self.critic_model = self._create_critic_model()
+        if os.path.exists('./' + model_path + '/A2C_critic_model.h5'):
+            self.critic_model.load_weights('./' + model_path + '/A2C_critic_model.h5')
+        self.critic_model.compile(loss='mse', metrics=['mse'], optimizer=RMSprop(lr=self.learning_rate))
 
     def increment_step(self):
         """
@@ -267,7 +202,6 @@ class DDPG(object):
         :param _env: The environment.
         :return: the action array and an object as cookie
         """
-
         if len(self.replay_sequence) < self.time_slice - 1:
             return np.argmax(np.random.randint(0, 2, self.action_size))
         else:
@@ -275,18 +209,8 @@ class DDPG(object):
             last_elements.append(observation)
             arr_last_elements = np.array(last_elements)
             tmp = arr_last_elements.reshape((1, self.state_size * self.time_slice))
-            act_values = self.actor_model.predict(tmp)
-
-            if self.is_training:
-                noise = self.random_process.sample()
-                act_values += noise
-
-            # Make discrete action
-            _max = np.nanmax(act_values[0])
-            indices = np.argwhere(act_values[0] == _max)
-            choice = np.random.choice(indices.size)
-
-            return indices[choice, 0]
+            policy = self.actor_model.predict(tmp).ravel()
+            return np.random.choice(np.arange(self.action_size), 1, p=policy)[0]
 
     def add_experiences(self, observation, action, next_observation, reward, done, info):
         """
@@ -332,29 +256,12 @@ class DDPG(object):
         :return: A boolean corresponding to wether or not update_model() can be run
         """
         # The NN is ready to be updated if there is at least a batch in the replay memory
-        # return (len(self.replay_memory) >= self.batch_size) and (len(self.replay_memory) % self.batch_size == 0)
-
-        # The NN is ready to be updated everytime a batch is sampled
         return (self.steps > 1) and ((self.steps % self.batch_size) == 0)
-
-    def _copy_target_models(self):
-        critic_weights = self.critic_model.get_weights()
-        critic_target_weights = self.critic_target_model.get_weights()
-        for i in range(len(critic_weights)):
-            critic_target_weights[i] = self.tau * critic_weights[i] + (1 - self.tau) * critic_target_weights[i]
-        self.critic_target_model.set_weights(critic_target_weights)
-
-        actor_weights = self.actor_model.get_weights()
-        actor_target_weights = self.target_model.get_weights()
-        for i in range(len(actor_weights)):
-            actor_target_weights[i] = self.tau * actor_weights[i] + (1 - self.tau) * actor_target_weights[i]
-        self.target_model.set_weights(actor_target_weights)
 
     def update_model(self):
         """
         Uses the memory to update model. Run back propagation.
         """
-        # TODO: update to support multiple agents. Now only one agent is supported
         num_samples = min(self.batch_size, len(self.replay_memory))
         mini_batch = random.sample(self.replay_memory, num_samples)
 
@@ -373,39 +280,32 @@ class DDPG(object):
 
         state0_batch = np.array(state0_batch).reshape((num_samples, self.state_size * self.time_slice))
         state1_batch = np.array(state1_batch).reshape((num_samples, self.state_size * self.time_slice))
-        # terminal1_batch = np.array(terminal1_batch).reshape((num_samples, 1))
+        terminal1_batch = np.array(terminal1_batch).reshape((num_samples, 1))
         reward_batch = np.array(reward_batch).reshape((num_samples, 1))
         action_batch = np.array(action_batch).reshape((num_samples, 1))
 
-        # Update critic
-        target_q_values = self.critic_target_model.predict_on_batch([state1_batch,
-                                                                     self.actor_model.predict_on_batch(state1_batch)])
-        self.write_tensorboard_value('target_v_values', target_q_values.mean())
-        discounted_reward_batch = self.gamma * target_q_values
-        # discounted_reward_batch = discounted_reward_batch * terminal1_batch
-        y_critic_t = (reward_batch + discounted_reward_batch).reshape(num_samples, 1)
-        train_action_batch = np.zeros((num_samples, self.action_size))
-        np.put_along_axis(arr=train_action_batch, indices=action_batch, values=1, axis=1)
-        logs = self.critic_model.train_on_batch([state0_batch, train_action_batch], y_critic_t)
-        self.write_tensorboard_value('y_critic_t', y_critic_t.mean())
+        # Compute values
+        values = self.critic_model.predict_on_batch([state0_batch])
+        next_values = self.critic_model.predict_on_batch([state1_batch])
+        self.write_tensorboard_value('values_mean', values.mean())
 
+        # Compute advantages and critic target
+        discounted_reward_batch = self.gamma * next_values
+        discounted_reward_batch = discounted_reward_batch * terminal1_batch
+        advantages = (reward_batch + discounted_reward_batch - values).reshape(num_samples, 1)
+        critic_targets = (reward_batch + discounted_reward_batch).reshape(num_samples, 1)
+
+        # Train the critic
+        critic_logs = self.critic_model.train_on_batch([state0_batch], critic_targets)
         train_names = ['critic_train_loss', 'critic_train_mse']
-        self._write_log(self.tensorBoard, train_names, logs, int(self.steps / self.batch_size))
+        self._write_log(self.tensorBoard, train_names, critic_logs, int(self.steps / self.batch_size))
 
-        # Update actor
-        # Compute the gradient from critic
-        a_for_grad = self.actor_model.predict(state0_batch)
-        critic_gradients = self.critic_gradient_wrt_action_fn([state0_batch, a_for_grad])[0]
-        assert critic_gradients.shape == (num_samples, self.action_size)
-
-        # apply the critic gradient to the actor model
-        self.actor_apply_gradient_fn([state0_batch, critic_gradients])
-
-        # Copy target model
-        self._copy_target_models()
-
-        self.write_tensorboard_value('cul_reward_mean', reward_batch.mean())
-        ############################################################################
+        # Train the actor
+        train_action_batch = np.zeros((num_samples, self.action_size))
+        np.put_along_axis(arr=train_action_batch, indices=action_batch, values=advantages, axis=1)
+        actor_logs = self.critic_model.train_on_batch([state0_batch], advantages)
+        train_names = ['actor_train_loss', 'actor_train_categorical_crossentropy']
+        self._write_log(self.tensorBoard, train_names, actor_logs, int(self.steps / self.batch_size))
 
     def save_model(self, model_path):
         """
@@ -413,10 +313,8 @@ class DDPG(object):
         :param model_path: The path where the model will be saved.
         """
         if os.path.exists('./' + model_path):
-            self.actor_model.save('./' + model_path + '/DPPG_actor_model.h5')
-            self.target_model.save('./' + model_path + '/DPPG_actor_target_model.h5')
-            self.critic_model.save('./' + model_path + '/DPPG_critic_model.h5')
-            self.critic_target_model.save('./' + model_path + '/DPPG_critic_target_model.h5')
+            self.actor_model.save('./' + model_path + '/A2C_actor_model.h5')
+            self.critic_model.save('./' + model_path + '/A2C_critic_model.h5')
         else:
             raise FAPSTrainerException("The model path doesn't exist. model_path : " + './' + model_path)
 
@@ -439,7 +337,7 @@ class DDPG(object):
                                    ([[str(x), str(input_dict[x])] for x in input_dict])
                                    )
             self.tensorBoard.add_summary(s_op, int(self.steps / self.batch_size))
-        except:
+        except AttributeError:
             logger.info("Cannot write text summary for Tensorboard. Tensorflow version must be r1.2 or above.")
 
     def write_tensorboard_value(self, key, value):

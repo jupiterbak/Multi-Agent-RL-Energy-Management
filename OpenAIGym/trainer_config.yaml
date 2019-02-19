@@ -126,9 +126,9 @@ MCD_DDPG:
     epsilon_min: 0.1        # minimal exploration rate
     epsilon_decay: 0.999
     gamma: 0.99             # discount factor
-    tau: .1               # soft target model updates
+    tau: .001                # soft target model updates
     num_layers: 2           # number of hidden layers
-    hidden_units: 32        # number of hidden unit in the hidden layer
+    hidden_units: 64        # number of hidden unit in the hidden layer
     use_recurrent: false    # use R-NN
     lambd: 0.95
     learning_rate: 0.001    # learning rate or learning factor
@@ -137,4 +137,18 @@ MCD_DDPG:
     num_epoch: 10000        # total number of epochs
     time_horizon: 64        # time horizon
     sequence_length: 64     # TODO:
+    summary_freq: 1000      # Frequency at which at summary will be printed out
+
+MCD_A2C:
+    trainer: A2C           # trainer type
+    batch_size: 512        # batch size
+    memory_size: 512       # allocated memory size
+    gamma: 0.99             # discount factor
+    num_layers: 2           # number of hidden layers
+    hidden_units: 64        # number of hidden unit in the hidden layer
+    use_recurrent: false    # use R-NN
+    learning_rate: 0.001    # learning rate or learning factor
+    max_steps: 5000000      # maximum number of state for an episode
+    normalize: false        # add normalization layer to the associated NN
+    num_epoch: 10000        # total number of epochs
     summary_freq: 1000      # Frequency at which at summary will be printed out

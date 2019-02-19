@@ -8,7 +8,7 @@ import numpy as np
 import tensorflow as tf
 from keras import backend as k, Input, Model
 from keras.layers import Dense, Dropout
-from keras.optimizers import Adam, RMSprop
+from keras.optimizers import RMSprop
 
 from OpenAIGym.exception import FAPSPLMEnvironmentException
 
@@ -50,7 +50,7 @@ class DQN_RC:
         self.env_brains = envs
         self.state_size = 0
         self.action_size = 0
-        for k, env in self.env_brains.items():
+        for env_name, env in self.env_brains.items():
             self.action_size = env.action_space.n
             self.state_size = env.observation_space.n
 
@@ -285,7 +285,7 @@ class DQN_RC:
 
         state0_batch = np.array(state0_batch).reshape((num_samples, self.state_size * self.time_slice))
         state1_batch = np.array(state1_batch).reshape((num_samples, self.state_size * self.time_slice))
-        terminal1_batch = np.array(terminal1_batch)
+        # terminal1_batch = np.array(terminal1_batch)
         reward_batch = np.array(reward_batch)
         action_batch = np.array(action_batch)
 
@@ -299,19 +299,6 @@ class DQN_RC:
         actions = np.expand_dims(action_batch, axis=1)
         np.put_along_axis(arr=q_target, indices=actions, values=delta_targets, axis=1)
         logs = self.model.train_on_batch(state0_batch, q_target)
-
-        # q_now = self.model.predict_on_batch(state0_batch)
-        # q_next = self.model.predict_on_batch(state1_batch)
-        # q_now_i = np.take(q_now, action_batch)
-        # q_next_i = np.take(q_next, action_batch)
-        #
-        # discounted_reward_batch = q_now_i + (0.2 * (reward_batch + (self.gamma * q_next_i) - q_now_i))
-        # # discounted_reward_batch = discounted_reward_batch * terminal1_batch
-        # delta_targets = discounted_reward_batch.reshape(num_samples, 1)
-        # target_f_after = q_now
-        # actions = np.expand_dims(action_batch, axis=1)
-        # np.put_along_axis(arr=target_f_after, indices=actions, values=delta_targets, axis=1)
-        # logs = self.model.train_on_batch(state0_batch, target_f_after)
 
         train_names = ['train_loss', 'train_mse']
         self._write_log(self.tensorBoard, train_names, logs, int(self.steps / self.batch_size))
@@ -361,7 +348,7 @@ class DQN_RC:
                                    )
 
             self.tensorBoard.add_summary(s_op, int(self.steps / self.batch_size))
-        except:
+        except FAPSTrainerException:
             logger.info("Cannot write text summary for Tensorboard. Tensorflow version must be r1.2 or above.")
 
     def write_tensorboard_value(self, key, value):
