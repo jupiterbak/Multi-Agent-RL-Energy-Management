@@ -268,6 +268,57 @@ class DQN_LSTM:
         # The NN is ready to be updated everytime a batch is sampled
         return (self.steps > 1) and ((self.steps % self.batch_size) == 0)
 
+    def update_model2(self):
+        """
+        Uses the memory to update model. Run back propagation.
+        """
+        # TODO: update to support multiple agents. Now only one agent is supported
+        num_samples = min(self.batch_size, len(self.replay_memory))
+        mini_batch = random.sample(self.replay_memory, num_samples)
+
+        # Start by extracting the necessary parameters (we use a vectorized implementation).
+        state0_batch = []
+        reward_batch = []
+        action_batch = []
+        terminal1_batch = []
+        state1_batch = []
+        for state, action, next_state, reward, done, info in mini_batch:
+            state0_batch.append(state)
+            state1_batch.append(next_state)
+            reward_batch.append(reward)
+            action_batch.append(action)
+            terminal1_batch.append(0. if done else 1.)
+
+        state0_batch = np.array(state0_batch)
+        state1_batch = np.array(state1_batch)
+        terminal1_batch = np.array(terminal1_batch)
+        reward_batch = np.array(reward_batch)
+        action_batch = np.array(action_batch)
+
+        next_target = self.target_model.predict_on_batch(state1_batch)
+        discounted_reward_batch = self.gamma * np.amax(next_target, axis=1)
+        # discounted_reward_batch = discounted_reward_batch * terminal1_batch
+        delta_targets = (reward_batch + discounted_reward_batch).reshape(num_samples, 1)
+
+        q_now = self.model.predict_on_batch(state0_batch)
+        q_target = q_now
+        actions = np.expand_dims(action_batch, axis=1)
+        np.put_along_axis(arr=q_target, indices=actions, values=delta_targets, axis=1)
+        logs = self.model.train_on_batch(state0_batch, q_target)
+
+        train_names = ['train_loss', 'train_mse']
+        self._write_log(self.tensorBoard, train_names, logs, int(self.steps / self.batch_size))
+
+        if self.epsilon > self.epsilon_min:
+            self.epsilon *= self.epsilon_decay
+
+        if self.alpha > self.alpha_min:
+            self.alpha *= self.alpha_decay
+
+        # Update the target network
+        if self.get_step % (4 * self.batch_size):
+            self._update_target_model()
+
     def update_model(self):
         """
         Uses the memory to update model. Run back propagation.
@@ -295,17 +346,6 @@ class DQN_LSTM:
         reward_batch = np.array(reward_batch)
         action_batch = np.array(action_batch)
 
-        # next_target = self.model.predict_on_batch(state1_batch)
-        # discounted_reward_batch = self.gamma * np.amax(next_target, axis=1)
-        # discounted_reward_batch = discounted_reward_batch * terminal1_batch
-        # delta_targets = (reward_batch + discounted_reward_batch).reshape(num_samples, 1)
-        #
-        # target_f = self.model.predict_on_batch(state0_batch)
-        # indexes = action_batch
-        # target_f_after = target_f
-        # target_f_after[:, indexes] = delta_targets
-        # logs = self.model.train_on_batch(state0_batch, target_f_after)
-
         q_now = self.model.predict_on_batch(state0_batch)
         q_next = self.model.predict_on_batch(state1_batch)
         q_now_i = np.take(q_now, action_batch)
@@ -318,17 +358,6 @@ class DQN_LSTM:
         actions = np.expand_dims(action_batch, axis=1)
         np.put_along_axis(arr=target_f_after, indices=actions, values=delta_targets, axis=1)
         logs = self.model.train_on_batch(state0_batch, target_f_after)
-
-        # next_target = self.target_model.predict_on_batch(state1_batch)
-        # discounted_reward_batch = self.gamma * np.amax(next_target, axis=1)
-        # # discounted_reward_batch = discounted_reward_batch * terminal1_batch
-        # delta_targets = (reward_batch + discounted_reward_batch).reshape(num_samples, 1)
-        #
-        # q_now = self.model.predict_on_batch(state0_batch)
-        # q_target = q_now
-        # actions = np.expand_dims(action_batch, axis=1)
-        # np.put_along_axis(arr=q_target, indices=actions, values=delta_targets, axis=1)
-        # logs = self.model.train_on_batch(state0_batch, q_target)
 
         train_names = ['train_loss', 'train_amse']
         self._write_log(self.tensorBoard, train_names, logs, int(self.steps / self.batch_size))

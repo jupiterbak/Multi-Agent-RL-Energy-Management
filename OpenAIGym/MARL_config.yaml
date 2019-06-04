@@ -1,0 +1,11 @@
+Agent_0:
+    type: EFlexAgentPConstant       # trainer type
+
+Agent_2:
+    type: EFlexAgentPConstant       # trainer type
+
+Agent_3:
+    type: EFlexAgentPConstant       # trainer type
+
+Agent_4:
+    type: EFlexAgentPConstant       # trainer type

@@ -8,3 +8,7 @@ register(
     id='eflex-agent-v1',
     entry_point='gym_eflex_agent.envs:EFlexAgentV1',
 )
+register(
+    id='eflex-multi-agent-v0',
+    entry_point='gym_eflex_agent.envs:EFlexMultiAgent',
+)
