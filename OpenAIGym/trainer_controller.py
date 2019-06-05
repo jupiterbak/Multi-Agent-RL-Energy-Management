@@ -136,7 +136,7 @@ class TrainerController(object):
     def _load_config(_trainer_config_path):
         try:
             with open(_trainer_config_path) as data_file:
-                trainer_config = yaml.load(data_file)
+                trainer_config = yaml.load(data_file, Loader=yaml.SafeLoader)
                 return trainer_config
         except IOError:
             raise FAPSPLMEnvironmentException("""Parameter file could not be found here {}.

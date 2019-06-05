@@ -253,7 +253,7 @@ class DQN:
         indexes = action_batch
         target_f_after = target_f
         target_f_after[:, indexes] = delta_targets
-        self.model.train_on_batch(state0_batch, target_f_after)
+
         logs = self.model.train_on_batch(state0_batch, target_f_after)
         train_names = ['train_loss', 'train_mse']
         self._write_log(self.tensorBoard, train_names, logs, int(self.steps / self.batch_size))

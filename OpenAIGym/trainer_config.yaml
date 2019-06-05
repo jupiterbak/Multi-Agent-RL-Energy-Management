@@ -114,6 +114,27 @@ MCD_SARSA:
     num_epoch: 10000        # total number of epochs
     summary_freq: 1000      # Frequency at which at summary will be printed out
 
+MCD_PPO:
+    trainer: PPO           # trainer type
+    batch_size: 512        # batch size
+    memory_size: 10240      # allocated memory size
+    beta: 5.0e-3
+    gamma: 0.99             # discount factor
+    loss_clipping: 0.2      # Only implemented clipping for the surrogate loss, paper said it was best
+    entropy_loss: 0.001     # Entropy loss
+    exploration_noise: 0.2  # Exploration noise
+    num_layers: 2           # number of hidden layers
+    hidden_units: 64        # number of hidden unit in the hidden layer
+    use_recurrent: false    # use R-NN
+    lambd: 0.95
+    learning_rate: 0.001    # learning rate or learning factor
+    max_steps: 5000000      # maximum number of state for an episode
+    normalize: false        # add normalization layer to the associated NN
+    num_epoch: 10000        # total number of epochs
+    time_horizon: 64        # time horizon
+    sequence_length: 64     # TODO:
+    summary_freq: 1000      # Frequency at which at summary will be printed out
+
 MCD_DDPG:
     trainer: DDPG           # trainer type
     batch_size: 512        # batch size
