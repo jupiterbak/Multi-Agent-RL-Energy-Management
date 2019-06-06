@@ -70,7 +70,7 @@ class DQN_LSTM:
         self.epsilon_decay = self.trainer_parameters['epsilon_decay']
         self.learning_rate = self.trainer_parameters['learning_rate']
         self.summary = self.trainer_parameters['summary_path']
-        self.tensorBoard = tf.summary.FileWriter(logdir=self.summary)
+        self.tensorBoard = TensorBoard(self.summary)
         self.model = None
         self.target_model = None
 
@@ -155,6 +155,7 @@ class DQN_LSTM:
 
         self._update_target_model()
 
+        self.tensorBoard.set_model(self.model)
         self.initialized = True
 
     def clear(self):
@@ -394,7 +395,7 @@ class DQN_LSTM:
         # TODO: Add Tensorboard support - Jupiter
         # print(self.model.summary())
 
-    def write_tensorboard_text(self, key, input_dict):
+    def write_tensor_board_text(self, key, input_dict):
         """
         Saves text to Tensorboard.
         Note: Only works on tensorflow r1.2 or above.
@@ -421,8 +422,8 @@ class DQN_LSTM:
         summary_value = summary.value.add()
         summary_value.simple_value = value
         summary_value.tag = key
-        self.tensorBoard.add_summary(summary, int(self.steps / self.batch_size))
-        self.tensorBoard.flush()
+        self.tensorBoard.writer.add_summary(summary, int(self.steps / self.batch_size))
+        self.tensorBoard.writer.flush()
 
     @staticmethod
     def _write_log(callback, names, logs, batch_no):
@@ -431,8 +432,8 @@ class DQN_LSTM:
             summary_value = summary.value.add()
             summary_value.simple_value = value
             summary_value.tag = name
-            callback.add_summary(summary, batch_no)
-            callback.flush()
+            callback.writer.add_summary(summary, batch_no)
+            callback.writer.flush()
 
 
 pass

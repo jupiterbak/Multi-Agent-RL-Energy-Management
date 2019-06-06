@@ -167,15 +167,18 @@ class EFlexMultiAgent(gym.Env):
         if self.shared_reward:
             reward_n = [reward] * self.n
 
-        return obs_n, reward_n, done_n, info_n
+        return obs_n, reward_n, np.sum(np.array(done_n, dtype=np.bool)) > 0, info_n
 
     def reset(self):
+        obs_n = []
         for i, agent in enumerate(self.agents):
-            agent.reset()
+            _ob = agent.reset()
+            obs_n.append(_ob)
+        return obs_n
 
     def render(self, mode='human', close=False):
-        print('|'.join('Agent: {} - State: {} - Reward: {}'.format(agent, agent.current_state, agent.current_reward)
-                       for agent in self.agents))
+        print('|'.join('Agent: {} - State: {} - Reward: {}'.format(i, agent.current_state, agent.current_reward)
+                       for i, agent in enumerate(self.agents)))
 
     def seed(self, seed=None):
         self.seed_value = seed

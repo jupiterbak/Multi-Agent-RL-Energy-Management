@@ -172,7 +172,7 @@ class Trainer(object):
         """
         raise FAPSTrainerException("The write_summary method was not implemented.")
 
-    def write_tensorboard_text(self, key, input_dict):
+    def write_tensor_board_text(self, key, input_dict):
         """
         Saves text to Tensorboard.
         Note: Only works on tensorflow r1.2 or above.
@@ -187,7 +187,7 @@ class Trainer(object):
         #     self.summary_writer.add_summary(s, self.get_step)
         # except:
         #     logger.info("Cannot write text summary for Tensorboard. Tensorflow version must be r1.2 or above.")
-        raise FAPSTrainerException("The write_tensorboard_text method was not implemented.")
+        raise FAPSTrainerException("The write_tensor_board_text method was not implemented.")
 
 
 pass

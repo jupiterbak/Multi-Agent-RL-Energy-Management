@@ -427,7 +427,7 @@ class DDPG(object):
         # print(self.model.summary())
         pass
 
-    def write_tensorboard_text(self, key, input_dict):
+    def write_tensor_board_text(self, key, input_dict):
         """
         Saves text to Tensorboard.
         Note: Only works on tensorflow r1.2 or above.

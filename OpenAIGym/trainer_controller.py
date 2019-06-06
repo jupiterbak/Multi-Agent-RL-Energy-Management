@@ -220,7 +220,7 @@ class TrainerController(object):
         # Write Tensor board settings
         if self.train_model:
             for brain_name, trainer in self.trainers.items():
-                trainer.write_tensorboard_text('Hyperparameters', trainer.parameters)
+                trainer.write_tensor_board_text('Hyperparameters', trainer.parameters)
         try:
             while any([t.get_step <= t.get_max_steps for k, t in self.trainers.items()]) or not self.train_model:
                 for brain_name, trainer in self.trainers.items():
@@ -242,7 +242,11 @@ class TrainerController(object):
                         trainer.add_experiences(self.observations[e], action_map[brain_name], new_observations[e],
                                                 self.rewards[e], self.dones[e], self.infos[e])
                         trainer.process_experiences(self.observations[e], action_map[brain_name], new_observations[e])
-                        cumulated_reward += self.rewards[e]
+                        if isinstance(self.rewards[e], (list,)):
+                            mean = np.mean(np.array(self.rewards[e]))
+                            cumulated_reward += mean
+                        else:
+                            cumulated_reward += self.rewards[e]
 
                         if trainer.is_ready_update() and self.train_model and trainer.get_step <= trainer.get_max_steps:
                             # Perform gradient descent with experience buffer
