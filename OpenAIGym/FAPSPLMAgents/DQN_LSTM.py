@@ -392,8 +392,7 @@ class DQN_LSTM:
         """
         Saves training statistics to i.e. Tensorboard.
         """
-        # TODO: Add Tensorboard support - Jupiter
-        # print(self.model.summary())
+        pass
 
     def write_tensor_board_text(self, key, input_dict):
         """

@@ -21,7 +21,7 @@ logger = logging.getLogger("FAPSPLMAgents")
 
 class FAPSTrainerException(FAPSPLMEnvironmentException):
     """
-    Related to errors with the Trainer. - Not implemented
+    Related to errors with the Trainer.
     """
     pass
 
@@ -149,7 +149,6 @@ class PPO(object):
         return self.initialized
     
     def _create_actor_model(self):
-
         a = Input(shape=(self.state_size,))
         advantage = Input(shape=(1,))
         old_prediction = Input(shape=(self.action_size,))
@@ -337,7 +336,6 @@ class PPO(object):
         action_batch = []
         state1_batch = []
         last_prediction_batch = []
-        index = 0
 
         for [state, action, next_state, reward, done, info, last_pred, proc_reward] in mini_batch:
             state0_batch.append(state)
@@ -350,7 +348,6 @@ class PPO(object):
             last_prediction_batch.append(last_pred)
             # reward
             reward_batch.append(proc_reward)
-            index += 1
 
         state0_batch = np.array(state0_batch)
         state1_batch = np.array(state1_batch)

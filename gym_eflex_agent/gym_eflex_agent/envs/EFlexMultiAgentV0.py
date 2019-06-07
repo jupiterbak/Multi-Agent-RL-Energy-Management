@@ -1,5 +1,4 @@
 from enum import Enum
-from random import randint
 
 import gym
 import math
@@ -69,27 +68,42 @@ class EFlexMultiAgent(gym.Env):
         self.n = 0
         self.shared_reward = False
 
-    def configure(self, p_min, p_max, p_slope, display=None, agent_config_path=None, shared_reward=False):
+        # Eflex related variables
+        self.max_allowed_power = 0
+
+        self.p_min = 0.0
+        self.p_max = 0.0
+        self.p_slope = 0.0
+        self.p_slope = "EFlexMultiAgent"
+
+    def configure(self, display=None, agent_config_path=None, shared_reward=False):
         self.shared_reward = shared_reward
         self.display = display
         if agent_config_path:
             self.agent_configs = self._load_config(agent_config_path)
 
-        for agent_name, agent_conf in self.agent_configs.items():
+        # Read the environment configurations
+        env_config = self.agent_configs['environement_config']
+        self.max_allowed_power = env_config['max_allowed_power']
+
+        for agent_name, agent_conf in self.agent_configs['agents'].items():
             # action space
             self.action_space.append(spaces.Discrete(len(EFLEXAgentTransition)))
 
             # observation space
-            self.observation_space.append(spaces.MultiBinary(len(EFLEXAgentState)))
+            self.observation_space.append(spaces.MultiBinary(len(EFLEXAgentState) + 1))
 
-            # initialize the agent
+            # initialize the agents
             module_spec = self._import_module("gym_eflex_agent", agent_conf['type'])
+            p_min = agent_conf['p_min']
+            p_max = agent_conf['p_max']
+            p_slope = agent_conf['p_slope']
 
             if module_spec is None:
                 raise EFLEXAgentEnvironmentException("The environement  config contains an unknown agent type {}"
                                                      .format(agent_conf['type']))
             else:
-                self.agents.append(module_spec(p_min, p_max, p_slope))
+                self.agents.append(module_spec(p_min, p_max, p_slope, agent_name, self.max_allowed_power))
 
         self.n = len(self.agents)
         self.seed(self.seed_value)
@@ -114,10 +128,10 @@ class EFlexMultiAgent(gym.Env):
         except IOError:
             raise EFLEXAgentEnvironmentException("""Parameter file could not be found here {}.
                                             Will use default Hyper parameters"""
-                                              .format(_trainer_config_path))
+                                                 .format(_trainer_config_path))
         except UnicodeDecodeError:
             raise EFLEXAgentEnvironmentException("There was an error decoding Trainer Config from this path : {}"
-                                              .format(_trainer_config_path))
+                                                 .format(_trainer_config_path))
 
     def step(self, action):
         """
@@ -152,6 +166,7 @@ class EFlexMultiAgent(gym.Env):
         reward_n = []
         done_n = []
         info_n = {'n': []}
+        current_power_n = []
 
         # set action for each agent
         for i, agent in enumerate(self.agents):
@@ -160,6 +175,7 @@ class EFlexMultiAgent(gym.Env):
             obs_n.append(_ob)
             reward_n.append(_state_reward)
             done_n.append(_eo)
+            current_power_n.append(agent.current_power)
             info_n['n'].append(_info)
 
         # all agents get total reward in cooperative case
@@ -167,7 +183,17 @@ class EFlexMultiAgent(gym.Env):
         if self.shared_reward:
             reward_n = [reward] * self.n
 
-        return obs_n, reward_n, np.sum(np.array(done_n, dtype=np.bool)) > 0, info_n
+        # done
+        done = np.sum(np.array(done_n, dtype=np.bool)) > 0
+
+        # Check if the total energy is smaller than the maximum allowed energy
+        total_energy = np.sum(np.array(current_power_n))
+        if total_energy > self.max_allowed_power:
+            # set a maximum negative reward to all agents
+            reward_n = [-0.5] * self.n
+            done = True
+
+        return obs_n, reward_n, done, info_n
 
     def reset(self):
         obs_n = []
@@ -177,8 +203,8 @@ class EFlexMultiAgent(gym.Env):
         return obs_n
 
     def render(self, mode='human', close=False):
-        print('|'.join('Agent: {} - State: {} - Reward: {}'.format(i, agent.current_state, agent.current_reward)
-                       for i, agent in enumerate(self.agents)))
+        print('\t|\t'.join('Agent: {} - State: {} - Reward: {}'.format(i, agent.current_state, agent.current_reward)
+                           for i, agent in enumerate(self.agents)))
 
     def seed(self, seed=None):
         self.seed_value = seed
@@ -199,7 +225,7 @@ class EFlexMultiAgent(gym.Env):
 class EFlexAgent:
     metadata = {'render.modes': ['human']}
 
-    def __init__(self):
+    def __init__(self, p_min, p_max, p_slope, name, max_allowed_power):
         # action space specify which transition can be activated
         self.action_space = spaces.Discrete(len(EFLEXAgentTransition))  # {0,1,...,n-1}
 
@@ -210,11 +236,16 @@ class EFlexAgent:
         self.reward_range = (float(-1.0), float(1.0))
 
         # Simulation related variables.
+        self.p_min = p_min
+        self.p_max = p_max
+        self.p_slope = p_slope
+        self.name = name
         self.current_state = None
         self.np_random = None
         self.current_reward = 0.0
         self.obs = None
         self.obs_pre = None
+        self.max_allowed_power = max_allowed_power
 
         self.seed()
         self.reset()
@@ -456,8 +487,10 @@ class EFlexAgent:
                 self.current_reward = 0.0
 
     def _get_obs(self):
-        obs = np.zeros(self.observation_space.shape)
+        obs = np.zeros(self.observation_space.n + 1)
         obs[self.current_state.value] = 1.0
+        obs[self.observation_space.n] = self.current_power / self.max_allowed_power
+
         return obs
 
     def _get_done(self):
@@ -466,75 +499,61 @@ class EFlexAgent:
     def _get_reward(self):
         return self.current_reward
 
-    def get_current_power(self):
+    @property
+    def current_power(self):
         raise NotImplementedError("Please Implement this method")
 
 
 class EFlexAgentPConstant(EFlexAgent):
     metadata = {'render.modes': ['human']}
 
-    def __init__(self, p_min, p_max, p_slope):
-        super(EFlexAgentPConstant, self).__init__()
-        self.p_min = p_min
-        self.p_max = p_max
-
-    def get_current_power(self):
-        if self.current_state == EFLEXAgentState.Aborted or self.current_state != EFLEXAgentState.Stopped:
+    @property
+    def current_power(self):
+        if self.current_state == EFLEXAgentState.Aborted or self.current_state == EFLEXAgentState.Stopped:
             return 0.0
-        elif self.current_state == EFLEXAgentState.StandBy or self.current_state != EFLEXAgentState.PowerOff or \
-                self.current_state == EFLEXAgentState.Suspended or self.current_state != EFLEXAgentState.Held:
-            return self.p_min
-        else:
+        elif self.current_state == EFLEXAgentState.Execute or self.current_state == EFLEXAgentState.Completed:
             return self.p_max
+        else:
+            return self.p_min
 
 
 class EFlexAgentPLinear(EFlexAgent):
     metadata = {'render.modes': ['human']}
 
-    def __init__(self, p_min, p_max, p_slope):
-        super(EFlexAgentPLinear, self).__init__()
-        self.p_min = p_min
-        self.p_max = p_max
-        self.p_slope = p_slope
-
-    def get_current_power(self):
-        if self.current_state == EFLEXAgentState.Aborted or self.current_state != EFLEXAgentState.Stopped:
+    @property
+    def current_power(self):
+        if self.current_state == EFLEXAgentState.Aborted or self.current_state == EFLEXAgentState.Stopped:
             return 0.0
-        elif self.current_state == EFLEXAgentState.StandBy or self.current_state != EFLEXAgentState.PowerOff or \
-                self.current_state == EFLEXAgentState.Suspended or self.current_state != EFLEXAgentState.Held:
-            return self.p_min
-        else:
+        elif self.current_state == EFLEXAgentState.Execute or self.current_state == EFLEXAgentState.Completed:
             delta = self.currentStep - self.startStep
             c_power = self.p_min + delta * self.p_slope
             if c_power > self.p_max:
                 return self.p_max
             else:
                 return c_power
+        else:
+            return self.p_min
 
 
 class EFlexAgentPLogistic(EFlexAgent):
     metadata = {'render.modes': ['human']}
 
-    def __init__(self, p_min, p_max, p_slope):
-        super(EFlexAgentPLogistic, self).__init__()
-        self.p_min = p_min
-        self.p_max = p_max
-        self.p_slope = p_slope
-
-    def sigmoid(self, x, k, l):
+    @staticmethod
+    def sigmoid(x, k, l):
         return l / (1 + math.exp(- l * x))
 
-    def get_current_power(self):
+    @property
+    def current_power(self):
 
-        if self.current_state == EFLEXAgentState.Aborted or self.current_state != EFLEXAgentState.Stopped:
+        if self.current_state == EFLEXAgentState.Aborted or self.current_state == EFLEXAgentState.Stopped:
             return 0.0
-        elif self.current_state == EFLEXAgentState.StandBy or self.current_state != EFLEXAgentState.PowerOff or \
-                self.current_state == EFLEXAgentState.Suspended or self.current_state != EFLEXAgentState.Held:
-            return self.p_min
-        else:
+        elif self.current_state == EFLEXAgentState.Execute or self.current_state == EFLEXAgentState.Completed:
             delta = self.currentStep - self.startStep
             c_power = self.p_min + self.sigmoid(delta, self.p_slope, self.p_max)
             if c_power > self.p_max:
                 return self.p_max
             else:
                 return c_power
+        else:
+            return self.p_min
+

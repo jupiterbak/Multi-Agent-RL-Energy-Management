@@ -24,7 +24,7 @@ default:
     normalize: false        # add nomalization layer to the associated NN
     num_epoch: 5000         # total number of epochs
     time_horizon: 64        # time horizon
-    sequence_length: 64     # TODO:
+    sequence_length: 64     # 
     summary_freq: 1000      # Frequency at which at summary will be printed out
     buffer_size: 10240
 
@@ -50,7 +50,7 @@ MCD_DQN_LSTM:
     normalize: false        # add nomalization layer to the associated NN
     num_epoch: 10000        # total number of epochs
     time_horizon: 64        # time horizon
-    sequence_length: 64     # TODO:
+    sequence_length: 64     # 
     summary_freq: 1000      # Frequency at which at summary will be printed out
 
 MCD_DQN_RC:
@@ -75,7 +75,7 @@ MCD_DQN_RC:
     normalize: false        # add normalization layer to the associated NN
     num_epoch: 10000        # total number of epochs
     time_horizon: 64        # time horizon
-    sequence_length: 64     # TODO:
+    sequence_length: 64     # 
     summary_freq: 1000      # Frequency at which at summary will be printed out
 
 MCD_DQN:
@@ -100,7 +100,7 @@ MCD_DQN:
     normalize: false        # add normalization layer to the associated NN
     num_epoch: 10000        # total number of epochs
     time_horizon: 64        # time horizon
-    sequence_length: 64     # TODO:
+    sequence_length: 64     # 
     summary_freq: 1000      # Frequency at which at summary will be printed out
 
 MCD_SARSA:
@@ -136,7 +136,7 @@ MCD_PPO:
     normalize: false        # add normalization layer to the associated NN
     num_epoch: 10000        # total number of epochs
     time_horizon: 64        # time horizon
-    sequence_length: 64     # TODO:
+    sequence_length: 64     # 
     summary_freq: 1000      # Frequency at which at summary will be printed out
 
 MCD_DDPG:
@@ -161,7 +161,7 @@ MCD_DDPG:
     normalize: false        # add normalization layer to the associated NN
     num_epoch: 10000        # total number of epochs
     time_horizon: 64        # time horizon
-    sequence_length: 64     # TODO:
+    sequence_length: 64     # 
     summary_freq: 1000      # Frequency at which at summary will be printed out
 
 MCD_DDPGCat:
@@ -186,7 +186,7 @@ MCD_DDPGCat:
     normalize: false        # add normalization layer to the associated NN
     num_epoch: 10000        # total number of epochs
     time_horizon: 64        # time horizon
-    sequence_length: 64     # TODO:
+    sequence_length: 64     # 
     summary_freq: 1000      # Frequency at which at summary will be printed out
 
 MCD_A2C:
@@ -229,15 +229,12 @@ MCD_MADDPG:
     normalize: false        # add normalization layer to the associated NN
     num_epoch: 10000        # total number of epochs
     time_horizon: 64        # time horizon
-    sequence_length: 64     # TODO:
+    sequence_length: 64     # 
     summary_freq: 1000      # Frequency at which at summary will be printed out
 
 MCD_MAPPO:
     trainer: MAPPO          # trainer type
-    agent_config_path: C:\Users\jubakakeu\Documents\GitHub\Multi-Agent-RL-Energy-Management\OpenAIGym\MARL_config.yaml
-    p_min: 0
-    p_max: 100
-    p_slope: 10
+    agent_config_path: C:\Users\Administrator\Desktop\SP347\02_Paper\2019_Multi_Agent_Energy_Management\03_Pythom_Workspace\OpenAIGym\MARL_config.yaml
     batch_size: 512        # batch size
     memory_size: 10240      # allocated memory size
     beta: 5.0e-3
@@ -247,7 +244,7 @@ MCD_MAPPO:
     gamma: 0.99             # discount factor
     num_layers: 2           # number of hidden layers
     hidden_units: 64        # number of hidden unit in the hidden layer
-    critic_hidden_units: 64 # number of hidden unit in the hidden layer
+    critic_hidden_units: 256 # number of hidden unit in the hidden layer
     use_recurrent: false    # use R-NN
     lambd: 0.95
     learning_rate: 0.001    # learning rate or learning factor
@@ -255,5 +252,5 @@ MCD_MAPPO:
     normalize: false        # add normalization layer to the associated NN
     num_epoch: 10000        # total number of epochs
     time_horizon: 64        # time horizon
-    sequence_length: 64     # TODO:
+    sequence_length: 64     # 
     summary_freq: 1000      # Frequency at which at summary will be printed out

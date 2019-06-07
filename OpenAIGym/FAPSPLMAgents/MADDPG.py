@@ -59,10 +59,7 @@ class MADDPG(object):
         # Initialize the environment
         self.agent_config_path = self.trainer_parameters['agent_config_path']
         for env_name, env in self.env_brains.items():
-            p_min = self.trainer_parameters['p_min']
-            p_max = self.trainer_parameters['p_max']
-            p_slope = self.trainer_parameters['p_slope']
-            env.configure(p_min, p_max, p_slope, display=True, agent_config_path=self.agent_config_path,
+            env.configure(display=True, agent_config_path=self.agent_config_path,
                           shared_reward=False)
             self.agent_count = env.n
 

@@ -5,7 +5,6 @@ import os
 import random
 from collections import deque
 
-import keras
 import keras.backend as k
 import numpy as np
 import tensorflow as tf
@@ -54,11 +53,7 @@ class MAPPO(object):
         self.agent_count = 0
         self.agent_config_path = self.trainer_parameters['agent_config_path']
         for env_name, env in self.env_brains.items():
-            p_min = self.trainer_parameters['p_min']
-            p_max = self.trainer_parameters['p_max']
-            p_slope = self.trainer_parameters['p_slope']
-            env.configure(p_min, p_max, p_slope, display=True, agent_config_path=self.agent_config_path,
-                          shared_reward=False)
+            env.configure(display=True, agent_config_path=self.agent_config_path, shared_reward=False)
             self.agent_count = env.n
 
         # initialize specific MAPPO parameters
@@ -96,6 +91,7 @@ class MAPPO(object):
 
         self.dummy_advantage = np.zeros((1, 1))
         self.dummy_old_prediction = [None] * self.agent_count
+
         for i in range(self.agent_count):
             self.dummy_old_prediction[i] = np.zeros((1, self.action_size[i]))
 
@@ -145,7 +141,6 @@ class MAPPO(object):
             return -k.mean(k.minimum(r * advantage, k.clip(r, min_value=1 - self.loss_clipping,
                                                            max_value=1 + self.loss_clipping) * advantage)
                            + self.entropy_loss * -(prob * k.log(prob + 1e-10)))
-
         return loss
 
     def proximal_policy_optimization_loss_continuous(self, advantage, old_prediction):
@@ -187,16 +182,17 @@ class MAPPO(object):
 
     def _create_critic_model(self, index):
         s = Input(shape=(self.all_state_size,))
-        a = Input(shape=(self.all_action_size,))
-
-        merged = keras.layers.concatenate([s, a], name="critic_concatenate_layer_{}".format(index))
-        h = Dense(self.critic_hidden_units, activation='relu')(merged)
-        # h1 = Dropout(0.2)(h)
+        # a = Input(shape=(self.all_action_size,))
+        # merged = keras.layers.concatenate([s, a], name="critic_concatenate_layer_{}".format(index))
+        # h = Dense(self.critic_hidden_units, activation='relu')(merged)
+        h = Dense(self.critic_hidden_units, activation='relu')(s)
+        # h = Dropout(0.2)(h)
         for x in range(1, self.num_layers):
             h = Dense(self.critic_hidden_units , activation='relu')(h)
             # h = Dropout(0.2)(h)
         v = Dense(1, name="critic_output_layer_{}".format(index))(h)
-        model = Model(inputs=[s, a], outputs=v)
+        # model = Model(inputs=[s, a], outputs=v)
+        model = Model(inputs=s, outputs=v)
 
         return model, s
 
@@ -272,18 +268,15 @@ class MAPPO(object):
         """
         _actions = [0] * self.agent_count
         for i in range(self.agent_count):
-            if observation is None:
-                _actions[i] = np.random.choice(self.action_size[i])
+            obs = observation[i].reshape(1, self.state_size[i])
+            p = self.actor_model[i].predict([obs, self.dummy_advantage, self.dummy_old_prediction[i]])
+            self.last_prediction[i] = p[0]
+            if self.is_training is True:
+                action = np.random.choice(self.action_size[i], p=np.nan_to_num(p[0]))
+                _actions[i] = action
             else:
-                obs = observation[i].reshape(1, self.state_size[i])
-                p = self.actor_model[i].predict([obs, self.dummy_advantage, self.dummy_old_prediction[i]])
-                self.last_prediction[i] = p[0]
-                if self.is_training is True:
-                    action = np.random.choice(self.action_size[i], p=np.nan_to_num(p[0]))
-                    _actions[i] = action
-                else:
-                    action = np.argmax(p[0])
-                    _actions[i] = action
+                action = np.argmax(p[0])
+                _actions[i] = action
         return _actions
 
     def take_action_continous(self, observation, _env):
@@ -310,8 +303,6 @@ class MAPPO(object):
         :param done: true if the episode ended.
         :param info: info after executing the action.
         """
-        if not observation:
-            pass
         self.replay_memory.append(
             [observation, action, next_observation, reward, done, info, self.last_prediction, reward])
 
@@ -326,11 +317,11 @@ class MAPPO(object):
         # Update the reward for the last round if the round ends
         _len = len(self.replay_memory)
         done = self.replay_memory[_len - 1][4]
-        if done:
+        if done is True:
             if _len > 1:
                 for j in range(_len - 2, -1, -1):
                     [state, action, next_state, reward, done, info, last_pred, pro_reward] = self.replay_memory[j]
-                    if done and (pro_reward is not None):
+                    if (done is True) and (pro_reward is not None):
                         break
                     else:
                         for i in range(self.agent_count):
@@ -363,54 +354,47 @@ class MAPPO(object):
         mini_batch = random.sample(self.replay_memory, num_samples)
 
         # Start by extracting the necessary parameters (we use a vectorized implementation).
-        state0_batch = []
+        state0_batch = [[] for r in range(self.agent_count)]
+        reward_batch = [[] for r in range(self.agent_count)]
+        action_batch = [[] for r in range(self.agent_count)]
+        state1_batch = [[] for r in range(self.agent_count)]
+        last_prediction_batch = [[] for r in range(self.agent_count)]
         full_state0_batch = []
-        reward_batch = []
-        full_action_batch = []
         full_state1_batch = []
-        state1_batch = []
-        last_prediction_batch = []
-        action_batch = []
+
         for [state, action, next_state, reward, done, info, last_pred, proc_reward] in mini_batch:
-            full_state0_batch.append(np.array(state).reshape((self.all_state_size, )))
-            state0_batch.append(state)
-            full_state1_batch.append(np.array(next_state).reshape((self.all_state_size, )))
-            state1_batch.append(next_state)
-            all_actions = []
+            _tmp_state_0 = []
             for i in range(self.agent_count):
+                state0_batch[i].append(state[i])
+                _tmp_state_0.append(state[i])
+                state1_batch[i].append(next_state[i])
                 # action matrix
                 action_matrix = np.zeros(self.action_size[i])
-                action_matrix[action] = 1
-                all_actions.append(action_matrix)
-            action_batch.append(all_actions)
-            full_action_batch.append(np.array(all_actions).reshape((self.all_action_size, )))
-            # last_prediction-probality
-            last_prediction_batch.append(last_pred)
-            # reward
-            reward_batch.append(proc_reward)
+                action_matrix[action[i]] = 1
+                action_batch[i].append(action_matrix)
+                # last_prediction-probality
+                last_prediction_batch[i].append(last_pred[i])
+                # reward
+                reward_batch[i].append(proc_reward[i])
+            full_state0_batch.append(np.array(_tmp_state_0).reshape((self.all_state_size, )))
 
         full_state0_batch = np.array(full_state0_batch)
-        full_state1_batch = np.array(full_state1_batch)
-        state0_batch = np.array(state0_batch)
-        state1_batch = np.array(state1_batch)
-        full_action_batch = np.array(full_action_batch)
-        reward_batch = np.array(reward_batch)
-        old_prediction_batch = np.array(last_prediction_batch)
-        action_batch = np.array(action_batch)
-
         for i in range(self.agent_count):
-            # Train the actors
-            pred_values_batch = np.array(self.critic_model[i].predict([full_state0_batch, full_action_batch]))
-            advantage_batch = reward_batch[:, i] - pred_values_batch[:, 0]
-            tmp = action_batch[:, i, :]
-            actor_log = self.actor_model[i].train_on_batch(
-                [state0_batch[:, i, :], advantage_batch, old_prediction_batch[:, i, :]],
-                action_batch[:, i, :])
+            state0_batch[i] = np.array(state0_batch[i])
+            state1_batch[i] = np.array(state1_batch[i])
+            reward_batch[i] = np.array(reward_batch[i]).reshape((num_samples, 1))
+            action_batch[i] = np.array(action_batch[i])
+            old_prediction_batch = np.array(last_prediction_batch[i])
+
+            # Train actor
+            pred_values_batch = np.array(self.critic_model[i].predict(full_state0_batch))
+            advantage_batch = reward_batch[i] - pred_values_batch
+            actor_log = self.actor_model[i].train_on_batch([state0_batch[i], advantage_batch, old_prediction_batch], action_batch[i])
             train_names = ['actor_loss_{}'.format(i), 'actor_mse_{}'.format(i)]
             self._write_log(self.tensorBoard, train_names, actor_log, int(self.steps / self.batch_size))
 
-            # Train critics
-            critic_log = self.critic_model[i].train_on_batch([full_state0_batch, full_action_batch], reward_batch[:, i])
+            # Train critic
+            critic_log = self.critic_model[i].train_on_batch(full_state0_batch, reward_batch[i])
             train_names = ['critic_loss_{}'.format(i), 'critic_mse_{}'.format(i)]
             self._write_log(self.tensorBoard, train_names, critic_log, int(self.steps / self.batch_size))
 

@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='gym_eflex_agent',
-      version='0.0.4',
+      version='0.0.5',
       description='Gym Environement for multi-agent energy management',
       author='jupiter Bakakeu',
       url='http://faps.de/',
