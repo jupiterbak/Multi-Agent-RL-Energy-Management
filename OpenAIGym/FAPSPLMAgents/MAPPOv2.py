@@ -5,6 +5,7 @@ import os
 import random
 from collections import deque
 
+import keras
 import keras.backend as k
 import numpy as np
 import tensorflow as tf
@@ -26,7 +27,7 @@ class FAPSTrainerException(FAPSPLMEnvironmentException):
     pass
 
 
-class MAPPO(object):
+class MAPPOv2(object):
     """This class is the abstract class for the faps trainers"""
 
     def __init__(self, envs, brain_name, trainer_parameters, training, seed):
@@ -182,17 +183,17 @@ class MAPPO(object):
 
     def _create_critic_model(self, index):
         s = Input(shape=(self.all_state_size,))
-        # a = Input(shape=(self.all_action_size,))
-        # merged = keras.layers.concatenate([s, a], name="critic_concatenate_layer_{}".format(index))
-        # h = Dense(self.critic_hidden_units, activation='relu')(merged)
-        h = Dense(self.critic_hidden_units, activation='tanh')(s)
+        a = Input(shape=(self.all_action_size,))
+        merged = keras.layers.concatenate([s, a], name="critic_concatenate_layer_{}".format(index))
+        h = Dense(self.critic_hidden_units, activation='relu')(merged)
+        # h = Dense(self.critic_hidden_units, activation='relu')(s)
         # h = Dropout(0.2)(h)
         for x in range(1, self.num_layers):
-            h = Dense(self.critic_hidden_units , activation='tanh')(h)
+            h = Dense(self.critic_hidden_units , activation='relu')(h)
             # h = Dropout(0.2)(h)
         v = Dense(1, name="critic_output_layer_{}".format(index))(h)
-        # model = Model(inputs=[s, a], outputs=v)
-        model = Model(inputs=s, outputs=v)
+        model = Model(inputs=[s, a], outputs=v)
+        # model = Model(inputs=s, outputs=v)
 
         return model, s
 
@@ -360,10 +361,11 @@ class MAPPO(object):
         state1_batch = [[] for r in range(self.agent_count)]
         last_prediction_batch = [[] for r in range(self.agent_count)]
         full_state0_batch = []
-        full_state1_batch = []
+        full_action_batch = []
 
         for [state, action, next_state, reward, done, info, last_pred, proc_reward] in mini_batch:
             _tmp_state_0 = []
+            _tmp_action = []
             for i in range(self.agent_count):
                 state0_batch[i].append(state[i])
                 _tmp_state_0.append(state[i])
@@ -372,13 +374,16 @@ class MAPPO(object):
                 action_matrix = np.zeros(self.action_size[i])
                 action_matrix[action[i]] = 1
                 action_batch[i].append(action_matrix)
+                _tmp_action.append(action_matrix)
                 # last_prediction-probality
                 last_prediction_batch[i].append(last_pred[i])
                 # reward
                 reward_batch[i].append(proc_reward[i])
             full_state0_batch.append(np.array(_tmp_state_0).reshape((self.all_state_size, )))
+            full_action_batch.append(np.array(_tmp_action).reshape((self.all_action_size,)))
 
         full_state0_batch = np.array(full_state0_batch)
+        full_action_batch = np.array(full_action_batch)
         for i in range(self.agent_count):
             state0_batch[i] = np.array(state0_batch[i])
             state1_batch[i] = np.array(state1_batch[i])
@@ -387,14 +392,14 @@ class MAPPO(object):
             old_prediction_batch = np.array(last_prediction_batch[i])
 
             # Train actor
-            pred_values_batch = np.array(self.critic_model[i].predict(full_state0_batch))
+            pred_values_batch = np.array(self.critic_model[i].predict([full_state0_batch,full_action_batch]))
             advantage_batch = reward_batch[i] - pred_values_batch
             actor_log = self.actor_model[i].train_on_batch([state0_batch[i], advantage_batch, old_prediction_batch], action_batch[i])
             train_names = ['actor_loss_{}'.format(i), 'actor_mse_{}'.format(i)]
             self._write_log(self.tensorBoard, train_names, actor_log, int(self.steps / self.batch_size))
 
             # Train critic
-            critic_log = self.critic_model[i].train_on_batch(full_state0_batch, reward_batch[i])
+            critic_log = self.critic_model[i].train_on_batch([full_state0_batch, full_action_batch], reward_batch[i])
             train_names = ['critic_loss_{}'.format(i), 'critic_mse_{}'.format(i)]
             self._write_log(self.tensorBoard, train_names, critic_log, int(self.steps / self.batch_size))
 

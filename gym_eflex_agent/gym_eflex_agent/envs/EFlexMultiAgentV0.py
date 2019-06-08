@@ -75,6 +75,8 @@ class EFlexMultiAgent(gym.Env):
         self.p_max = 0.0
         self.p_slope = 0.0
         self.p_slope = "EFlexMultiAgent"
+        self.current_system_power = 0.0
+        self.global_reward = 0.0
 
     def configure(self, display=None, agent_config_path=None, shared_reward=False):
         self.shared_reward = shared_reward
@@ -180,6 +182,7 @@ class EFlexMultiAgent(gym.Env):
 
         # all agents get total reward in cooperative case
         reward = np.sum(reward_n)
+
         if self.shared_reward:
             reward_n = [reward] * self.n
 
@@ -187,12 +190,13 @@ class EFlexMultiAgent(gym.Env):
         done = np.sum(np.array(done_n, dtype=np.bool)) > 0
 
         # Check if the total energy is smaller than the maximum allowed energy
-        total_energy = np.sum(np.array(current_power_n))
-        if total_energy > self.max_allowed_power:
+        self.current_system_power = np.sum(np.array(current_power_n))
+        if self.current_system_power > self.max_allowed_power:
             # set a maximum negative reward to all agents
             reward_n = [-0.5] * self.n
             done = True
 
+        self.global_reward = np.mean(reward_n)
         return obs_n, reward_n, done, info_n
 
     def reset(self):
@@ -203,8 +207,11 @@ class EFlexMultiAgent(gym.Env):
         return obs_n
 
     def render(self, mode='human', close=False):
-        print('\t|\t'.join('Agent: {} - State: {} - Reward: {}'.format(i, agent.current_state, agent.current_reward)
-                           for i, agent in enumerate(self.agents)))
+        tmp = '\t|\t'.join('{:>10}\t- State: {:>10}\t- Reward: {:>5}'.format(agent.name,
+                                                                    agent.current_state.name,
+                                                                    agent.current_reward) for
+                           i, agent in enumerate(self.agents))
+        print('POWER: {:>6}%\t|\t GR: {:>4}\t|\t{}'.format(self.current_system_power,self.global_reward, tmp))
 
     def seed(self, seed=None):
         self.seed_value = seed
@@ -556,4 +563,3 @@ class EFlexAgentPLogistic(EFlexAgent):
                 return c_power
         else:
             return self.p_min
-
