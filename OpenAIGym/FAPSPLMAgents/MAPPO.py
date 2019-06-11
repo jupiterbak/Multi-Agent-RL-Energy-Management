@@ -185,10 +185,10 @@ class MAPPO(object):
         # a = Input(shape=(self.all_action_size,))
         # merged = keras.layers.concatenate([s, a], name="critic_concatenate_layer_{}".format(index))
         # h = Dense(self.critic_hidden_units, activation='relu')(merged)
-        h = Dense(self.critic_hidden_units, activation='tanh')(s)
+        h = Dense(self.critic_hidden_units, activation='relu')(s)
         # h = Dropout(0.2)(h)
         for x in range(1, self.num_layers):
-            h = Dense(self.critic_hidden_units , activation='tanh')(h)
+            h = Dense(self.critic_hidden_units , activation='relu')(h)
             # h = Dropout(0.2)(h)
         v = Dense(1, name="critic_output_layer_{}".format(index))(h)
         # model = Model(inputs=[s, a], outputs=v)

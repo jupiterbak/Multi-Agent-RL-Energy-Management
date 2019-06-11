@@ -211,7 +211,7 @@ class EFlexMultiAgent(gym.Env):
                                                                     agent.current_state.name,
                                                                     agent.current_reward) for
                            i, agent in enumerate(self.agents))
-        print('POWER: {:>6}%\t|\t GR: {:>4}\t|\t{}'.format(self.current_system_power,self.global_reward, tmp))
+        print('POWER: {:>6}%\t|\t GR: {:.2f}\t|\t{}'.format(self.current_system_power,self.global_reward, tmp))
 
     def seed(self, seed=None):
         self.seed_value = seed
