@@ -2,14 +2,26 @@ environement_config:
     max_allowed_power: 100.0
 
 agents:
-    Agent_0:
-        type: EFlexAgentPConstant       # trainer type
-        p_min: 20.0
+    grid:
+        type: EFLEXEnergyMainGridAgent       # trainer type
+        p_min: 0.0
         p_max: 80.0
-        p_slope: 10.0
+        p_slope: 1
 
-    Agent_1:
+    utility1:
         type: EFlexAgentPConstant       # trainer type
-        p_min: 30.0
-        p_max: 30.0
-        p_slope: 10.0
+        p_min: 0.0
+        p_max: 80.0
+        p_slope: 1
+
+    utility2:
+        type: EFlexAgentPConstant       # trainer type
+        p_min: 0.0
+        p_max: 80.0
+        p_slope: 1
+
+    generator:
+        type: EFLEXEnergyGeneratorAgent       # trainer type
+        p_min: 0.0
+        p_max: 80.0
+        p_slope: 1

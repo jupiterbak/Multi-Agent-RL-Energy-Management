@@ -366,7 +366,7 @@ class MAPPO(object):
             _tmp_state_0 = []
             for i in range(self.agent_count):
                 state0_batch[i].append(state[i])
-                _tmp_state_0.append(state[i])
+                _tmp_state_0.extend( state[i])
                 state1_batch[i].append(next_state[i])
                 # action matrix
                 action_matrix = np.zeros(self.action_size[i])
@@ -376,7 +376,7 @@ class MAPPO(object):
                 last_prediction_batch[i].append(last_pred[i])
                 # reward
                 reward_batch[i].append(proc_reward[i])
-            full_state0_batch.append(np.array(_tmp_state_0).reshape((self.all_state_size, )))
+            full_state0_batch.append(np.array(_tmp_state_0).reshape((self.all_state_size,)))
 
         full_state0_batch = np.array(full_state0_batch)
         for i in range(self.agent_count):

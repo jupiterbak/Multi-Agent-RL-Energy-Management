@@ -74,7 +74,6 @@ class EFlexMultiAgent(gym.Env):
         self.p_min = 0.0
         self.p_max = 0.0
         self.p_slope = 0.0
-        self.p_slope = "EFlexMultiAgent"
         self.current_system_power = 0.0
         self.global_reward = 0.0
 
