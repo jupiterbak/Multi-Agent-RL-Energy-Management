@@ -1,27 +1,23 @@
 environement_config:
     max_allowed_power: 100.0
+    daily_slot_count: 200
 
 agents:
-    grid:
-        type: EFLEXEnergyMainGridAgent       # trainer type
-        p_min: 0.0
-        p_max: 80.0
-        p_slope: 1
 
     utility1:
         type: EFlexAgentPConstant       # trainer type
         p_min: 0.0
-        p_max: 80.0
+        p_max: 30.0
         p_slope: 1
 
     utility2:
         type: EFlexAgentPConstant       # trainer type
         p_min: 0.0
-        p_max: 80.0
+        p_max: 60.0
         p_slope: 1
 
-    generator:
-        type: EFLEXEnergyGeneratorAgent       # trainer type
+    storage:
+        type: EFlexEnergyStorageAgent       # trainer type
         p_min: 0.0
-        p_max: 80.0
+        p_max: 50.0
         p_slope: 1

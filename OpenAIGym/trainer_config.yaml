@@ -205,7 +205,7 @@ MCD_A2C:
 
 MCD_MADDPG:
     trainer: MADDPG           # trainer type
-    agent_config_path: C:\Users\jubakakeu\Documents\GitHub\Multi-Agent-RL-Energy-Management\OpenAIGym\MARL_config.yaml
+    agent_config_path: C:\Users\Administrator\Desktop\SP347\02_Paper\2019_Multi_Agent_Energy_Management\03_Pythom_Workspace\OpenAIGym\MARL_config.yaml
     p_min: 0
     p_max: 100
     p_slope: 10
@@ -234,7 +234,7 @@ MCD_MADDPG:
 
 MCD_MAPPO:
     trainer: MAPPO          # trainer type
-    agent_config_path: C:\Users\jubakakeu\Documents\GitHub\Multi-Agent-RL-Energy-Management\OpenAIGym\MARL_config.yaml
+    agent_config_path: C:\Users\Administrator\Desktop\SP347\02_Paper\2019_Multi_Agent_Energy_Management\03_Pythom_Workspace\OpenAIGym\MARL_config.yaml
     batch_size: 512        # batch size
     memory_size: 10240      # allocated memory size
     beta: 5.0e-3
@@ -257,7 +257,30 @@ MCD_MAPPO:
 
 MCD_MAPPO_mult:
     trainer: MAPPO          # trainer type
-    agent_config_path: C:\Users\jubakakeu\Documents\GitHub\Multi-Agent-RL-Energy-Management\OpenAIGym\MARL_config.yaml
+    agent_config_path: C:\Users\Administrator\Desktop\SP347\02_Paper\2019_Multi_Agent_Energy_Management\03_Pythom_Workspace\OpenAIGym\MARL_config.yaml
+    batch_size: 512        # batch size
+    memory_size: 10240      # allocated memory size
+    beta: 5.0e-3
+    loss_clipping: 0.1      # Only implemented clipping for the surrogate loss, paper said it was best
+    entropy_loss: 0.01     # Entropy loss
+    exploration_noise: 0.2  # Exploration noise
+    gamma: 0.99             # discount factor
+    num_layers: 2           # number of hidden layers
+    hidden_units: 64        # number of hidden unit in the hidden layer
+    critic_hidden_units: 256 # number of hidden unit in the hidden layer
+    use_recurrent: false    # use R-NN
+    lambd: 0.95
+    learning_rate: 0.001    # learning rate or learning factor
+    max_steps: 5000000      # maximum number of state for an episode
+    normalize: false        # add normalization layer to the associated NN
+    num_epoch: 10000        # total number of epochs
+    time_horizon: 64        # time horizon
+    sequence_length: 64     #
+    summary_freq: 1000      # Frequency at which at summary will be printed out
+
+MCD_MAPPOLSTM_mult:
+    trainer: MAPPOLSTM          # trainer type
+    agent_config_path: C:\Users\Administrator\Desktop\SP347\02_Paper\2019_Multi_Agent_Energy_Management\03_Pythom_Workspace\OpenAIGym\MARL_config.yaml
     batch_size: 512        # batch size
     memory_size: 10240      # allocated memory size
     beta: 5.0e-3
@@ -271,16 +294,16 @@ MCD_MAPPO_mult:
     use_recurrent: false    # use R-NN
     lambd: 0.95
     learning_rate: 0.001    # learning rate or learning factor
-    max_steps: 5000000      # maximum number of state for an episode
+    max_steps: 500000      # maximum number of state for an episode
     normalize: false        # add normalization layer to the associated NN
-    num_epoch: 10000        # total number of epochs
+    num_epoch: 1000        # total number of epochs
     time_horizon: 64        # time horizon
     sequence_length: 64     #
     summary_freq: 1000      # Frequency at which at summary will be printed out
 
 MCD_MAPPOv2:
     trainer: MAPPOv2          # trainer type
-    agent_config_path: C:\Users\jubakakeu\Documents\GitHub\Multi-Agent-RL-Energy-Management\OpenAIGym\MARL_config.yaml
+    agent_config_path: C:\Users\Administrator\Desktop\SP347\02_Paper\2019_Multi_Agent_Energy_Management\03_Pythom_Workspace\OpenAIGym\MARL_config.yaml
     batch_size: 1024        # batch size
     memory_size: 10240      # allocated memory size
     beta: 5.0e-3

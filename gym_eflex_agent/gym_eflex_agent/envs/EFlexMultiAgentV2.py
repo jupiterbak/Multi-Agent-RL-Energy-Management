@@ -46,7 +46,7 @@ class EFLEXAgentEnvironmentException(Exception):
     pass
 
 
-class EFlexMultiAgent(gym.Env):
+class EFlexMultiAgentVersion2(gym.Env):
     metadata = {'render.modes': ['human']}
 
     def __init__(self):
@@ -69,9 +69,15 @@ class EFlexMultiAgent(gym.Env):
         self.shared_reward = False
 
         # Eflex related variables
+        self.daily_slot_count = 1
         self.max_allowed_power = 0
         self.current_system_power = 0.0
         self.global_reward = 0.0
+        self.simulation_step = 0
+        self.daily_load = [0.0] * self.daily_slot_count
+        self.daily_generated = [0.0] * self.daily_slot_count
+        self.daily_sell = [0.0] * self.daily_slot_count
+        self.daily_buy = [0.0] * self.daily_slot_count
 
     def configure(self, display=None, agent_config_path=None, shared_reward=False):
         self.shared_reward = shared_reward
@@ -82,7 +88,15 @@ class EFlexMultiAgent(gym.Env):
         # Read the environment configurations
         env_config = self.agent_configs['environement_config']
         self.max_allowed_power = env_config['max_allowed_power']
+        self.daily_slot_count = env_config['daily_slot_count']
 
+        # initialize internal variables
+        self.daily_load = [0.0] * self.daily_slot_count
+        self.daily_generated = [0.0] * self.daily_slot_count
+        self.daily_sell = [0.0] * self.daily_slot_count
+        self.daily_buy = [0.0] * self.daily_slot_count
+
+        # initialize and configure the agents
         for agent_name, agent_conf in self.agent_configs['agents'].items():
             current_agent = None
             # initialize the agents
@@ -91,7 +105,7 @@ class EFlexMultiAgent(gym.Env):
                 raise EFLEXAgentEnvironmentException("The environement  config contains an unknown agent type {}"
                                                      .format(agent_conf['type']))
             else:
-                current_agent = module_spec(agent_conf, agent_name, self.max_allowed_power)
+                current_agent = module_spec(agent_conf, agent_name, self.max_allowed_power, self.daily_slot_count)
                 self.agents.append(current_agent)
 
             # action space
@@ -100,6 +114,7 @@ class EFlexMultiAgent(gym.Env):
             # observation space
             self.observation_space.append(current_agent.observation_space)
 
+        # Set environment parameters
         self.n = len(self.agents)
         self.seed(self.seed_value)
         self.reset()
@@ -110,7 +125,7 @@ class EFlexMultiAgent(gym.Env):
 
         macro_module = __import__(module_name)
         module0 = getattr(macro_module, 'envs')
-        module = getattr(module0, 'EFlexMultiAgentV1')
+        module = getattr(module0, 'EFlexMultiAgentV2')
         my_class = getattr(module, class_name)
         return my_class
 
@@ -157,12 +172,14 @@ class EFlexMultiAgent(gym.Env):
                  However, official evaluations of your agent are not allowed to
                  use this for learning.
         """
+        # increase the simulation step
+        self.simulation_step += 1
+
         obs_n = []
         reward_n = []
         done_n = []
         info_n = {'n': []}
-        current_power_n = []
-
+        t = self.simulation_step % self.daily_slot_count
         # set action for each agent
         for i, agent in enumerate(self.agents):
             _ob, _state_reward, _eo, _info = agent.step(action[i])
@@ -170,33 +187,49 @@ class EFlexMultiAgent(gym.Env):
             obs_n.append(_ob)
             reward_n.append(_state_reward)
             done_n.append(_eo)
-            current_power_n.append(agent.current_power)
             info_n['n'].append(_info)
+            # Collect the load of all elements
+            if agent is EFlexAgent:
+                self.daily_load[t] += agent.current_power
+            elif agent is EFLEXEnergyGeneratorAgent:
+                self.daily_generated[t] += abs(agent.current_power)
+            elif agent is EFLEXEnergyMainGridAgent:
+                if agent.current_state == EFLEXEnergyMainGridAgentState.Buying:
+                    self.daily_buy[t] += abs(agent.current_power)
+                elif agent.current_state == EFLEXEnergyMainGridAgentState.Selling:
+                    self.daily_sell[t] += abs(agent.current_power)
 
         # all agents get total reward in cooperative case
         reward = np.sum(reward_n)
-
         if self.shared_reward:
             reward_n = [reward] * self.n
 
         # done
-        done = np.sum(np.array(done_n, dtype=np.bool)) > 0
+        done = (self.simulation_step % self.daily_slot_count == 0)
 
-        # Check if the total energy is smaller than the maximum allowed energy
-        self.current_system_power = np.sum(np.array(current_power_n))
-        if self.current_system_power > self.max_allowed_power:
-            # set a maximum negative reward to all agents
-            reward_n = [-0.5] * self.n
-            done = True
-        # else:
-        #     # Add a smal reward to encourage energy savings
-        #     for i, agent in enumerate(self.agents):
-        #             reward_n[i] = reward_n[i] # + (0.1 * (1 - math.tanh(self.current_system_power ** 2)))
+        self.current_system_power = self.daily_sell[t] + self.daily_generated[t] - (self.daily_load[t]
+                                                                                    - self.daily_buy[t])
+        if done:
+            total_cost = np.sum(np.array(self.daily_sell)) + np.sum(np.array(self.daily_generated)) \
+                         - np.sum(np.array(self.daily_load)) - np.sum(np.array(self.daily_buy))
+            reward_n = [0.5 * (1 - math.tanh(total_cost ** 2))] * self.n
+
+        # # Check if the total energy is smaller than the maximum allowed energy
+        # self.current_system_power = np.sum(np.array(current_power_n))
+        # if self.current_system_power > self.max_allowed_power:
+        #     # set a maximum negative reward to all agents
+        #     reward_n = [-0.5] * self.n
+        #     done = True
+        # # else:
+        # #     # Add a smal reward to encourage energy savings
+        # #     for i, agent in enumerate(self.agents):
+        # #             reward_n[i] = reward_n[i] # + (0.1 * (1 - math.tanh(self.current_system_power ** 2)))
 
         self.global_reward = np.mean(reward_n)
         return obs_n, reward_n, done, info_n
 
     def reset(self):
+        self.simulation_step = 0
         obs_n = []
         for i, agent in enumerate(self.agents):
             _ob = agent.reset()
@@ -204,7 +237,7 @@ class EFlexMultiAgent(gym.Env):
         return obs_n
 
     def render(self, mode='human', close=False):
-        tmp = '\t|\t'.join('{:<10}\t- State: {:<12}\t- Reward: {:.2f}'.format(agent.name,
+        tmp = '\t|\t'.join('{:<10}\t- State: {:<10}\t- Reward: {:.2f}'.format(agent.name,
                                                                               agent.current_state.name,
                                                                               agent.current_reward) for
                            i, agent in enumerate(self.agents))
@@ -229,12 +262,12 @@ class EFlexMultiAgent(gym.Env):
 class EFlexAgent:
     metadata = {'render.modes': ['human']}
 
-    def __init__(self, agent_conf, name, max_allowed_power):
+    def __init__(self, agent_conf, name, max_allowed_power, daily_slot_count):
         # action space specify which transition can be activated
         self.action_space = spaces.Discrete(len(EFLEXAgentTransition))  # {0,1,...,n-1}
 
         # observation is a multi discrete specifying which state is activated
-        self.observation_space = spaces.MultiBinary(len(EFLEXAgentState) + 1)
+        self.observation_space = spaces.MultiBinary(len(EFLEXAgentState) + 2)
 
         # reward_range
         self.reward_range = (float(-1.0), float(1.0))
@@ -250,6 +283,7 @@ class EFlexAgent:
         self.obs = None
         self.obs_pre = None
         self.max_allowed_power = max_allowed_power
+        self.daily_slot_count = daily_slot_count
 
         self.seed()
         self.reset()
@@ -352,7 +386,7 @@ class EFlexAgent:
             elif action == EFLEXAgentTransition.Start:
                 self.startStep = self.currentStep
                 self.current_state = EFLEXAgentState.Execute
-                self.current_reward = 1.0
+                self.current_reward = 0.5
             elif action == EFLEXAgentTransition.PowerOff:
                 self.current_state = EFLEXAgentState.PowerOff
                 self.current_reward = 0.0
@@ -419,7 +453,7 @@ class EFlexAgent:
                 self.current_reward = -0.1
             elif action == EFLEXAgentTransition.SC:
                 self.current_state = EFLEXAgentState.Completed
-                self.current_reward = 1.0
+                self.current_reward = 0.5
             elif action == EFLEXAgentTransition.Hold:
                 self.current_state = EFLEXAgentState.Held
                 self.current_reward = 0.0
@@ -442,7 +476,7 @@ class EFlexAgent:
                 self.current_reward = -0.1
             elif action == EFLEXAgentTransition.SC:
                 self.current_state = EFLEXAgentState.Idle
-                self.current_reward = 1.0
+                self.current_reward = 0.5
             elif action == EFLEXAgentTransition.Stop:
                 self.current_state = EFLEXAgentState.Stopped
                 self.current_reward = 0.0
@@ -493,6 +527,7 @@ class EFlexAgent:
     def _get_obs(self):
         obs = np.zeros(self.observation_space.n)
         obs[self.current_state.value] = 1.0
+        obs[self.observation_space.n - 2] = self.currentStep % self.daily_slot_count
         obs[self.observation_space.n - 1] = self.current_power / self.max_allowed_power
 
         return obs
@@ -581,12 +616,12 @@ class EFLEXEnergyStorageAgentTransition(Enum):
 class EFlexEnergyStorageAgent:
     metadata = {'render.modes': ['human']}
 
-    def __init__(self, agent_conf, name, max_allowed_power):
+    def __init__(self, agent_conf, name, max_allowed_power, daily_slot_count):
         # action space specify which transition can be activated
         self.action_space = spaces.Discrete(len(EFLEXEnergyStorageAgentTransition))  # {0,1,...,n-1}
 
         # observation is a multi discrete specifying which state is activated
-        self.observation_space = spaces.MultiBinary(len(EFLEXEnergyStorageAgentState) + 1)
+        self.observation_space = spaces.MultiBinary(len(EFLEXEnergyStorageAgentState) + 2)
 
         # reward_range
         self.reward_range = (float(-1.0), float(1.0))
@@ -602,6 +637,7 @@ class EFlexEnergyStorageAgent:
         self.obs = None
         self.obs_pre = None
         self.max_allowed_power = max_allowed_power
+        self.daily_slot_count = daily_slot_count
 
         self.seed()
         self.reset()
@@ -711,11 +747,11 @@ class EFlexEnergyStorageAgent:
                 self.current_reward = 0.0
             elif action == EFLEXEnergyStorageAgentTransition.Discharge:
                 self.current_state = EFLEXEnergyStorageAgentState.Discharging
-                val = 0.5 * (1 - ((self.p_max - self.charging_level) ** 2 / (self.p_max ** 2)))
+                val = 1 - ((self.p_max - self.charging_level) * +2 / (self.p_max ** 2))
                 self.current_reward = val
             else:
                 self.current_state = EFLEXEnergyStorageAgentState.Charging
-                val = 0.5 * (1 - ((self.p_max - self.charging_level) ** 2 / (self.p_max ** 2)))
+                val = 1 - ((self.p_max - self.charging_level) * +2 / (self.p_max ** 2))
                 self.current_reward = val
 
             self.charging_level = self.charging_level + self.p_slope
@@ -731,11 +767,11 @@ class EFlexEnergyStorageAgent:
                 self.current_reward = 0.0
             elif action == EFLEXEnergyStorageAgentTransition.Charge:
                 self.current_state = EFLEXEnergyStorageAgentState.Charging
-                val = 0.5 * (1 - ((self.p_max - self.charging_level) ** 2 / (self.p_max ** 2)))
+                val = 1 - ((self.p_max - self.charging_level) ** 2 / (self.p_max ** 2))
                 self.current_reward = val
             else:
                 self.current_state = EFLEXEnergyStorageAgentState.Discharging
-                val = 0.5 * (1 - ((self.p_max - self.charging_level) ** 2 / (self.p_max ** 2)))
+                val = 1 - ((self.p_max - self.charging_level) ** 2 / (self.p_max ** 2))
                 self.current_reward = val
 
             self.charging_level = self.charging_level - self.p_slope
@@ -745,6 +781,7 @@ class EFlexEnergyStorageAgent:
     def _get_obs(self):
         obs = np.zeros(self.observation_space.n)
         obs[self.current_state.value] = 1.0
+        obs[self.observation_space.n - 2] = self.currentStep % self.daily_slot_count
         obs[self.observation_space.n - 1] = self.current_power / self.max_allowed_power
 
         return obs
@@ -791,12 +828,12 @@ class EFLEXEnergyGeneratorAgentTransition(Enum):
 class EFLEXEnergyGeneratorAgent:
     metadata = {'render.modes': ['human']}
 
-    def __init__(self, agent_conf, name, max_allowed_power):
+    def __init__(self, agent_conf, name, max_allowed_power, daily_slot_count):
         # action space specify which transition can be activated
         self.action_space = spaces.Discrete(len(EFLEXEnergyGeneratorAgentTransition))  # {0,1,...,n-1}
 
         # observation is a multi discrete specifying which state is activated
-        self.observation_space = spaces.MultiBinary(len(EFLEXEnergyGeneratorAgentState) + 1)
+        self.observation_space = spaces.MultiBinary(len(EFLEXEnergyGeneratorAgentState) + 2)
 
         # reward_range
         self.reward_range = (float(-1.0), float(1.0))
@@ -812,6 +849,7 @@ class EFLEXEnergyGeneratorAgent:
         self.obs = None
         self.obs_pre = None
         self.max_allowed_power = max_allowed_power
+        self.daily_slot_count = daily_slot_count
 
         self.seed()
         self.reset()
@@ -924,6 +962,7 @@ class EFLEXEnergyGeneratorAgent:
     def _get_obs(self):
         obs = np.zeros(self.observation_space.n)
         obs[self.current_state.value] = 1.0
+        obs[self.observation_space.n - 2] = self.currentStep % self.daily_slot_count
         obs[self.observation_space.n - 1] = self.current_power / self.max_allowed_power
 
         return obs
@@ -968,12 +1007,12 @@ class EFLEXEnergyMainGridAgentTransition(Enum):
 class EFLEXEnergyMainGridAgent:
     metadata = {'render.modes': ['human']}
 
-    def __init__(self, agent_conf, name, max_allowed_power):
+    def __init__(self, agent_conf, name, max_allowed_power, daily_slot_count):
         # action space specify which transition can be activated
         self.action_space = spaces.Discrete(len(EFLEXEnergyMainGridAgentTransition))  # {0,1,...,n-1}
 
         # observation is a multi discrete specifying which state is activated
-        self.observation_space = spaces.MultiBinary(len(EFLEXEnergyMainGridAgentState) + 1)
+        self.observation_space = spaces.MultiBinary(len(EFLEXEnergyMainGridAgentState) + 2)
 
         # reward_range
         self.reward_range = (float(-1.0), float(1.0))
@@ -989,6 +1028,7 @@ class EFLEXEnergyMainGridAgent:
         self.obs = None
         self.obs_pre = None
         self.max_allowed_power = max_allowed_power
+        self.daily_slot_count = daily_slot_count
 
         self.seed()
         self.reset()
@@ -1119,6 +1159,7 @@ class EFLEXEnergyMainGridAgent:
     def _get_obs(self):
         obs = np.zeros(self.observation_space.n)
         obs[self.current_state.value] = 1.0
+        obs[self.observation_space.n - 2] = self.currentStep % self.daily_slot_count
         obs[self.observation_space.n - 1] = self.current_power / self.max_allowed_power
 
         return obs

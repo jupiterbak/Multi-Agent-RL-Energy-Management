@@ -2,15 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac5cb565-613a-4825-b8bb-08171f326be0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentV1.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/litterature/1-s2.0-S2405896317317238-main.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/litterature/energies-11-02010.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Notes.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/MAPPOLSTM.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentV2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/03_Pythom_Workspace.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/03_Pythom_Workspace.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/MAPPO.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/MAPPO.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OpenAIGym/MARL_config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/MARL_config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/models/MCD_MAPPO/MAPPO_actor_0_model.h5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/models/MCD_MAPPO/MAPPO_actor_1_model.h5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/models/MCD_MAPPO/MAPPO_actor_2_model.h5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/models/MCD_MAPPO/MAPPO_actor_3_model.h5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/models/MCD_MAPPO/MAPPO_critic_0_model.h5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/models/MCD_MAPPO/MAPPO_critic_1_model.h5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/models/MCD_MAPPO/MAPPO_critic_2_model.h5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/models/MCD_MAPPO/MAPPO_critic_3_model.h5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/summaries/MCD_MAPPO/events.out.tfevents.1560271436.LAPLACE" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/OpenAIGym/trainer_config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/trainer_config.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentV0.py" beforeDir="false" afterPath="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentV0.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentV1.py" beforeDir="false" afterPath="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentV1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/__init__.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,13 +30,21 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="pause">
+      <favorite_root url="file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentV1.py" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+    </favorites_list>
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/MAPPO.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
-              <caret line="378" column="63" selection-start-line="378" selection-start-column="63" selection-end-line="378" selection-end-column="63" />
+            <state relative-caret-position="89">
+              <caret line="142" column="46" selection-start-line="142" selection-start-column="34" selection-end-line="142" selection-end-column="46" />
+              <folding>
+                <element signature="e#20#34#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -33,8 +52,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/OpenAIGym/trainer_controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="516">
-              <caret line="252" selection-start-line="252" selection-end-line="252" />
+            <state relative-caret-position="135">
+              <caret line="66" column="35" selection-start-line="66" selection-start-column="35" selection-end-line="66" selection-end-column="35" />
               <folding>
                 <element signature="e#51#65#0" expanded="true" />
               </folding>
@@ -45,39 +64,59 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentV1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="790" column="31" selection-start-line="790" selection-start-column="6" selection-end-line="790" selection-end-column="31" />
+            <state relative-caret-position="-490">
+              <caret line="444" column="41" selection-start-line="444" selection-start-column="41" selection-end-line="444" selection-end-column="41" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
-                <element signature="e#647#711#0" />
-                <element signature="e#3508#4171#0" />
-                <element signature="e#6663#6804#0" />
-                <element signature="e#7707#19967#0" />
-                <element signature="e#8935#10821#0" />
-                <element signature="e#10852#11269#0" />
-                <element signature="e#22202#23212#0" />
-                <element signature="e#23322#25340#0" />
-                <element signature="e#25371#25801#0" />
-                <element signature="e#28885#29077#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/OpenAIGym/MARL_config.yaml">
+        <entry file="file://$PROJECT_DIR$/gym_eflex_agent/setup.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="111">
-              <caret line="20" column="18" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
+            <state relative-caret-position="51">
+              <caret line="3" column="20" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="20" column="61" selection-start-line="20" selection-start-column="61" selection-end-line="20" selection-end-column="61" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="54" selection-start-line="4" selection-start-column="54" selection-end-line="4" selection-end-column="54" />
+              <folding>
+                <element signature="e#0#38#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/OpenAIGym/trainer_config.yaml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="264" column="21" selection-start-line="264" selection-start-column="21" selection-end-line="264" selection-end-column="21" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/OpenAIGym/trainer_config.yaml">
+        <entry file="file://$PROJECT_DIR$/OpenAIGym/MARL_config.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-199">
-              <caret line="269" column="28" selection-start-line="269" selection-start-column="28" selection-end-line="269" selection-end-column="28" />
+            <state relative-caret-position="153">
+              <caret line="12" column="12" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -93,9 +132,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>dummy_old_prediction</find>
-      <find>summary_path</find>
-      <find>configure</find>
       <find>cumulated_reward</find>
       <find>last_round_rewards</find>
       <find>action_size</find>
@@ -108,7 +144,6 @@
       <find>proximal_policy_optimization_loss</find>
       <find>2</find>
       <find>p_min</find>
-      <find>entropy_loss</find>
       <find>currentStep</find>
       <find>len</find>
       <find>EFlexMultiAgent</find>
@@ -122,7 +157,11 @@
       <find>Aborted</find>
       <find>execu</find>
       <find>Gene</find>
+      <find>steps</find>
+      <find>MAPPO</find>
+      <find>current_system_power</find>
       <find>Execute</find>
+      <find>entropy_loss</find>
     </findStrings>
     <replaceStrings>
       <replace>.value:</replace>
@@ -139,6 +178,7 @@
       <replace>write_tensor_board_text</replace>
       <replace>PPO</replace>
       <replace>obs[self.observation_space.n - 1]</replace>
+      <replace>MAPPOLSTM</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -147,9 +187,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/OpenAIGym/EFlexAgent/EFlexAgent/EflexAgent-v0.py" />
-        <option value="$PROJECT_DIR$/OpenAIGym/EFlexAgent/EFlexAgent/env/EflexAgent-v1.py" />
-        <option value="$PROJECT_DIR$/OpenAIGym/EFlexAgent/EFlexAgent/env/__init__.py" />
         <option value="$PROJECT_DIR$/OpenAIGym/EFlexAgent/README.md" />
         <option value="$PROJECT_DIR$/OpenAIGym/EFlexAgent/EFlexAgent/envs/__init__.py" />
         <option value="$PROJECT_DIR$/OpenAIGym/EFlexAgent/EFlexAgent/envs/EFlexAgentV1.py" />
@@ -192,12 +229,15 @@
         <option value="$PROJECT_DIR$/gym_eflex_agent/setup.py" />
         <option value="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/MAPPOv2.py" />
         <option value="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentV0.py" />
+        <option value="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/MAPPOLSTM.py" />
+        <option value="$PROJECT_DIR$/Notes.md" />
         <option value="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/__init__.py" />
         <option value="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/__init__.py" />
+        <option value="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentV2.py" />
         <option value="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/MAPPO.py" />
         <option value="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentV1.py" />
-        <option value="$PROJECT_DIR$/OpenAIGym/MARL_config.yaml" />
         <option value="$PROJECT_DIR$/OpenAIGym/trainer_config.yaml" />
+        <option value="$PROJECT_DIR$/OpenAIGym/MARL_config.yaml" />
       </list>
     </option>
   </component>
@@ -213,18 +253,46 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="Multi-Agent-RL-Energy-Management" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Multi-Agent-RL-Energy-Management" type="462c0819:PsiDirectoryNode" />
+              <item name="03_Pythom_Workspace" type="b2602c69:ProjectViewProjectNode" />
+              <item name="03_Pythom_Workspace" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="03_Pythom_Workspace" type="b2602c69:ProjectViewProjectNode" />
+              <item name="03_Pythom_Workspace" type="462c0819:PsiDirectoryNode" />
+              <item name="gym_eflex_agent" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="03_Pythom_Workspace" type="b2602c69:ProjectViewProjectNode" />
+              <item name="03_Pythom_Workspace" type="462c0819:PsiDirectoryNode" />
+              <item name="OpenAIGym" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="03_Pythom_Workspace" type="b2602c69:ProjectViewProjectNode" />
+              <item name="03_Pythom_Workspace" type="462c0819:PsiDirectoryNode" />
+              <item name="OpenAIGym" type="462c0819:PsiDirectoryNode" />
+              <item name="FAPSPLMAgents" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="03_Pythom_Workspace" type="b2602c69:ProjectViewProjectNode" />
+              <item name="03_Pythom_Workspace" type="462c0819:PsiDirectoryNode" />
+              <item name="OpenAIGym" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="03_Pythom_Workspace" type="b2602c69:ProjectViewProjectNode" />
+              <item name="03_Pythom_Workspace" type="462c0819:PsiDirectoryNode" />
+              <item name="OpenAIGym" type="462c0819:PsiDirectoryNode" />
+              <item name="summaries" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -241,11 +309,11 @@
       <recent name="C:\Users\Administrator\Desktop\SP347\02_Paper\2019_Multi_Agent_Energy_Management\03_Pythom_Workspace\OpenAIGym\FAPSPLMTrainers" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Administrator\Desktop\SP347\02_Paper\2019_Multi_Agent_Energy_Management\03_Pythom_Workspace\gym_eflex_agent\gym_eflex_agent\envs" />
+      <recent name="C:\Users\Administrator\Desktop\SP347\02_Paper\2019_Multi_Agent_Energy_Management\03_Pythom_Workspace\OpenAIGym\FAPSPLMAgents" />
       <recent name="C:\Users\jubakakeu\Documents\GitHub\Multi-Agent-RL-Energy-Management\gym_eflex_agent\gym_eflex_agent\envs" />
       <recent name="C:\Users\jubakakeu\Documents\GitHub\Multi-Agent-RL-Energy-Management\OpenAIGym\FAPSPLMAgents" />
-      <recent name="C:\Users\Administrator\Desktop\SP347\02_Paper\2019_Multi_Agent_Energy_Management\03_Pythom_Workspace\gym_eflex_agent\gym_eflex_agent\envs" />
       <recent name="C:\Users\Administrator\Desktop\SP347\02_Paper\2019_Multi_Agent_Energy_Management\03_Pythom_Workspace\OpenAIGym\summaries\MCD_MAPPO" />
-      <recent name="C:\Users\Administrator\Desktop\SP347\02_Paper\2019_Multi_Agent_Energy_Management\03_Pythom_Workspace\OpenAIGym\FAPSPLMAgents" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -429,6 +497,48 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="main_MCD_MAPPOLSTM_mult" type="PythonConfigurationType" factoryName="Python">
+      <module name="03_Pythom_Workspace" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/OpenAIGym" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/OpenAIGym/main_01.py" />
+      <option name="PARAMETERS" value="--train --use-gpu --environment=eflex-multi-agent-v1 --brain_name=MCD_MAPPOLSTM_mult --render --seed=11" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main_MCD_MAPPO_mult (1)" type="PythonConfigurationType" factoryName="Python">
+      <module name="03_Pythom_Workspace" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/OpenAIGym" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/OpenAIGym/main_01.py" />
+      <option name="PARAMETERS" value="--train --use-gpu --environment=eflex-multi-agent-v2 --brain_name=MCD_MAPPO_mult --render --seed=11" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main_MCD_MAPPO_mult" type="PythonConfigurationType" factoryName="Python">
       <module name="03_Pythom_Workspace" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -442,7 +552,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/OpenAIGym/main_01.py" />
-      <option name="PARAMETERS" value="--train --use-gpu --environment=eflex-multi-agent-v1 --brain_name=MCD_MAPPO --render --seed=11" />
+      <option name="PARAMETERS" value="--train --use-gpu --environment=eflex-multi-agent-v1 --brain_name=MCD_MAPPO_mult --render --seed=11" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -522,6 +632,8 @@
       <item itemvalue="Python.main_MCD_MADDPG" />
       <item itemvalue="Python.main_MCD_MAPPO" />
       <item itemvalue="Python.main_MCD_MAPPO_mult" />
+      <item itemvalue="Python.main_MCD_MAPPO_mult (1)" />
+      <item itemvalue="Python.main_MCD_MAPPOLSTM_mult" />
       <item itemvalue="Python.main_MCD_MAPPOv2" />
       <item itemvalue="Python.main_MCD_SARSA" />
       <item itemvalue="Python.main_MCD_PPO" />
@@ -630,21 +742,22 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21654373" />
       <window_info id="Structure" order="1" weight="0.24973656" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49315068" weight="0.3263041" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.9341412" visible="true" weight="0.6714761" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.727608" weight="0.35516092" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.9299262" visible="true" weight="0.66762453" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.7244468" weight="0.35440612" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49947312" weight="0.32950193" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49841937" weight="0.20689656" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.6492786" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.065858796" side_tool="true" visible="true" weight="0.6714761" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.07007376" side_tool="true" visible="true" weight="0.66762453" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32963374" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -728,18 +841,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentV0.py</url>
-          <line>522</line>
+          <line>521</line>
           <option name="timeStamp" value="77" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentV0.py</url>
-          <line>119</line>
+          <line>118</line>
           <option name="timeStamp" value="85" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentV1.py</url>
-          <line>1066</line>
-          <option name="timeStamp" value="98" />
+          <url>file://$PROJECT_DIR$/OpenAIGym/trainer_controller.py</url>
+          <line>67</line>
+          <option name="timeStamp" value="105" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -752,26 +865,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/environment.py" />
-    <entry file="file://$USER_HOME$/AppData/Local/Continuum/anaconda3/envs/tensorflow/Lib/logging/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/OPCUAEFLEXAgent/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="31" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/Random.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="44" column="53" selection-start-line="44" selection-start-column="53" selection-end-line="44" selection-end-column="53" />
-          <folding>
-            <element signature="e#20#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Continuum/anaconda3/envs/tensorflow/Lib/site-packages/numpy/core/fromnumeric.py" />
     <entry file="file://$USER_HOME$/AppData/Local/Continuum/anaconda3/envs/tensorflow/Lib/enum.py" />
     <entry file="file://$USER_HOME$/AppData/Local/Continuum/anaconda3/envs/tensorflow/Lib/site-packages/numpy/lib/shape_base.py" />
@@ -837,13 +930,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/exception.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" selection-start-line="7" selection-end-line="11" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gym_eflex_agent/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -866,16 +952,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="401">
           <caret line="388" column="62" lean-forward="true" selection-start-line="388" selection-start-column="62" selection-end-line="388" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/DDPG.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="383" column="52" selection-start-line="383" selection-start-column="52" selection-end-line="383" selection-end-column="52" />
-          <folding>
-            <element signature="e#20#34#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -907,16 +983,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="217">
           <caret line="260" column="10" selection-start-line="260" selection-start-column="10" selection-end-line="260" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/DQN_LSTM.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="275" column="10" selection-start-line="275" selection-start-column="10" selection-end-line="275" selection-end-column="10" />
-          <folding>
-            <element signature="e#19#28#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -955,47 +1021,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gym_eflex_agent/setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="20" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Continuum/anaconda3/envs/tensorflow/Lib/site-packages/gym/envs/registration.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="91" column="18" lean-forward="true" selection-start-line="91" selection-start-column="18" selection-end-line="91" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="46" lean-forward="true" selection-start-line="3" selection-start-column="46" selection-end-line="3" selection-end-column="46" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="53" selection-start-line="16" selection-start-column="53" selection-end-line="16" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/trainer_controller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="516">
-          <caret line="252" selection-start-line="252" selection-end-line="252" />
-          <folding>
-            <element signature="e#51#65#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Continuum/anaconda3/envs/tensorflow/Lib/site-packages/gym/envs/registration.py" />
     <entry file="file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentV0.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -1008,44 +1034,134 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/MAPPO.py">
+    <entry file="file://$PROJECT_DIR$/OpenAIGym/summaries/MCD_MAPPO/events.out.tfevents.1560271436.LAPLACE" />
+    <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/DDPG.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="378" column="63" selection-start-line="378" selection-start-column="63" selection-end-line="378" selection-end-column="63" />
+        <state relative-caret-position="4080">
+          <caret line="254" column="18" selection-start-line="254" selection-start-column="13" selection-end-line="254" selection-end-column="18" />
+          <folding>
+            <element signature="e#20#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/MAPPOLSTM.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="173" column="28" selection-start-line="173" selection-start-column="28" selection-end-line="173" selection-end-column="28" />
+          <folding>
+            <element signature="e#20#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/DQN_LSTM.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="113" column="52" selection-start-line="113" selection-start-column="52" selection-end-line="113" selection-end-column="52" />
+          <folding>
+            <element signature="e#19#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OpenAIGym/exception.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Notes.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="596">
+            <caret line="39" column="46" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="46" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gym_eflex_agent/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="20" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="54" selection-start-line="4" selection-start-column="54" selection-end-line="4" selection-end-column="54" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="61" selection-start-line="20" selection-start-column="61" selection-end-line="20" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentV2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="309">
+          <caret line="774" column="41" lean-forward="true" selection-start-line="773" selection-start-column="15" selection-end-line="774" selection-end-column="41" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentV1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="790" column="31" selection-start-line="790" selection-start-column="6" selection-end-line="790" selection-end-column="31" />
+        <state relative-caret-position="-490">
+          <caret line="444" column="41" selection-start-line="444" selection-start-column="41" selection-end-line="444" selection-end-column="41" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <element signature="e#647#711#0" />
-            <element signature="e#3508#4171#0" />
-            <element signature="e#6663#6804#0" />
-            <element signature="e#7707#19967#0" />
-            <element signature="e#8935#10821#0" />
-            <element signature="e#10852#11269#0" />
-            <element signature="e#22202#23212#0" />
-            <element signature="e#23322#25340#0" />
-            <element signature="e#25371#25801#0" />
-            <element signature="e#28885#29077#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/MARL_config.yaml">
+    <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/MAPPO.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="20" column="18" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
+        <state relative-caret-position="89">
+          <caret line="142" column="46" selection-start-line="142" selection-start-column="34" selection-end-line="142" selection-end-column="46" />
+          <folding>
+            <element signature="e#20#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OpenAIGym/trainer_controller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="66" column="35" selection-start-line="66" selection-start-column="35" selection-end-line="66" selection-end-column="35" />
+          <folding>
+            <element signature="e#51#65#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/OpenAIGym/trainer_config.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-199">
-          <caret line="269" column="28" selection-start-line="269" selection-start-column="28" selection-end-line="269" selection-end-column="28" />
+        <state relative-caret-position="238">
+          <caret line="264" column="21" selection-start-line="264" selection-start-column="21" selection-end-line="264" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OpenAIGym/MARL_config.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="12" column="12" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
         </state>
       </provider>
     </entry>
