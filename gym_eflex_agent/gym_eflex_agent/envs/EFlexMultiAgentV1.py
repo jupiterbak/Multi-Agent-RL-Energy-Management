@@ -46,7 +46,7 @@ class EFLEXAgentEnvironmentException(Exception):
     pass
 
 
-class EFlexMultiAgent(gym.Env):
+class EFlexMultiAgentVersion1(gym.Env):
     metadata = {'render.modes': ['human']}
 
     def __init__(self):
@@ -104,8 +104,8 @@ class EFlexMultiAgent(gym.Env):
         self.seed(self.seed_value)
         self.reset()
 
-    @staticmethod
-    def _import_module(module_name, class_name):
+
+    def _import_module(self, module_name, class_name):
         """Constructor"""
 
         macro_module = __import__(module_name)
@@ -118,7 +118,7 @@ class EFlexMultiAgent(gym.Env):
     def _load_config(_trainer_config_path):
         try:
             with open(_trainer_config_path) as data_file:
-                trainer_config = yaml.load(data_file)
+                trainer_config = yaml.load(data_file, Loader=yaml.FullLoader)
                 return trainer_config
         except IOError:
             raise EFLEXAgentEnvironmentException("""Parameter file could not be found here {}.

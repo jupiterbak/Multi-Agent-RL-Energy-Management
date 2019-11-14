@@ -10,6 +10,8 @@ from keras.callbacks import TensorBoard
 from keras.layers import Dense, LSTM
 from keras.optimizers import Adam
 from keras import backend as k, Input, Model
+from keras.layers import Dense, Dropout
+from keras.optimizers import RMSprop
 
 from OpenAIGym.exception import FAPSPLMEnvironmentException
 
@@ -107,8 +109,10 @@ class DQN:
 
         a = Input(shape=[self.state_size], name='actor_state')
         h = Dense(self.hidden_units, activation='relu', kernel_initializer='he_uniform', name="dense_actor")(a)
-        # for x in range(1, self.num_layers):
-        #     h = Dense(self.hidden_units, activation='relu', kernel_initializer='he_uniform')(h)
+        h = Dropout(0.2)(h)
+        for x in range(1, self.num_layers):
+            h = Dense(self.hidden_units, activation='relu', kernel_initializer='he_uniform')(h)
+            h = Dropout(0.2)(h)
         o = Dense(self.action_size, activation='softmax', kernel_initializer='he_uniform')(h)
         model = Model(inputs=a, outputs=o)
         return model
