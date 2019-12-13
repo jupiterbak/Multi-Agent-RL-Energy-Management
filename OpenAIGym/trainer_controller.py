@@ -210,12 +210,14 @@ class TrainerController(object):
 
         global_step = 0  # This is only for saving the model
         cumulated_reward = 0.0
+        cumulated_rewards = {}
         # Reset the environments
         for e, env in self.envs.items():
             self.observations[e] = env.reset()
             self.dones[e] = False
             self.rewards[e] = 0.0
             self.infos[e] = None
+            cumulated_rewards[e] = None
 
         # Write Tensor board settings
         if self.train_model:
@@ -245,20 +247,38 @@ class TrainerController(object):
                         if isinstance(self.rewards[e], (list,)):
                             mean = np.mean(np.array(self.rewards[e]))
                             cumulated_reward += mean
+                            if cumulated_rewards[e] is None:
+                                cumulated_rewards[e] = np.array(self.rewards[e])
+                            else:
+                                cumulated_rewards[e] += np.array(self.rewards[e])
                         else:
                             cumulated_reward += self.rewards[e]
+                            cumulated_rewards[e] += np.array(self.rewards[e])
 
-                        if trainer.is_ready_update() and self.train_model and trainer.get_step <= trainer.get_max_steps:
-                            # Perform gradient descent with experience buffer
-                            trainer.update_model()
-                            # Write training statistics.
-                            trainer.write_summary()
+                        if trainer.is_ready_update() and trainer.get_step <= trainer.get_max_steps:
+                            if self.train_model:
+                                # Perform gradient descent with experience buffer
+                                trainer.update_model()
+
+                                # Write training statistics.
+                                trainer.write_summary()
+
                             if self.render:
                                 # Write to tensorborad
                                 trainer.write_tensorboard_value('cul_reward', cumulated_reward)
-                                cumulated_reward = 0
+
+                                all_rewards = cumulated_rewards[e]
+                                for i in range(len(all_rewards)):
+                                    trainer.write_tensorboard_value('cul_reward_agent_{:d}'.format(i), all_rewards[i])
+
+                            # Reset the statistics values
+                            cumulated_reward = 0
+                            cumulated_rewards[e] = None
+
+                        # Increment the step counter
+                        trainer.increment_step()
+
                         if self.train_model and trainer.get_step <= trainer.get_max_steps:
-                            trainer.increment_step()
                             trainer.update_last_reward(self.rewards[e])
 
                         # Render the environment

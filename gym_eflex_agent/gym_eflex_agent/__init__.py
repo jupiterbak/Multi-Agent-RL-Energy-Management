@@ -20,3 +20,11 @@ register(
     id='eflex-multi-agent-v2',
     entry_point='gym_eflex_agent.envs:EFlexMultiAgentVersion2',
 )
+register(
+    id='eflex-multi-agent-cooperation-v1',
+    entry_point='gym_eflex_agent.envs:EFlexMultiAgentCooperation',
+)
+register(
+    id='eflex-multi-agent-competition-v1',
+    entry_point='gym_eflex_agent.envs:EFlexMultiAgentCompetition',
+)

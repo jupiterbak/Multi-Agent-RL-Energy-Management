@@ -246,7 +246,7 @@ class MAPPO(object):
             )
             self.critic_model[i], _ = self._create_critic_model(i)
             if os.path.exists('./' + model_path + '/MAPPO_critic_{}_model.h5'.format(i)):
-                self.critic_model[i].load_weights('./' + model_path + '/MAPPO_critic_{}_model.h5'.format(i))
+                self.critic_model.load_weights('./' + model_path + '/MAPPO_critic_{}_model.h5'.format(i))
             self.critic_model[i].compile(loss='mse', metrics=['mse'], optimizer=Adam(lr=self.learning_rate))
 
     def increment_step(self):
@@ -273,9 +273,12 @@ class MAPPO(object):
             obs = observation[i].reshape(1, self.state_size[i])
             p = self.actor_model[i].predict([obs, self.dummy_advantage, self.dummy_old_prediction[i]])
             self.last_prediction[i] = p[0]
-
-            action = np.random.choice(self.action_size[i], p=np.nan_to_num(p[0]))
-            _actions[i] = action
+            if self.is_training is True:
+                action = np.random.choice(self.action_size[i], p=np.nan_to_num(p[0]))
+                _actions[i] = action
+            else:
+                action = np.argmax(p[0])
+                _actions[i] = action
         return _actions
 
     def take_action_continous(self, observation, _env):
@@ -352,10 +355,11 @@ class MAPPO(object):
         """
         For PPO the Optimization will be executed in self.self.num_epoch epoch times
         """
-        # num_samples = len(self.replay_memory)
-        # mini_batch = self.replay_memory
-        num_samples = min(self.batch_size, len(self.replay_memory))
-        mini_batch = random.sample(self.replay_memory, num_samples)
+        num_samples = len(self.replay_memory)
+        mini_batch = self.replay_memory
+
+        # num_samples = min(self.batch_size, len(self.replay_memory))
+        # mini_batch = random.sample(self.replay_memory, num_samples)
 
         # Start by extracting the necessary parameters (we use a vectorized implementation).
         state0_batch = [[] for r in range(self.agent_count)]
@@ -390,24 +394,22 @@ class MAPPO(object):
             action_batch[i] = np.array(action_batch[i])
             old_prediction_batch = np.array(last_prediction_batch[i])
 
+            # for epoch in range(self.num_epoch):
             # Train actor
             pred_values_batch = np.array(self.critic_model[i].predict(full_state0_batch))
             advantage_batch = reward_batch[i] - pred_values_batch
-            actor_log = self.actor_model[i].train_on_batch([state0_batch[i],
-                                   advantage_batch, old_prediction_batch], action_batch[i])
-            # actor_log = self.actor_model[i].fit([state0_batch[i], advantage_batch, old_prediction_batch],
-            #                                     action_batch[i], batch_size=self.batch_size,
-            #                                     epochs=self.num_epoch,
-            #                                     verbose=False)
+            # actor_log = self.actor_model[i].train_on_batch([state0_batch[i], advantage_batch, old_prediction_batch], action_batch[i])
+            actor_log = self.actor_model[i].fit([state0_batch[i], advantage_batch, old_prediction_batch], action_batch[i]
+                                                , batch_size=self.batch_size, epochs=self.num_epoch)
+            # if epoch == 0:
             # train_names = ['actor_loss_{}'.format(i), 'actor_mse_{}'.format(i)]
             # self._write_log(self.tensorBoard, train_names, actor_log, int(self.steps / self.batch_size))
 
             # Train critic
-            critic_log = self.critic_model[i].train_on_batch(full_state0_batch, reward_batch[i])
-            # critic_log = self.critic_model[i].fit(full_state0_batch, reward_batch[i],
-            #                                       batch_size=self.batch_size,
-            #                                       epochs=self.num_epoch,
-            #                                       verbose=False)
+            #critic_log = self.critic_model[i].train_on_batch(full_state0_batch, reward_batch[i])
+            critic_log = self.critic_model[i].fit(full_state0_batch, reward_batch[i],
+                                                  batch_size=self.batch_size, epochs=self.num_epoch)
+            # if epoch == 0:
             # train_names = ['critic_loss_{}'.format(i), 'critic_mse_{}'.format(i)]
             # self._write_log(self.tensorBoard, train_names, critic_log, int(self.steps / self.batch_size))
 

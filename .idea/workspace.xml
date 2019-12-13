@@ -43,7 +43,6 @@
       <change beforePath="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentV2.py" beforeDir="false" afterPath="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentV2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/__init__.py" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -64,31 +63,24 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="240" />
-    <option name="y" value="145" />
-    <option name="width" value="1440" />
-    <option name="height" value="870" />
-  </component>
   <component name="ProjectId" id="1TbmCECVorFGU3wqUFAG78Jyeoy" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentV2.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentV2.py" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Administrator\Desktop\SP347\02_Paper\2019_Multi_Agent_Energy_Management\03_Pythom_Workspace\gym_eflex_agent\gym_eflex_agent\envs" />
-      <recent name="C:\Users\Administrator\Desktop\SP347\02_Paper\2019_Multi_Agent_Energy_Management\03_Pythom_Workspace\OpenAIGym\FAPSPLMAgents" />
-      <recent name="C:\Users\jubakakeu\Documents\GitHub\Multi-Agent-RL-Energy-Management\gym_eflex_agent\gym_eflex_agent\envs" />
-      <recent name="C:\Users\jubakakeu\Documents\GitHub\Multi-Agent-RL-Energy-Management\OpenAIGym\FAPSPLMAgents" />
-      <recent name="C:\Users\Administrator\Desktop\SP347\02_Paper\2019_Multi_Agent_Energy_Management\03_Pythom_Workspace\OpenAIGym\summaries\MCD_MAPPO" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\jubakakeu\Documents\GitHub\Multi-Agent-RL-Energy-Management\litterature" />
       <recent name="C:\Users\Administrator\Desktop\SP347\02_Paper\2019_Multi_Agent_Energy_Management\03_Pythom_Workspace\OpenAIGym\summaries\MCD_MAPPO" />
@@ -96,20 +88,15 @@
       <recent name="C:\Users\jubakakeu\Documents\GitHub\Multi-Agent-RL-Energy-Management\OpenAIGym" />
       <recent name="C:\Users\Administrator\Desktop\SP347\02_Paper\2019_Multi_Agent_Energy_Management\03_Pythom_Workspace\OpenAIGym\FAPSPLMTrainers" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\JBK_WORKSPACE\GitHub\Multi-Agent-RL-Energy-Management\OpenAIGym\FAPSPLMAgents" />
+      <recent name="C:\JBK_WORKSPACE\GitHub\Multi-Agent-RL-Energy-Management\gym_eflex_agent\gym_eflex_agent\envs" />
+      <recent name="C:\Users\Administrator\Desktop\SP347\02_Paper\2019_Multi_Agent_Energy_Management\03_Pythom_Workspace\gym_eflex_agent\gym_eflex_agent\envs" />
+      <recent name="C:\Users\Administrator\Desktop\SP347\02_Paper\2019_Multi_Agent_Energy_Management\03_Pythom_Workspace\OpenAIGym\FAPSPLMAgents" />
+      <recent name="C:\Users\jubakakeu\Documents\GitHub\Multi-Agent-RL-Energy-Management\gym_eflex_agent\gym_eflex_agent\envs" />
+    </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager" selected="Python.main_MCD_MAPPO_env_v2">
+  <component name="RunManager" selected="Python.main_MCD_MAPPO_cooperation">
     <configuration name="main_MCD_A2C" type="PythonConfigurationType" factoryName="Python">
       <module name="03_Pythom_Workspace" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -278,6 +265,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="main_MCD_MAPPO_cooperation" type="PythonConfigurationType" factoryName="Python">
+      <module name="03_Pythom_Workspace" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/OpenAIGym" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/OpenAIGym/main_01.py" />
+      <option name="PARAMETERS" value="--train --use-gpu --environment=eflex-multi-agent-cooperation-v1 --brain_name=MCD_MAPPO_mult --render --seed=998" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main_MCD_MAPPO_env_v0" type="PythonConfigurationType" factoryName="Python">
       <module name="03_Pythom_Workspace" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -413,6 +421,7 @@
       <item itemvalue="Python.main_MCD_MADDPG" />
       <item itemvalue="Python.main_MCD_MAPPO_env_v0" />
       <item itemvalue="Python.main_MCD_MAPPO_env_v1" />
+      <item itemvalue="Python.main_MCD_MAPPO_cooperation" />
       <item itemvalue="Python.main_MCD_MAPPO_env_v2" />
       <item itemvalue="Python.main_MCD_MAPPOLSTM_mult" />
       <item itemvalue="Python.main_MCD_MAPPOv2" />
@@ -425,6 +434,18 @@
         <item itemvalue="Python.main_MCD_DQN" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="StructureViewFactory">
     <option name="ACTIVE_ACTIONS" value=",SHOW_FIELDS" />
@@ -537,7 +558,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -554,6 +577,60 @@
     <MESSAGE value="Update Double Q by DQN" />
     <MESSAGE value="Optimized environement" />
     <option name="LAST_COMMIT_MESSAGE" value="Optimized environement" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1576264695626">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1576264695626" />
+    <state width="722" height="466" key="DebuggerActiveHint" timestamp="1576256075175">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="722" height="466" key="DebuggerActiveHint/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1576256075175" />
+    <state x="739" y="293" key="FileChooserDialogImpl" timestamp="1576233049882">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="739" y="293" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1576233049882" />
+    <state width="1877" height="313" key="GridCell.Tab.0.bottom" timestamp="1576264725419">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="313" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1576264725419" />
+    <state width="1877" height="313" key="GridCell.Tab.0.center" timestamp="1576264725418">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="313" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1576264725418" />
+    <state width="1877" height="313" key="GridCell.Tab.0.left" timestamp="1576264725418">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="313" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1576264725418" />
+    <state width="1877" height="313" key="GridCell.Tab.0.right" timestamp="1576264725419">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="313" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1576264725419" />
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1576259506247">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1576259506247" />
+    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1576259506247">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1576259506247" />
+    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1576259506247">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1576259506247" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1576259506247">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1576259506247" />
+    <state x="461" y="161" key="SettingsEditor" timestamp="1576233989054">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="161" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1576233989054" />
+    <state x="661" y="342" key="com.intellij.ide.util.TipDialog" timestamp="1576230760981">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="661" y="342" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1576230760981" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -602,6 +679,21 @@
           <url>file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentV2.py</url>
           <line>125</line>
           <option name="timeStamp" value="110" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/MAPPO.py</url>
+          <line>466</line>
+          <option name="timeStamp" value="112" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/OpenAIGym/trainer_controller.py</url>
+          <line>258</line>
+          <option name="timeStamp" value="116" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/OpenAIGym/trainer_controller.py</url>
+          <line>257</line>
+          <option name="timeStamp" value="117" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
