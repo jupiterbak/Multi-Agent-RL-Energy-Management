@@ -172,12 +172,6 @@ class EFlexMultiAgentCompetition(gym.Env):
             current_power_n.append(agent.current_power)
             info_n['n'].append(_info)
 
-        # all agents get total reward in cooperative case
-        reward = np.sum(reward_n)
-
-        if self.shared_reward:
-            reward_n = [reward] * self.n
-
         # done
         done = np.sum(np.array(done_n, dtype=np.bool)) > 0
 
@@ -187,12 +181,19 @@ class EFlexMultiAgentCompetition(gym.Env):
             # set a maximum negative reward to all agents
             reward_n = [-0.5] * self.n
             done = True
-        # else:
-        #     # Add a smal reward to encourage energy savings
-        #     for i, agent in enumerate(self.agents):
-        #             reward_n[i] = reward_n[i] # + (0.1 * (1 - math.tanh(self.current_system_power ** 2)))
+            self.global_reward = -1.0
+        else:
+            # Check for competitive cases
+            for i, agent in enumerate(self.agents):
+                if agent.current_state == EFLEXAgentState.Completed:
+                    reward_n = [-1.0] * self.n
+                    reward_n[i] = 1
+                    self.global_reward = 1.0
+                    done = True
+                    break
+                else:
+                    self.global_reward = np.mean(reward_n)
 
-        self.global_reward = np.mean(reward_n)
         return obs_n, reward_n, done, info_n
 
     def reset(self):

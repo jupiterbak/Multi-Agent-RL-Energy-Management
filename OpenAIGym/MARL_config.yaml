@@ -3,15 +3,32 @@ environement_config:
     daily_slot_count: 200
 
 agents:
-
     utility1:
         type: EFlexAgentPConstant       # trainer type
         p_min: 0.0
         p_max: 30.0
         p_slope: 1
 
-    storage:
-        type: EFlexEnergyStorageAgent       # trainer type
+    utility2:
+        type: EFlexAgentPConstant       # trainer type
         p_min: 0.0
-        p_max: 50.0
+        p_max: 30.0
         p_slope: 1
+
+    utility3:
+        type: EFlexAgentPConstant       # trainer type
+        p_min: 0.0
+        p_max: 30.0
+        p_slope: 1
+
+    utility4:
+        type: EFlexAgentPConstant       # trainer type
+        p_min: 0.0
+        p_max: 30.0
+        p_slope: 1
+
+#    storage:
+#        type: EFlexEnergyStorageAgent       # trainer type
+#        p_min: 0.0
+#        p_max: 50.0
+#        p_slope: 1
