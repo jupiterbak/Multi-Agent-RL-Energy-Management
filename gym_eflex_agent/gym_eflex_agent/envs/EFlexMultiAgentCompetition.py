@@ -184,15 +184,23 @@ class EFlexMultiAgentCompetition(gym.Env):
             self.global_reward = -1.0
         else:
             # Check for competitive cases
+            _index = []
+            _not_index = []
             for i, agent in enumerate(self.agents):
                 if agent.current_state == EFLEXAgentState.Completed:
-                    reward_n = [-1.0] * self.n
-                    reward_n[i] = 1
-                    self.global_reward = 1.0
-                    done = True
-                    break
+                    _index.append(i)
                 else:
-                    self.global_reward = np.mean(reward_n)
+                    _not_index.append(i)
+
+            if len(_index) > 0:
+                for _i, i in enumerate(_index):
+                    reward_n[i] = 1
+                for _n, n in enumerate(_not_index):
+                    reward_n[n] = -1
+                self.global_reward = 1.0
+                done = True
+            else:
+                self.global_reward = np.mean(reward_n)
 
         return obs_n, reward_n, done, info_n
 
