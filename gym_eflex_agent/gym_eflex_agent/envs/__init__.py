@@ -3,5 +3,5 @@ from .EFlexAgentV1 import EFlexAgentV1
 from .EFlexMultiAgentV0 import EFlexMultiAgentVersion0
 from .EFlexMultiAgentV1 import EFlexMultiAgentVersion1
 from .EFlexMultiAgentV2 import EFlexMultiAgentVersion2
-from .EFlexMultiAgentCooperation import EFlexMultiAgentCooperation
-from .EFlexMultiAgentCompetition import EFlexMultiAgentCompetition
+from .EFlexMultiAgentCooperationV1 import EFlexMultiAgentCooperation
+from .EFlexMultiAgentCompetitionV1 import EFlexMultiAgentCompetition

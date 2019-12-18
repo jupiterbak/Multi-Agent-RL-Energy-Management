@@ -113,7 +113,7 @@ class MAPPO(object):
         Returns the maximum number of steps. Is used to know when the trainer should be stopped.
         :return: The maximum number of steps of the trainer
         """
-        return self.trainer_parameters['max_steps'] * self.trainer_parameters['max_steps']
+        return self.trainer_parameters['max_steps'] * self.trainer_parameters['time_horizon']
 
     @property
     def get_step(self):

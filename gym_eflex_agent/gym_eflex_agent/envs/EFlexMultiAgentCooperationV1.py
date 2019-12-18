@@ -46,7 +46,7 @@ class EFLEXAgentEnvironmentException(Exception):
     pass
 
 
-class EFlexMultiAgentCompetition(gym.Env):
+class EFlexMultiAgentCooperation(gym.Env):
     metadata = {'render.modes': ['human']}
 
     def __init__(self):
@@ -109,7 +109,7 @@ class EFlexMultiAgentCompetition(gym.Env):
 
         macro_module = __import__(module_name)
         module0 = getattr(macro_module, 'envs')
-        module = getattr(module0, 'EFlexMultiAgentV1')
+        module = getattr(module0, 'EFlexMultiAgentCooperationV1')
         my_class = getattr(module, class_name)
         return my_class
 
@@ -172,6 +172,12 @@ class EFlexMultiAgentCompetition(gym.Env):
             current_power_n.append(agent.current_power)
             info_n['n'].append(_info)
 
+        # all agents get total reward in cooperative case
+        reward = np.sum(reward_n)
+
+        if self.shared_reward:
+            reward_n = [reward] * self.n
+
         # done
         done = np.sum(np.array(done_n, dtype=np.bool)) > 0
 
@@ -181,27 +187,8 @@ class EFlexMultiAgentCompetition(gym.Env):
             # set a maximum negative reward to all agents
             reward_n = [-0.5] * self.n
             done = True
-            self.global_reward = -1.0
-        else:
-            # Check for competitive cases
-            _index = []
-            _not_index = []
-            for i, agent in enumerate(self.agents):
-                if agent.current_state == EFLEXAgentState.Completed:
-                    _index.append(i)
-                else:
-                    _not_index.append(i)
 
-            if len(_index) > 0:
-                for _i, i in enumerate(_index):
-                    reward_n[i] = 1
-                for _n, n in enumerate(_not_index):
-                    reward_n[n] = -1
-                self.global_reward = 1.0
-                done = True
-            else:
-                self.global_reward = np.mean(reward_n)
-
+        self.global_reward = np.mean(reward_n)
         return obs_n, reward_n, done, info_n
 
     def reset(self):
@@ -346,12 +333,6 @@ class EFlexAgent:
             if action == EFLEXAgentTransition.Abort:
                 self.current_state = EFLEXAgentState.Aborted
                 self.current_reward = -0.1
-            elif action == EFLEXAgentTransition.Stop:
-                self.current_state = EFLEXAgentState.Stopped
-                self.current_reward = - 0.1
-            elif action == EFLEXAgentTransition.Start:
-                self.current_state = EFLEXAgentState.Stopped
-                self.current_reward = - 0.1
             elif action == EFLEXAgentTransition.Reset:
                 self.current_state = EFLEXAgentState.Idle
                 self.current_reward = 0.1

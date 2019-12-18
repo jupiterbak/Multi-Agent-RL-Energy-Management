@@ -205,7 +205,7 @@ MCD_A2C:
 
 MCD_MADDPG:
     trainer: MADDPG           # trainer type
-    agent_config_path: C:\SP347\02_Papers\2019_Multi_Agent_Energy_Management\03_Python_Workspace\OpenAIGym\MARL_config.yaml
+    agent_config_path: C:\GitHub\Multi-Agent-RL-Energy-Management\OpenAIGym\MARL_config.yaml
     p_min: 0
     p_max: 100
     p_slope: 10
@@ -234,7 +234,7 @@ MCD_MADDPG:
 
 MCD_MAPPO:
     trainer: MAPPO          # trainer type
-    agent_config_path: C:\SP347\02_Papers\2019_Multi_Agent_Energy_Management\03_Python_Workspace\OpenAIGym\MARL_config.yaml
+    agent_config_path: C:\GitHub\Multi-Agent-RL-Energy-Management\OpenAIGym\MARL_config.yaml
     batch_size: 512        # batch size
     memory_size: 10240      # allocated memory size
     beta: 5.0e-3
@@ -257,7 +257,7 @@ MCD_MAPPO:
 
 MCD_MAPPO_mult:
     trainer: MAPPO          # trainer type
-    agent_config_path: C:\SP347\02_Papers\2019_Multi_Agent_Energy_Management\03_Python_Workspace\OpenAIGym\MARL_config.yaml
+    agent_config_path: C:\GitHub\Multi-Agent-RL-Energy-Management\OpenAIGym\MARL_config.yaml
     batch_size: 512        # batch size. Normally 4 to 4096
     memory_size: 10240      # allocated memory size
     beta: 5.0e-3
@@ -271,7 +271,7 @@ MCD_MAPPO_mult:
     use_recurrent: false    # use R-NN
     lambd: 0.95
     learning_rate: 0.001    # learning rate or learning factor. Normally 0.003 to 5e-6
-    max_steps: 500      # maximum number of state for an episode
+    max_steps: 2000      # maximum number of state for an episode
     normalize: false        # add normalization layer to the associated NN
     num_epoch: 3         # total number of epochs. 3 to 30
     time_horizon: 512        # time horizon. Normally 32 to 5000
@@ -280,7 +280,7 @@ MCD_MAPPO_mult:
 
 MCD_MAPPOLSTM_mult:
     trainer: MAPPOLSTM          # trainer type
-    agent_config_path: C:\SP347\02_Papers\2019_Multi_Agent_Energy_Management\03_Python_Workspace\OpenAIGym\MARL_config.yaml
+    agent_config_path: C:\GitHub\Multi-Agent-RL-Energy-Management\OpenAIGym\MARL_config.yaml
     batch_size: 512        # batch size
     memory_size: 10240      # allocated memory size
     beta: 5.0e-3
@@ -303,7 +303,7 @@ MCD_MAPPOLSTM_mult:
 
 MCD_MAPPOv2:
     trainer: MAPPOv2          # trainer type
-    agent_config_path: C:\SP347\02_Papers\2019_Multi_Agent_Energy_Management\03_Python_Workspace\OpenAIGym\MARL_config.yaml
+    agent_config_path: C:\GitHub\Multi-Agent-RL-Energy-Management\OpenAIGym\MARL_config.yaml
     batch_size: 1024        # batch size
     memory_size: 10240      # allocated memory size
     beta: 5.0e-3
