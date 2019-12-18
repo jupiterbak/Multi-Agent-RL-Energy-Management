@@ -144,8 +144,8 @@ class MAPPOv2(object):
 
     def proximal_policy_optimization_loss(self, advantage, old_prediction):
         def loss(y_true, y_pred):
-            prob = k.sum(y_true * y_pred, axis=-1)
-            old_prob = k.sum(y_true * old_prediction, axis=-1)
+            prob = y_true * y_pred
+            old_prob = y_true * old_prediction
             r = prob / (old_prob + 1e-10)
             return -k.mean(k.minimum(r * advantage, k.clip(r, min_value=1 - self.loss_clipping,
                                                            max_value=1 + self.loss_clipping) * advantage)
@@ -326,8 +326,8 @@ class MAPPOv2(object):
         if done is True:
             if _len > 1:
                 for j in range(_len - 2, -1, -1):
-                    [state, action, next_state, reward, done, info, last_pred, pro_reward] = self.replay_memory[j]
-                    if (done is True) and (pro_reward is not None):
+                    [state, action, next_state, reward, _done, info, last_pred, pro_reward] = self.replay_memory[j]
+                    if (_done is True) and (pro_reward is not None):
                         break
                     else:
                         for i in range(self.agent_count):
@@ -351,6 +351,17 @@ class MAPPOv2(object):
 
         # The NN is ready to be updated at every time horizon
         return (self.steps > 1) and ((self.steps % self.time_horizon) == 0)
+
+    def _get_advantages(self, values, masks, rewards):
+        returns = []
+        gae = 0
+        for i in reversed(range(len(rewards))):
+            delta = rewards[i] + self.gamma * values[i + 1] * masks[i] - values[i]
+            gae = delta + self.gamma * self.lambd * masks[i] * gae
+            returns.insert(0, gae + values[i])
+
+        adv = np.array(returns) - values[:-1]
+        return returns, (adv - np.mean(adv)) / (np.std(adv) + 1e-10)
 
     def update_model(self):
         """
@@ -389,7 +400,7 @@ class MAPPOv2(object):
                 last_prediction_batch[i].append(last_pred[i])
                 # reward
                 reward_batch[i].append(proc_reward[i])
-            full_state0_batch.append(np.array(_tmp_state_0).reshape((self.all_state_size, )))
+            full_state0_batch.append(np.array(_tmp_state_0).reshape((self.all_state_size,)))
             full_action_batch.append(np.array(_tmp_action).reshape((self.all_action_size,)))
 
         full_state0_batch = np.array(full_state0_batch)
@@ -402,14 +413,21 @@ class MAPPOv2(object):
             old_prediction_batch = np.array(last_prediction_batch[i])
 
             # Train actor
-            pred_values_batch = np.array(self.critic_model[i].predict([full_state0_batch,full_action_batch]))
+            pred_values_batch = np.array(self.critic_model[i].predict([full_state0_batch, full_action_batch]))
+
+            # Compute Advantage
+            # adv = reward_batch[i] - pred_values_batch
+            # advantage_batch = (adv - np.mean(adv)) / (np.std(adv) + 1e-10)
             advantage_batch = reward_batch[i] - pred_values_batch
-            actor_log = self.actor_model[i].train_on_batch([state0_batch[i], advantage_batch, old_prediction_batch], action_batch[i])
+
+            actor_log = self.actor_model[i].train_on_batch([state0_batch[i], advantage_batch, old_prediction_batch],
+                                                           action_batch[i])
             train_names = ['actor_loss_{}'.format(i), 'actor_mse_{}'.format(i)]
             self._write_log(self.tensorBoard, train_names, actor_log, int(self.steps / self.batch_size))
 
             # Train critic
-            critic_log = self.critic_model[i].train_on_batch([full_state0_batch, full_action_batch], reward_batch[i])
+            critic_log = self.critic_model[i].train_on_batch([full_state0_batch, full_action_batch], advantage_batch)
+            # critic_log = self.critic_model[i].train_on_batch([full_state0_batch, full_action_batch], reward_batch[i])
             train_names = ['critic_loss_{}'.format(i), 'critic_mse_{}'.format(i)]
             self._write_log(self.tensorBoard, train_names, critic_log, int(self.steps / self.batch_size))
 

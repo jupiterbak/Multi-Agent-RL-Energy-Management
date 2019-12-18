@@ -152,12 +152,12 @@ class MAPPOv3(object):
     def _exponential_average(old, new, b1):
         return old * b1 + (1 - b1) * new
 
-    def proximal_policy_optimization_loss_gae(self, oldpolicy_probs, advantages, rewards, values):
+    def proximal_policy_optimization_loss_gae(self, old_prediction, advantage, rewards, values):
         def loss(y_true, y_pred):
             newpolicy_probs = y_pred
-            ratio = k.exp(k.log(newpolicy_probs + 1e-10) - k.log(oldpolicy_probs + 1e-10))
-            p1 = ratio * advantages
-            p2 = k.clip(ratio, min_value=1 - self.loss_clipping, max_value=1 + self.loss_clipping) * advantages
+            ratio = k.exp(k.log(newpolicy_probs + 1e-10) - k.log(old_prediction + 1e-10))
+            p1 = ratio * advantage
+            p2 = k.clip(ratio, min_value=1 - self.loss_clipping, max_value=1 + self.loss_clipping) * advantage
             actor_loss = -k.mean(k.minimum(p1, p2))
             critic_loss = k.mean(k.square(rewards - values))
             total_loss = 0.5 * critic_loss + actor_loss - self.entropy_loss * k.mean(
