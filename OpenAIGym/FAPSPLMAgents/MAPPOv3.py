@@ -5,6 +5,7 @@ import os
 import random
 from collections import deque
 
+import keras
 import keras.backend as k
 import numpy as np
 import tensorflow as tf
@@ -26,8 +27,14 @@ class FAPSTrainerException(FAPSPLMEnvironmentException):
     pass
 
 
-class MAPPO(object):
-    """This class is the abstract class for the faps trainers"""
+class MAPPOv3(object):
+    """This class is the abstract class for the faps trainers
+        The trainer implements the PPO algorithm for Multi-Agent Reinforcement Learning Usecase.
+        in this implementation, the critic of all agents has access to the observation of all agents
+        as well as the selected actions.
+
+        NOTE: Period Updates and GAE Advantage are implemented.
+    """
 
     def __init__(self, envs, brain_name, trainer_parameters, training, seed):
         """
@@ -75,8 +82,18 @@ class MAPPO(object):
         self.batch_size = self.trainer_parameters['batch_size']
         self.hidden_units = self.trainer_parameters['hidden_units']
         self.critic_hidden_units = self.trainer_parameters['critic_hidden_units']
+
+        # Replay Memeory components
         self.replay_memory = deque(maxlen=self.trainer_parameters['memory_size'])
+        # self.replay_memory_states = deque(maxlen=self.trainer_parameters['memory_size'])
+        # self.replay_memory_actions = deque(maxlen=self.trainer_parameters['memory_size'])
+        # self.replay_memory_action_one_hot = deque(maxlen=self.trainer_parameters['memory_size'])
+        # self.replay_memory_values = deque(maxlen=self.trainer_parameters['memory_size'])
+        # self.replay_memory_masks = deque(maxlen=self.trainer_parameters['memory_size'])
+        # self.replay_memory_rewards = deque(maxlen=self.trainer_parameters['memory_size'])
+
         self.gamma = self.trainer_parameters['gamma']  # discount rate
+        self.lambd = self.trainer_parameters['lambd']
         self.learning_rate = self.trainer_parameters['learning_rate']
         self.loss_clipping = self.trainer_parameters['loss_clipping']
         self.entropy_loss = self.trainer_parameters['entropy_loss']
@@ -135,6 +152,20 @@ class MAPPO(object):
     def _exponential_average(old, new, b1):
         return old * b1 + (1 - b1) * new
 
+    def proximal_policy_optimization_loss_gae(self, oldpolicy_probs, advantages, rewards, values):
+        def loss(y_true, y_pred):
+            newpolicy_probs = y_pred
+            ratio = k.exp(k.log(newpolicy_probs + 1e-10) - k.log(oldpolicy_probs + 1e-10))
+            p1 = ratio * advantages
+            p2 = k.clip(ratio, min_value=1 - self.loss_clipping, max_value=1 + self.loss_clipping) * advantages
+            actor_loss = -k.mean(k.minimum(p1, p2))
+            critic_loss = k.mean(k.square(rewards - values))
+            total_loss = 0.5 * critic_loss + actor_loss - self.entropy_loss * k.mean(
+                -(newpolicy_probs * k.log(newpolicy_probs + 1e-10)))
+            return total_loss
+
+        return loss
+
     def proximal_policy_optimization_loss(self, advantage, old_prediction):
         def loss(y_true, y_pred):
             prob = k.sum(y_true * y_pred, axis=-1)
@@ -169,32 +200,34 @@ class MAPPO(object):
         return self.initialized
 
     def _create_actor_model(self, index):
-        a = Input(shape=(self.state_size[index],))
+        _state = Input(shape=(self.state_size[index],))
         advantage = Input(shape=(1,))
         old_prediction = Input(shape=(self.action_size[index],))
+        rewards = Input(shape=(1,))
+        values = Input(shape=(1,))
 
-        h = Dense(self.hidden_units, activation='relu')(a)
+        h = Dense(self.hidden_units, activation='relu')(_state)
         # h = Dropout(0.2)(h)
         for x in range(1, self.num_layers):
             h = Dense(self.hidden_units, activation='relu')(h)
             # h = Dropout(0.2)(h)
         o = Dense(self.action_size[index], activation='softmax', name="output_actor_network_{}".format(index))(h)
-        model = Model(inputs=[a, advantage, old_prediction], outputs=o)
-        return model, advantage, old_prediction
+        model = Model(inputs=[_state, advantage, old_prediction, rewards, values], outputs=o)
+        return model, advantage, old_prediction, rewards, values
 
     def _create_critic_model(self, index):
         s = Input(shape=(self.all_state_size,))
-        # a = Input(shape=(self.all_action_size,))
-        # merged = keras.layers.concatenate([s, a], name="critic_concatenate_layer_{}".format(index))
-        # h = Dense(self.critic_hidden_units, activation='relu')(merged)
-        h = Dense(self.critic_hidden_units, activation='relu')(s)
+        a = Input(shape=(self.all_action_size,))
+        merged = keras.layers.concatenate([s, a], name="critic_concatenate_layer_{}".format(index))
+        h = Dense(self.critic_hidden_units, activation='relu')(merged)
+        # h = Dense(self.critic_hidden_units, activation='relu')(s)
         # h = Dropout(0.2)(h)
         for x in range(1, self.num_layers):
             h = Dense(self.critic_hidden_units , activation='relu')(h)
             # h = Dropout(0.2)(h)
         v = Dense(1, name="critic_output_layer_{}".format(index))(h)
-        # model = Model(inputs=[s, a], outputs=v)
-        model = Model(inputs=s, outputs=v)
+        model = Model(inputs=[s, a], outputs=v)
+        # model = Model(inputs=s, outputs=v)
 
         return model, s
 
@@ -204,9 +237,10 @@ class MAPPO(object):
         """
         for i in range(self.agent_count):
             # initialize the actors
-            self.actor_model[i], advantage, old_prediction = self._create_actor_model(i)
+            self.actor_model[i], advantage, old_prediction, rewards, values = self._create_actor_model(i)
             self.actor_model[i].compile(
-                loss=self.proximal_policy_optimization_loss(advantage=advantage, old_prediction=old_prediction),
+                loss=self.proximal_policy_optimization_loss_gae(advantage=advantage, old_prediction=old_prediction,
+                                                                rewards=rewards, values=values),
                 metrics=['mse'], optimizer=Adam(lr=self.learning_rate)
             )
             print('\n##### Actor Model {}'.format(i))
@@ -237,16 +271,17 @@ class MAPPO(object):
         :param model_path: Random seed.
         """
         for i in range(self.agent_count):
-            self.actor_model[i], advantage, old_prediction = self._create_actor_model(i)
-            if os.path.exists('./' + model_path + '/MAPPO_actor_{}_model.h5'.format(i)):
-                self.actor_model[i].load_weights('./' + model_path + '/MAPPO_actor_{}_model.h5'.format(i))
+            self.actor_model[i], advantage, old_prediction, rewards, values = self._create_actor_model(i)
+            if os.path.exists('./' + model_path + '/MAPPO_actor_{}_model_v3.h5'.format(i)):
+                self.actor_model[i].load_weights('./' + model_path + '/MAPPO_actor_{}_model_v3.h5'.format(i))
             self.actor_model[i].compile(
-                loss=self.proximal_policy_optimization_loss(advantage=advantage, old_prediction=old_prediction),
+                loss=self.proximal_policy_optimization_loss_gae(advantage=advantage, old_prediction=old_prediction,
+                                                                rewards=rewards, values=values),
                 metrics=['mse'], optimizer=Adam(lr=self.learning_rate)
             )
             self.critic_model[i], _ = self._create_critic_model(i)
-            if os.path.exists('./' + model_path + '/MAPPO_critic_{}_model.h5'.format(i)):
-                self.critic_model[i].load_weights('./' + model_path + '/MAPPO_critic_{}_model.h5'.format(i))
+            if os.path.exists('./' + model_path + '/MAPPO_critic_{}_model_v3.h5'.format(i)):
+                self.critic_model[i].load_weights('./' + model_path + '/MAPPO_critic_{}_model_v3.h5'.format(i))
             self.critic_model[i].compile(loss='mse', metrics=['mse'], optimizer=Adam(lr=self.learning_rate))
 
     def increment_step(self):
@@ -304,6 +339,15 @@ class MAPPO(object):
         """
         self.replay_memory.append(
             [observation, action, next_observation, reward, done, info, self.last_prediction, reward])
+        #
+        # self.replay_memory_states.append(observation)
+        # self.replay_memory_actions.append(action)
+        # self.replay_memory_action_one_hot.append(action)
+        #
+        # self.replay_memory_values = deque(maxlen=self.trainer_parameters['memory_size'])
+        # _mask = not done
+        # self.replay_memory_masks.append(_mask)
+        # self.replay_memory_rewards.append(reward)
 
     def process_experiences(self, current_info, action_vector, next_info):
         """
@@ -313,18 +357,18 @@ class MAPPO(object):
         :param action_vector: Current executed action
         :param next_info: Next corresponding BrainInfo.
         """
-        # Update the reward for the last round if the round ends
-        _len = len(self.replay_memory)
-        done = self.replay_memory[_len - 1][4]
-        if done is True:
-            if _len > 1:
-                for j in range(_len - 2, -1, -1):
-                    [state, action, next_state, reward, _done, info, last_pred, pro_reward] = self.replay_memory[j]
-                    if (_done is True) and (pro_reward is not None):
-                        break
-                    else:
-                        for i in range(self.agent_count):
-                            self.replay_memory[j][7][i] += self.replay_memory[j + 1][7][i] * self.gamma
+        # # Update the reward for the last round if the round ends
+        # _len = len(self.replay_memory)
+        # done = self.replay_memory[_len - 1][4]
+        # if done is True:
+        #     if _len > 1:
+        #         for j in range(_len - 2, -1, -1):
+        #             [state, action, next_state, reward, done, info, last_pred, pro_reward] = self.replay_memory[j]
+        #             if (done is True) and (pro_reward is not None):
+        #                 break
+        #             else:
+        #                 for i in range(self.agent_count):
+        #                     self.replay_memory[j][7][i] += self.replay_memory[j + 1][7][i] * self.gamma
         pass
 
     def end_episode(self):
@@ -345,6 +389,17 @@ class MAPPO(object):
         # The NN is ready to be updated at every time horizon
         return (self.steps > 1) and ((self.steps % self.time_horizon) == 0)
 
+    def _get_advantages(self, values, masks, rewards):
+        returns = []
+        gae = 0
+        for i in reversed(range(len(rewards))):
+            delta = rewards[i] + self.gamma * values[i + 1] * masks[i] - values[i]
+            gae = delta + self.gamma * self.lambd * masks[i] * gae
+            returns.insert(0, gae + values[i])
+
+        adv = np.array(returns) - values[:-1]
+        return returns, (adv - np.mean(adv)) / (np.std(adv) + 1e-10)
+
     def update_model(self):
         """
         Uses the memory to update model. Run back propagation.
@@ -352,22 +407,23 @@ class MAPPO(object):
         """
         For PPO the Optimization will be executed in self.self.num_epoch epoch times
         """
-        # num_samples = len(self.replay_memory)
-        # mini_batch = self.replay_memory
-        num_samples = min(self.batch_size, len(self.replay_memory))
-        mini_batch = random.sample(self.replay_memory, num_samples)
+
+        num_samples = min(self.time_horizon, len(self.replay_memory))
+        traces = self.replay_memory[- (num_samples - 1):]
 
         # Start by extracting the necessary parameters (we use a vectorized implementation).
         state0_batch = [[] for r in range(self.agent_count)]
         reward_batch = [[] for r in range(self.agent_count)]
         action_batch = [[] for r in range(self.agent_count)]
         state1_batch = [[] for r in range(self.agent_count)]
+        mask_batch = [[] for r in range(self.agent_count)]
         last_prediction_batch = [[] for r in range(self.agent_count)]
         full_state0_batch = []
-        full_state1_batch = []
+        full_action_batch = []
 
-        for [state, action, next_state, reward, done, info, last_pred, proc_reward] in mini_batch:
+        for [state, action, next_state, reward, done, info, last_pred, proc_reward] in traces:
             _tmp_state_0 = []
+            _tmp_action = []
             for i in range(self.agent_count):
                 state0_batch[i].append(state[i])
                 _tmp_state_0.append(state[i])
@@ -376,38 +432,45 @@ class MAPPO(object):
                 action_matrix = np.zeros(self.action_size[i])
                 action_matrix[action[i]] = 1
                 action_batch[i].append(action_matrix)
+                _tmp_action.append(action_matrix)
                 # last_prediction-probality
                 last_prediction_batch[i].append(last_pred[i])
                 # reward
                 reward_batch[i].append(proc_reward[i])
-            full_state0_batch.append(np.array(_tmp_state_0).reshape((self.all_state_size,)))
-
+                # done
+                _mask = not done[i]
+                mask_batch[i].append(_mask)
+            full_state0_batch.append(np.array(_tmp_state_0).reshape((self.all_state_size, )))
+            full_action_batch.append(np.array(_tmp_action).reshape((self.all_action_size,)))
         full_state0_batch = np.array(full_state0_batch)
+        full_action_batch = np.array(full_action_batch)
+
+        # Train the actor and the critic for each agent
         for i in range(self.agent_count):
             state0_batch[i] = np.array(state0_batch[i])
             state1_batch[i] = np.array(state1_batch[i])
             reward_batch[i] = np.array(reward_batch[i]).reshape((num_samples, 1))
             action_batch[i] = np.array(action_batch[i])
             old_prediction_batch = np.array(last_prediction_batch[i])
+            mask_batch[i] = np.array(mask_batch[i])
 
-            # Train actor
-            pred_values_batch = np.array(self.critic_model[i].predict(full_state0_batch))
-            advantage_batch = reward_batch[i] - pred_values_batch
-            actor_log = self.actor_model[i].train_on_batch([state0_batch[i],
-                                   advantage_batch, old_prediction_batch], action_batch[i])
-            # actor_log = self.actor_model[i].fit([state0_batch[i], advantage_batch, old_prediction_batch],
-            #                                     action_batch[i], batch_size=self.batch_size,
-            #                                     epochs=self.num_epoch,
-            #                                     verbose=False)
+            # Compute the GAE
+            pred_values_batch = np.array(self.critic_model[i].predict([full_state0_batch, full_action_batch]))
+            returns_batch, advantage_batch, = self._get_advantages(pred_values_batch, mask_batch, reward_batch)
+
+            # Train the actor
+            actor_log = self.actor_model[i].fit([state0_batch[i], advantage_batch, old_prediction_batch, reward_batch,
+                                                 pred_values_batch], action_batch[i], verbose=True, shuffle=True,
+                                                epochs=self.num_epoch, batch_size=self.batch_size,
+                                                use_multiprocessing=True)
+
             # train_names = ['actor_loss_{}'.format(i), 'actor_mse_{}'.format(i)]
             # self._write_log(self.tensorBoard, train_names, actor_log, int(self.steps / self.batch_size))
 
             # Train critic
-            critic_log = self.critic_model[i].train_on_batch(full_state0_batch, reward_batch[i])
-            # critic_log = self.critic_model[i].fit(full_state0_batch, reward_batch[i],
-            #                                       batch_size=self.batch_size,
-            #                                       epochs=self.num_epoch,
-            #                                       verbose=False)
+            critic_log = self.critic_model[i].fit([full_state0_batch, full_action_batch], returns_batch, verbose=True,
+                                                  shuffle=True, epochs=self.num_epoch, batch_size=self.batch_size,
+                                                  use_multiprocessing=True)
             # train_names = ['critic_loss_{}'.format(i), 'critic_mse_{}'.format(i)]
             # self._write_log(self.tensorBoard, train_names, critic_log, int(self.steps / self.batch_size))
 
@@ -418,8 +481,8 @@ class MAPPO(object):
         """
         if os.path.exists('./' + model_path):
             for i in range(self.agent_count):
-                self.actor_model[i].save('./' + model_path + '/MAPPO_actor_{}_model.h5'.format(i))
-                self.critic_model[i].save('./' + model_path + '/MAPPO_critic_{}_model.h5'.format(i))
+                self.actor_model[i].save('./' + model_path + '/MAPPO_actor_{}_model_v3.h5'.format(i))
+                self.critic_model[i].save('./' + model_path + '/MAPPO_critic_{}_model_v3.h5'.format(i))
         else:
             raise FAPSTrainerException("The model path doesn't exist. model_path : " + './' + model_path)
 

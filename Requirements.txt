@@ -1,6 +1,6 @@
+numpy
+docopt
+gym
 tensorflow
 tensorboard
 keras
-docopt
-gym
-numpy

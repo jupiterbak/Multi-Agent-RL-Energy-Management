@@ -205,7 +205,7 @@ MCD_A2C:
 
 MCD_MADDPG:
     trainer: MADDPG           # trainer type
-    agent_config_path: C:\GitHub\Multi-Agent-RL-Energy-Management\OpenAIGym\MARL_config.yaml
+    agent_config_path: C:\SP347\02_Papers\2019_Multi_Agent_Energy_Management\03_Python_Workspace\OpenAIGym\MARL_config.yaml
     p_min: 0
     p_max: 100
     p_slope: 10
@@ -234,7 +234,7 @@ MCD_MADDPG:
 
 MCD_MAPPO:
     trainer: MAPPO          # trainer type
-    agent_config_path: C:\GitHub\Multi-Agent-RL-Energy-Management\OpenAIGym\MARL_config.yaml
+    agent_config_path: C:\SP347\02_Papers\2019_Multi_Agent_Energy_Management\03_Python_Workspace\OpenAIGym\MARL_config.yaml
     batch_size: 512        # batch size
     memory_size: 10240      # allocated memory size
     beta: 5.0e-3
@@ -256,9 +256,9 @@ MCD_MAPPO:
     summary_freq: 1000      # Frequency at which at summary will be printed out
 
 MCD_MAPPO_mult:
-    trainer: MAPPO          # trainer type
-    agent_config_path: C:\GitHub\Multi-Agent-RL-Energy-Management\OpenAIGym\MARL_config.yaml
-    batch_size: 512        # batch size. Normally 4 to 4096
+    trainer: MAPPOv2          # trainer type ie. MAPPO, MAPPOv2, MAPPOv3
+    agent_config_path: C:\SP347\02_Papers\2019_Multi_Agent_Energy_Management\03_Python_Workspace\OpenAIGym\MARL_config.yaml
+    batch_size: 512         # batch size. Normally 4 to 4096
     memory_size: 10240      # allocated memory size
     beta: 5.0e-3
     loss_clipping: 0.1      # Only implemented clipping for the surrogate loss, paper said it was best. 0.1, 0.2, 0.3
@@ -267,20 +267,20 @@ MCD_MAPPO_mult:
     gamma: 0.99             # discount factor. 0.8 to 0.9997
     num_layers: 2           # number of hidden layers
     hidden_units: 64        # number of hidden unit in the hidden layer
-    critic_hidden_units: 256 # number of hidden unit in the hidden layer
+    critic_hidden_units: 256 # number of hidden unit in the critic hidden layer
     use_recurrent: false    # use R-NN
-    lambd: 0.95
+    lambd: 0.95             # GAE smoothing parameter
     learning_rate: 0.001    # learning rate or learning factor. Normally 0.003 to 5e-6
-    max_steps: 2000      # maximum number of state for an episode
+    max_steps: 2000         # maximum number of state for an episode
     normalize: false        # add normalization layer to the associated NN
-    num_epoch: 3         # total number of epochs. 3 to 30
+    num_epoch: 3            # total number of epochs. 3 to 30
     time_horizon: 512        # time horizon. Normally 32 to 5000
     sequence_length: 64     #
     summary_freq: 1000      # Frequency at which at summary will be printed out
 
 MCD_MAPPOLSTM_mult:
     trainer: MAPPOLSTM          # trainer type
-    agent_config_path: C:\GitHub\Multi-Agent-RL-Energy-Management\OpenAIGym\MARL_config.yaml
+    agent_config_path: C:\SP347\02_Papers\2019_Multi_Agent_Energy_Management\03_Python_Workspace\OpenAIGym\MARL_config.yaml
     batch_size: 512        # batch size
     memory_size: 10240      # allocated memory size
     beta: 5.0e-3
@@ -301,25 +301,48 @@ MCD_MAPPOLSTM_mult:
     sequence_length: 64     #
     summary_freq: 1000      # Frequency at which at summary will be printed out
 
-MCD_MAPPOv2:
-    trainer: MAPPOv2          # trainer type
-    agent_config_path: C:\GitHub\Multi-Agent-RL-Energy-Management\OpenAIGym\MARL_config.yaml
-    batch_size: 1024        # batch size
+MCD_MAPPO_mult_v2:
+    trainer: MAPPOv2         # trainer type
+    agent_config_path: C:\SP347\02_Papers\2019_Multi_Agent_Energy_Management\03_Python_Workspace\OpenAIGym\MARL_config.yaml
+    batch_size: 512         # batch size. Normally 4 to 4096
     memory_size: 10240      # allocated memory size
     beta: 5.0e-3
-    loss_clipping: 0.2      # Only implemented clipping for the surrogate loss, paper said it was best
-    entropy_loss: 0.001     # Entropy loss
-    exploration_noise: 0.2  # Exploration noise
-    gamma: 0.99             # discount factor
+    loss_clipping: 0.1      # Only implemented clipping for the surrogate loss, paper said it was best. 0.1, 0.2, 0.3
+    entropy_loss: 0.005     # Entropy loss. 0 to 0.01
+    exploration_noise: 0.2  # Exploration noise. Normally 0.2
+    gamma: 0.99             # discount factor. 0.8 to 0.9997
     num_layers: 2           # number of hidden layers
     hidden_units: 64        # number of hidden unit in the hidden layer
-    critic_hidden_units: 256 # number of hidden unit in the hidden layer
+    critic_hidden_units: 256 # number of hidden unit in the critic hidden layer
     use_recurrent: false    # use R-NN
     lambd: 0.95
-    learning_rate: 0.001    # learning rate or learning factor
-    max_steps: 5000000      # maximum number of state for an episode
+    learning_rate: 0.001    # learning rate or learning factor. Normally 0.003 to 5e-6
+    max_steps: 2000         # maximum number of state for an episode
     normalize: false        # add normalization layer to the associated NN
-    num_epoch: 10000        # total number of epochs
-    time_horizon: 64        # time horizon
+    num_epoch: 3            # total number of epochs. 3 to 30
+    time_horizon: 512        # time horizon. Normally 32 to 5000
+    sequence_length: 64     #
+    summary_freq: 1000      # Frequency at which at summary will be printed out
+
+MCD_MAPPO_mult_v3:
+    trainer: MAPPOv3         # trainer type
+    agent_config_path: C:\SP347\02_Papers\2019_Multi_Agent_Energy_Management\03_Python_Workspace\OpenAIGym\MARL_config.yaml
+    batch_size: 64         # batch size. Normally 4 to 4096
+    memory_size: 10240      # allocated memory size
+    beta: 5.0e-3
+    loss_clipping: 0.1      # Only implemented clipping for the surrogate loss, paper said it was best. 0.1, 0.2, 0.3
+    entropy_loss: 0.005     # Entropy loss. 0 to 0.01
+    exploration_noise: 0.2  # Exploration noise. Normally 0.2
+    gamma: 0.99             # discount factor. 0.8 to 0.9997
+    num_layers: 2           # number of hidden layers
+    hidden_units: 64        # number of hidden unit in the hidden layer
+    critic_hidden_units: 256 # number of hidden unit in the critic hidden layer
+    use_recurrent: false    # use R-NN
+    lambd: 0.95             # GAE smoothing parameter
+    learning_rate: 0.001    # learning rate or learning factor. Normally 0.003 to 5e-6
+    max_steps: 2000         # maximum number of state for an episode
+    normalize: false        # add normalization layer to the associated NN
+    num_epoch: 3            # total number of epochs. 3 to 30
+    time_horizon: 512        # time horizon. Normally 32 to 5000
     sequence_length: 64     #
     summary_freq: 1000      # Frequency at which at summary will be printed out

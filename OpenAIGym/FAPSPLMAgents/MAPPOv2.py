@@ -28,7 +28,13 @@ class FAPSTrainerException(FAPSPLMEnvironmentException):
 
 
 class MAPPOv2(object):
-    """This class is the abstract class for the faps trainers"""
+    """This class is the abstract class for the faps trainers
+        The trainer implements the PPO algorithm for Multi-Agent Reinforcement Learning Usecase.
+        in this implementation, the critic of all agents has access to the observation of all agents
+        as well as the selected actions.
+
+        NOTE: We do not implements the periods update and the GAE
+    """
 
     def __init__(self, envs, brain_name, trainer_parameters, training, seed):
         """
@@ -83,6 +89,8 @@ class MAPPOv2(object):
         self.entropy_loss = self.trainer_parameters['entropy_loss']
         self.exploration_noise = self.trainer_parameters['exploration_noise']
         self.learning_rate = self.trainer_parameters['learning_rate']
+        self.time_horizon = self.trainer_parameters['time_horizon']
+        self.num_epoch = self.trainer_parameters['num_epoch']
         self.summary = self.trainer_parameters['summary_path']
         self.tensorBoard = TensorBoard(self.summary)
 
@@ -112,7 +120,7 @@ class MAPPOv2(object):
         Returns the maximum number of steps. Is used to know when the trainer should be stopped.
         :return: The maximum number of steps of the trainer
         """
-        return self.trainer_parameters['max_steps'] * self.trainer_parameters['num_epoch']
+        return self.trainer_parameters['max_steps'] * self.trainer_parameters['time_horizon']
 
     @property
     def get_step(self):
@@ -136,8 +144,8 @@ class MAPPOv2(object):
 
     def proximal_policy_optimization_loss(self, advantage, old_prediction):
         def loss(y_true, y_pred):
-            prob = y_true * y_pred
-            old_prob = y_true * old_prediction
+            prob = k.sum(y_true * y_pred, axis=-1)
+            old_prob = k.sum(y_true * old_prediction, axis=-1)
             r = prob / (old_prob + 1e-10)
             return -k.mean(k.minimum(r * advantage, k.clip(r, min_value=1 - self.loss_clipping,
                                                            max_value=1 + self.loss_clipping) * advantage)
@@ -237,15 +245,15 @@ class MAPPOv2(object):
         """
         for i in range(self.agent_count):
             self.actor_model[i], advantage, old_prediction = self._create_actor_model(i)
-            if os.path.exists('./' + model_path + '/MAPPO_actor_{}_model.h5'.format(i)):
-                self.actor_model[i].load_weights('./' + model_path + '/MAPPO_actor_{}_model.h5'.format(i))
+            if os.path.exists('./' + model_path + '/MAPPO_actor_{}_model_v2.h5'.format(i)):
+                self.actor_model[i].load_weights('./' + model_path + '/MAPPO_actor_{}_model_v2.h5'.format(i))
             self.actor_model[i].compile(
                 loss=self.proximal_policy_optimization_loss(advantage=advantage, old_prediction=old_prediction),
                 metrics=['mse'], optimizer=Adam(lr=self.learning_rate)
             )
             self.critic_model[i], _ = self._create_critic_model(i)
-            if os.path.exists('./' + model_path + '/MAPPO_critic_{}_model.h5'.format(i)):
-                self.critic_model.load_weights('./' + model_path + '/MAPPO_critic_{}_model.h5'.format(i))
+            if os.path.exists('./' + model_path + '/MAPPO_critic_{}_model_v2.h5'.format(i)):
+                self.critic_model[i].load_weights('./' + model_path + '/MAPPO_critic_{}_model_v2.h5'.format(i))
             self.critic_model[i].compile(loss='mse', metrics=['mse'], optimizer=Adam(lr=self.learning_rate))
 
     def increment_step(self):
@@ -272,12 +280,9 @@ class MAPPOv2(object):
             obs = observation[i].reshape(1, self.state_size[i])
             p = self.actor_model[i].predict([obs, self.dummy_advantage, self.dummy_old_prediction[i]])
             self.last_prediction[i] = p[0]
-            if self.is_training is True:
-                action = np.random.choice(self.action_size[i], p=np.nan_to_num(p[0]))
-                _actions[i] = action
-            else:
-                action = np.argmax(p[0])
-                _actions[i] = action
+
+            action = np.random.choice(self.action_size[i], p=np.nan_to_num(p[0]))
+            _actions[i] = action
         return _actions
 
     def take_action_continous(self, observation, _env):
@@ -344,13 +349,18 @@ class MAPPOv2(object):
         # The NN is ready to be updated if there is at least a batch in the replay memory
         # return (len(self.replay_memory) >= self.batch_size) and (len(self.replay_memory) % self.batch_size == 0)
 
-        # The NN is ready to be updated everytime a batch is sampled
-        return (self.steps > 1) and ((self.steps % self.batch_size) == 0)
+        # The NN is ready to be updated at every time horizon
+        return (self.steps > 1) and ((self.steps % self.time_horizon) == 0)
 
     def update_model(self):
         """
         Uses the memory to update model. Run back propagation.
         """
+        """
+        For PPO the Optimization will be executed in self.self.num_epoch epoch times
+        """
+        # num_samples = len(self.replay_memory)
+        # mini_batch = self.replay_memory
         num_samples = min(self.batch_size, len(self.replay_memory))
         mini_batch = random.sample(self.replay_memory, num_samples)
 
@@ -410,8 +420,8 @@ class MAPPOv2(object):
         """
         if os.path.exists('./' + model_path):
             for i in range(self.agent_count):
-                self.actor_model[i].save('./' + model_path + '/MAPPO_actor_{}_model.h5'.format(i))
-                self.critic_model[i].save('./' + model_path + '/MAPPO_critic_{}_model.h5'.format(i))
+                self.actor_model[i].save('./' + model_path + '/MAPPO_actor_{}_model_v2.h5'.format(i))
+                self.critic_model[i].save('./' + model_path + '/MAPPO_critic_{}_model_v2.h5'.format(i))
         else:
             raise FAPSTrainerException("The model path doesn't exist. model_path : " + './' + model_path)
 
