@@ -372,8 +372,9 @@ class MAPPOv2(object):
         """
         # num_samples = len(self.replay_memory)
         # mini_batch = self.replay_memory
-        num_samples = min(self.batch_size, len(self.replay_memory))
-        mini_batch = random.sample(self.replay_memory, num_samples)
+        num_samples = min(self.time_horizon, len(self.replay_memory))
+        # mini_batch = random.sample(self.replay_memory, num_samples)
+        mini_batch = list(self.replay_memory)[-num_samples:]
 
         # Start by extracting the necessary parameters (we use a vectorized implementation).
         state0_batch = [[] for r in range(self.agent_count)]
@@ -389,13 +390,13 @@ class MAPPOv2(object):
             _tmp_action = []
             for i in range(self.agent_count):
                 state0_batch[i].append(state[i])
-                _tmp_state_0.append(state[i])
+                _tmp_state_0.extend(state[i])
                 state1_batch[i].append(next_state[i])
                 # action matrix
                 action_matrix = np.zeros(self.action_size[i])
                 action_matrix[action[i]] = 1
                 action_batch[i].append(action_matrix)
-                _tmp_action.append(action_matrix)
+                _tmp_action.extend(action_matrix)
                 # last_prediction-probality
                 last_prediction_batch[i].append(last_pred[i])
                 # reward
@@ -420,16 +421,26 @@ class MAPPOv2(object):
             # advantage_batch = (adv - np.mean(adv)) / (np.std(adv) + 1e-10)
             advantage_batch = reward_batch[i] - pred_values_batch
 
-            actor_log = self.actor_model[i].train_on_batch([state0_batch[i], advantage_batch, old_prediction_batch],
-                                                           action_batch[i])
-            train_names = ['actor_loss_{}'.format(i), 'actor_mse_{}'.format(i)]
-            self._write_log(self.tensorBoard, train_names, actor_log, int(self.steps / self.batch_size))
+            # Train actor
+            # actor_log = self.actor_model[i].train_on_batch([state0_batch[i], advantage_batch, old_prediction_batch],
+            #                                                action_batch[i])
+            actor_log = self.actor_model[i].fit([state0_batch[i], advantage_batch, old_prediction_batch],
+                                                action_batch[i], verbose=True, shuffle=True,
+                                                epochs=self.num_epoch, batch_size=self.batch_size,
+                                                use_multiprocessing=True)
+
+            # Log the training data
+            # train_names = ['actor_loss_{}'.format(i), 'actor_mse_{}'.format(i)]
+            # self._write_log(self.tensorBoard, train_names, actor_log, int(self.steps / self.batch_size))
 
             # Train critic
-            critic_log = self.critic_model[i].train_on_batch([full_state0_batch, full_action_batch], advantage_batch)
+            # critic_log = self.critic_model[i].train_on_batch([full_state0_batch, full_action_batch], advantage_batch)
             # critic_log = self.critic_model[i].train_on_batch([full_state0_batch, full_action_batch], reward_batch[i])
-            train_names = ['critic_loss_{}'.format(i), 'critic_mse_{}'.format(i)]
-            self._write_log(self.tensorBoard, train_names, critic_log, int(self.steps / self.batch_size))
+            critic_log = self.critic_model[i].fit([full_state0_batch, full_action_batch], advantage_batch, verbose=True,
+                                                  shuffle=True, epochs=self.num_epoch, batch_size=self.batch_size,
+                                                  use_multiprocessing=True)
+            # train_names = ['critic_loss_{}'.format(i), 'critic_mse_{}'.format(i)]
+            # self._write_log(self.tensorBoard, train_names, critic_log, int(self.steps / self.batch_size))
 
     def save_model(self, model_path):
         """
@@ -461,7 +472,7 @@ class MAPPOv2(object):
             s_op = tf.summary.text(key,
                                    ([[str(x), str(input_dict[x])] for x in input_dict])
                                    )
-            self.tensorBoard.writer.add_summary(s_op, int(self.steps / self.batch_size))
+            self.tensorBoard.writer.add_summary(s_op, int(self.steps / self.time_horizon))
         except:
             logger.info("Cannot write text summary for Tensorboard. Tensorflow version must be r1.2 or above.")
 
@@ -476,7 +487,7 @@ class MAPPOv2(object):
         summary_value = summary.value.add()
         summary_value.simple_value = value
         summary_value.tag = key
-        self.tensorBoard.writer.add_summary(summary, int(self.steps / self.batch_size))
+        self.tensorBoard.writer.add_summary(summary, int(self.steps / self.time_horizon))
         self.tensorBoard.writer.flush()
 
     @staticmethod

@@ -2,6 +2,7 @@
 # ## FAPS PLM ML-Agent Learning
 import logging
 import os
+import random
 import re
 from enum import Enum
 
@@ -49,9 +50,11 @@ class TrainerController(object):
         # Generate seed
         if seed == -1:
             seed = np.random.randint(0, 999999)
+
+        # Set the seed
         self.seed = seed
         np.random.seed(self.seed)
-
+        random.seed(self.seed)
         if backend.backend() == 'tensorflow':
             tf.set_random_seed(self.seed)
         else:
@@ -267,9 +270,9 @@ class TrainerController(object):
                                 # Write to tensorborad
                                 trainer.write_tensorboard_value('cul_reward', cumulated_reward)
 
-                                all_rewards = cumulated_rewards[e]
-                                for i in range(len(all_rewards)):
-                                    trainer.write_tensorboard_value('cul_reward_agent_{:d}'.format(i), all_rewards[i])
+                                # all_rewards = cumulated_rewards[e]
+                                # for i in range(len(all_rewards)):
+                                #     trainer.write_tensorboard_value('cul_reward_agent_{:d}'.format(i), all_rewards[i])
 
                             # Reset the statistics values
                             cumulated_reward = 0

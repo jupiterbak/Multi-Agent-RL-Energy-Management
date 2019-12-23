@@ -426,13 +426,13 @@ class MAPPOv3(object):
             _tmp_action = []
             for i in range(self.agent_count):
                 state0_batch[i].append(state[i])
-                _tmp_state_0.append(state[i])
+                _tmp_state_0.extend(state[i])
                 state1_batch[i].append(next_state[i])
                 # action matrix
                 action_matrix = np.zeros(self.action_size[i])
                 action_matrix[action[i]] = 1
                 action_batch[i].append(action_matrix)
-                _tmp_action.append(action_matrix)
+                _tmp_action.extend(action_matrix)
                 # last_prediction-probality
                 last_prediction_batch[i].append(last_pred[i])
                 # reward

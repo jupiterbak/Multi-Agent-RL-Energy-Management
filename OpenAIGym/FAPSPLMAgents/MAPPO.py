@@ -370,7 +370,7 @@ class MAPPO(object):
             _tmp_state_0 = []
             for i in range(self.agent_count):
                 state0_batch[i].append(state[i])
-                _tmp_state_0.append(state[i])
+                _tmp_state_0.extend(state[i])
                 state1_batch[i].append(next_state[i])
                 # action matrix
                 action_matrix = np.zeros(self.action_size[i])
@@ -441,7 +441,7 @@ class MAPPO(object):
             s_op = tf.summary.text(key,
                                    ([[str(x), str(input_dict[x])] for x in input_dict])
                                    )
-            self.tensorBoard.writer.add_summary(s_op, int(self.steps / self.batch_size))
+            self.tensorBoard.writer.add_summary(s_op, int(self.steps / self.time_horizon))
         except:
             logger.info("Cannot write text summary for Tensorboard. Tensorflow version must be r1.2 or above.")
 
@@ -456,7 +456,7 @@ class MAPPO(object):
         summary_value = summary.value.add()
         summary_value.simple_value = value
         summary_value.tag = key
-        self.tensorBoard.writer.add_summary(summary, int(self.steps / self.batch_size))
+        self.tensorBoard.writer.add_summary(summary, int(self.steps / self.time_horizon))
         self.tensorBoard.writer.flush()
 
     @staticmethod
