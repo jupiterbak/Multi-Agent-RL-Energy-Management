@@ -11,7 +11,7 @@ import numpy as np
 import tensorflow as tf
 from keras import Input
 from keras.callbacks import TensorBoard
-from keras.layers import Dense
+from keras.layers import Dense, Dropout
 from keras.models import Model
 from keras.optimizers import Adam
 
@@ -150,6 +150,7 @@ class MAPPOv2(object):
             return -k.mean(k.minimum(r * advantage, k.clip(r, min_value=1 - self.loss_clipping,
                                                            max_value=1 + self.loss_clipping) * advantage)
                            + self.entropy_loss * -(prob * k.log(prob + 1e-10)))
+
         return loss
 
     def proximal_policy_optimization_loss_continuous(self, advantage, old_prediction):
@@ -197,7 +198,7 @@ class MAPPOv2(object):
         # h = Dense(self.critic_hidden_units, activation='relu')(s)
         # h = Dropout(0.2)(h)
         for x in range(1, self.num_layers):
-            h = Dense(self.critic_hidden_units , activation='relu')(h)
+            h = Dense(self.critic_hidden_units, activation='relu')(h)
             # h = Dropout(0.2)(h)
         v = Dense(1, name="critic_output_layer_{}".format(index))(h)
         model = Model(inputs=[s, a], outputs=v)
@@ -385,7 +386,12 @@ class MAPPOv2(object):
         full_state0_batch = []
         full_action_batch = []
 
-        for [state, action, next_state, reward, done, info, last_pred, proc_reward] in mini_batch:
+        current_system_power = []
+        max_load_pofile = []
+        current_energy_price = []
+        production = []
+
+        for [state, action, next_state, reward, done, infos, last_pred, proc_reward] in mini_batch:
             _tmp_state_0 = []
             _tmp_action = []
             for i in range(self.agent_count):
@@ -403,6 +409,22 @@ class MAPPOv2(object):
                 reward_batch[i].append(proc_reward[i])
             full_state0_batch.append(np.array(_tmp_state_0).reshape((self.all_state_size,)))
             full_action_batch.append(np.array(_tmp_action).reshape((self.all_action_size,)))
+
+            # retrieve all environment infos
+            if 'current_energy_price' in infos:
+                current_energy_price.append(infos['current_energy_price'])
+            if 'max_load_pofile' in infos:
+                max_load_pofile.append(infos['max_load_pofile'])
+            if 'current_system_power' in infos:
+                current_system_power.append(infos['current_system_power'])
+            if 'production' in infos:
+                production.append(infos['production'])
+
+        # Write info to board
+        self.write_tensorboard_value('current_energy_price', np.mean(current_energy_price))
+        self.write_tensorboard_value('max_load_pofile', np.mean(max_load_pofile))
+        self.write_tensorboard_value('current_system_power', np.mean(current_system_power))
+        self.write_tensorboard_value('production', np.sum(production))
 
         full_state0_batch = np.array(full_state0_batch)
         full_action_batch = np.array(full_action_batch)
@@ -488,6 +510,20 @@ class MAPPOv2(object):
         summary_value.simple_value = value
         summary_value.tag = key
         self.tensorBoard.writer.add_summary(summary, int(self.steps / self.time_horizon))
+        self.tensorBoard.writer.flush()
+
+    def write_tensorboard_value_by_step(self, key, value):
+        """
+        Saves text to Tensorboard.
+        Note: Only works on tensorflow r1.2 or above.
+        :param key: The name of the text.
+        :param value: A value that will bw displayed on Tensorboard.
+        """
+        summary = tf.Summary()
+        summary_value = summary.value.add()
+        summary_value.simple_value = value
+        summary_value.tag = key
+        self.tensorBoard.writer.add_summary(summary, int(self.steps))
         self.tensorBoard.writer.flush()
 
     @staticmethod

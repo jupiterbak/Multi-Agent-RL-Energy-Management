@@ -270,9 +270,9 @@ class TrainerController(object):
                                 # Write to tensorborad
                                 trainer.write_tensorboard_value('cul_reward', cumulated_reward)
 
-                                # all_rewards = cumulated_rewards[e]
-                                # for i in range(len(all_rewards)):
-                                #     trainer.write_tensorboard_value('cul_reward_agent_{:d}'.format(i), all_rewards[i])
+                                all_rewards = cumulated_rewards[e]
+                                for i in range(len(all_rewards)):
+                                     trainer.write_tensorboard_value('cul_reward_agent_{:d}'.format(i), all_rewards[i])
 
                             # Reset the statistics values
                             cumulated_reward = 0

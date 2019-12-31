@@ -28,3 +28,15 @@ register(
     id='eflex-multi-agent-competition-v1',
     entry_point='gym_eflex_agent.envs:EFlexMultiAgentCompetition',
 )
+register(
+    id='eflex-multi-agent-competition-v2',
+    entry_point='gym_eflex_agent.envs:EFlexMultiAgentCompetitionClsV2',
+)
+register(
+    id='eflex-multi-agent-cooperation-v2',
+    entry_point='gym_eflex_agent.envs:EFlexMultiAgentCooperationClsV2',
+)
+register(
+    id='eflex-multi-agent-cooperation-v3',
+    entry_point='gym_eflex_agent.envs:EFlexMultiAgentCooperationClsV3',
+)

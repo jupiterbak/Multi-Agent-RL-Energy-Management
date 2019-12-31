@@ -1,34 +1,68 @@
 environement_config:
     max_allowed_power: 100.0
+    energy_cost_budget: 100.0
     daily_slot_count: 200
+    tou_generartor:
+        type: STEPTOUGenerator
+        steps: [ 102400, 204800, 307200 ]
+        values: [ 0.01, 0.16, 0.06 ]
+    load_profile:
+        type: STEPLoadProfile
+        tolerance_factor: 0.2
+        steps: [ 102400, 204800, 307200 ]
+        values: [ 100, 100, 100 ]
 
 agents:
     utility1:
         type: EFlexAgentPConstant       # trainer type
         p_min: 0.0
-        p_max: 20.0
-        p_slope: 1
+        p_max: 80.0
+        p_slope: 1.0
 
     utility2:
         type: EFlexAgentPConstant       # trainer type
         p_min: 0.0
-        p_max: 10.0
-        p_slope: 1
-
-    utility3:
-        type: EFlexAgentPConstant       # trainer type
-        p_min: 0.0
         p_max: 20.0
-        p_slope: 1
+        p_slope: 1.0
 
-    utility4:
-        type: EFlexAgentPConstant       # trainer type
-        p_min: 0.0
-        p_max: 10.0
-        p_slope: 1
+#    utility3:
+#        type: EFlexAgentPConstant       # trainer type
+#        p_min: 0.0
+#        p_max: 20.0
+#        p_slope: 1.0
 
+#    utility4:
+#        type: EFlexAgentPConstant       # trainer type
+#        p_min: 0.0
+#        p_max: 20.0
+#        p_slope: 1.0
+        
+#    utility5:
+#        type: EFlexAgentPConstant       # trainer type
+#        p_min: 0.0
+#        p_max: 5.0
+#        p_slope: 1.0.0
+#
+#    utility6:
+#        type: EFlexAgentPConstant       # trainer type
+#        p_min: 0.0
+#        p_max: 5.0
+#        p_slope: 1.0
+#
+#    utility7:
+#        type: EFlexAgentPConstant       # trainer type
+#        p_min: 0.0
+#        p_max: 5.0
+#        p_slope: 1.0
+#
     storage:
         type: EFlexEnergyStorageAgent       # trainer type
         p_min: 0.0
-        p_max: 30.0
-        p_slope: 1
+        p_max: 20.0
+        p_slope: 1.0
+
+    generator:
+        type: EFLEXEnergyGeneratorAgent       # trainer type
+        p_min: 0.0
+        p_max: 20.0
+        p_slope: 1.0

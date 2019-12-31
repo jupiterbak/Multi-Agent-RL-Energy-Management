@@ -267,11 +267,11 @@ MCD_MAPPO_mult:
     gamma: 0.9             # discount factor. 0.8 to 0.9997
     num_layers: 2           # number of hidden layers
     hidden_units: 256        # number of hidden unit in the hidden layer
-    critic_hidden_units: 256 # number of hidden unit in the critic hidden layer
+    critic_hidden_units: 512 # number of hidden unit in the critic hidden layer
     use_recurrent: false    # use R-NN
     lambd: 0.95             # GAE smoothing parameter
     learning_rate: 0.001    # learning rate or learning factor. Normally 0.003 to 5e-6
-    max_steps: 1000         # maximum number of state for an episode
+    max_steps: 100         # maximum number of state for an episode
     normalize: false        # add normalization layer to the associated NN
     num_epoch: 2            # total number of epochs. 3 to 30
     time_horizon: 1024      # time horizon. Normally 32 to 5000

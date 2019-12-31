@@ -198,7 +198,7 @@ class EFlexMultiAgentCompetition(gym.Env):
                 for _n, n in enumerate(_not_index):
                     reward_n[n] = -1.0
                 self.global_reward = 1.0
-                done = True
+                # done = True
             else:
                 self.global_reward = np.mean(reward_n)
 

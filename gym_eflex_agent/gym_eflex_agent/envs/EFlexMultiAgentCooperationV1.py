@@ -229,7 +229,7 @@ class EFlexAgent:
         self.action_space = spaces.Discrete(len(EFLEXAgentTransition))  # {0,1,...,n-1}
 
         # observation is a multi discrete specifying which state is activated
-        self.observation_space = spaces.MultiBinary(len(EFLEXAgentState) + 1)
+        self.observation_space = spaces.MultiBinary(len(EFLEXAgentState))
 
         # reward_range
         self.reward_range = (float(-1.0), float(1.0))
@@ -488,7 +488,7 @@ class EFlexAgent:
     def _get_obs(self):
         obs = np.zeros(self.observation_space.n)
         obs[self.current_state.value] = 1.0
-        obs[self.observation_space.n - 1] = self.current_power / self.max_allowed_power
+        # obs[self.observation_space.n - 1] = self.current_power / self.max_allowed_power
 
         return obs
 
@@ -581,7 +581,8 @@ class EFlexEnergyStorageAgent:
         self.action_space = spaces.Discrete(len(EFLEXEnergyStorageAgentTransition))  # {0,1,...,n-1}
 
         # observation is a multi discrete specifying which state is activated
-        self.observation_space = spaces.MultiBinary(len(EFLEXEnergyStorageAgentState) + 1)
+        # self.observation_space = spaces.MultiBinary(len(EFLEXEnergyStorageAgentState) + 1)
+        self.observation_space = spaces.MultiBinary(len(EFLEXEnergyStorageAgentState))
 
         # reward_range
         self.reward_range = (float(-1.0), float(1.0))
@@ -740,7 +741,7 @@ class EFlexEnergyStorageAgent:
     def _get_obs(self):
         obs = np.zeros(self.observation_space.n)
         obs[self.current_state.value] = 1.0
-        obs[self.observation_space.n - 1] = self.current_power / self.max_allowed_power
+        # obs[self.observation_space.n - 1] = self.current_power / self.max_allowed_power
 
         return obs
 
@@ -791,8 +792,8 @@ class EFLEXEnergyGeneratorAgent:
         self.action_space = spaces.Discrete(len(EFLEXEnergyGeneratorAgentTransition))  # {0,1,...,n-1}
 
         # observation is a multi discrete specifying which state is activated
-        self.observation_space = spaces.MultiBinary(len(EFLEXEnergyGeneratorAgentState) + 1)
-
+        # self.observation_space = spaces.MultiBinary(len(EFLEXEnergyGeneratorAgentState) + 1)
+        self.observation_space = spaces.MultiBinary(len(EFLEXEnergyGeneratorAgentState))
         # reward_range
         self.reward_range = (float(-1.0), float(1.0))
 
@@ -919,7 +920,7 @@ class EFLEXEnergyGeneratorAgent:
     def _get_obs(self):
         obs = np.zeros(self.observation_space.n)
         obs[self.current_state.value] = 1.0
-        obs[self.observation_space.n - 1] = self.current_power / self.max_allowed_power
+        # obs[self.observation_space.n - 1] = self.current_power / self.max_allowed_power
 
         return obs
 
@@ -968,7 +969,8 @@ class EFLEXEnergyMainGridAgent:
         self.action_space = spaces.Discrete(len(EFLEXEnergyMainGridAgentTransition))  # {0,1,...,n-1}
 
         # observation is a multi discrete specifying which state is activated
-        self.observation_space = spaces.MultiBinary(len(EFLEXEnergyMainGridAgentState) + 1)
+        # self.observation_space = spaces.MultiBinary(len(EFLEXEnergyMainGridAgentState) + 1)
+        self.observation_space = spaces.MultiBinary(len(EFLEXEnergyMainGridAgentState))
 
         # reward_range
         self.reward_range = (float(-1.0), float(1.0))
@@ -1114,7 +1116,7 @@ class EFLEXEnergyMainGridAgent:
     def _get_obs(self):
         obs = np.zeros(self.observation_space.n)
         obs[self.current_state.value] = 1.0
-        obs[self.observation_space.n - 1] = self.current_power / self.max_allowed_power
+        # obs[self.observation_space.n - 1] = self.current_power / self.max_allowed_power
 
         return obs
 
