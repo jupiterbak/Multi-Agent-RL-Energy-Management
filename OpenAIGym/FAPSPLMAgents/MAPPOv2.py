@@ -14,6 +14,7 @@ from keras.callbacks import TensorBoard
 from keras.layers import Dense, Dropout
 from keras.models import Model
 from keras.optimizers import Adam
+from gym import spaces
 
 from OpenAIGym.exception import FAPSPLMEnvironmentException
 
@@ -68,8 +69,16 @@ class MAPPOv2(object):
         self.state_size = [None] * self.agent_count
         for env_name, env in self.env_brains.items():
             for i in range(self.agent_count):
-                self.action_size[i] = env.action_space[i].n
-                self.state_size[i] = env.observation_space[i].n
+                a_space = env.action_space[i]
+                o_space = env.observation_space[i]
+                if isinstance(a_space, spaces.Discrete):
+                    self.action_size[i] = a_space.n
+                else:
+                    self.action_space[i] = a_space.shape[0]
+                if isinstance(o_space, spaces.Discrete):
+                    self.state_size[i] = o_space.n
+                else:
+                    self.state_size[i] = o_space.shape[0]
 
         self.all_state_size = 0
         for i in range(self.agent_count):
@@ -390,6 +399,7 @@ class MAPPOv2(object):
         max_load_pofile = []
         current_energy_price = []
         production = []
+        energy_cost_budget = []
 
         for [state, action, next_state, reward, done, infos, last_pred, proc_reward] in mini_batch:
             _tmp_state_0 = []
@@ -419,12 +429,15 @@ class MAPPOv2(object):
                 current_system_power.append(infos['current_system_power'])
             if 'production' in infos:
                 production.append(infos['production'])
+            if 'energy_cost_budget' in infos:
+                energy_cost_budget.append((infos['energy_cost_budget']))
 
         # Write info to board
         self.write_tensorboard_value('current_energy_price', np.mean(current_energy_price))
         self.write_tensorboard_value('max_load_pofile', np.mean(max_load_pofile))
         self.write_tensorboard_value('current_system_power', np.mean(current_system_power))
         self.write_tensorboard_value('production', np.sum(production))
+        self.write_tensorboard_value('energy_cost_budget', np.mean(energy_cost_budget))
 
         full_state0_batch = np.array(full_state0_batch)
         full_action_batch = np.array(full_action_batch)

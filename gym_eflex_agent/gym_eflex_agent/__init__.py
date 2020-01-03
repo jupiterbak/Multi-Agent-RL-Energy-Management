@@ -40,3 +40,7 @@ register(
     id='eflex-multi-agent-cooperation-v3',
     entry_point='gym_eflex_agent.envs:EFlexMultiAgentCooperationClsV3',
 )
+register(
+    id='eflex-multi-agent-cooperation-v4',
+    entry_point='gym_eflex_agent.envs:EFlexMultiAgentCooperationClsV4',
+)

@@ -4,12 +4,13 @@ import matplotlib.pyplot as plt
 
 
 DATA_ROOT_PATH = 'C:/GitHub/Multi-Agent-RL-Energy-Management/Visualisation/data'
-SEEDS = [998, 667, 11, 2148, 79]
-SCENARIO_COUNT = 4
-AGENT_COUNT = 3
+SEEDS = [998, 79, 784, 667]  # [998, 667, 11, 2148, 79]
+SCENARIO_COUNT = 2
+AGENT_COUNT = 4
+DATA_SIZE = 300
 AGENT_NAMES = [
     ["Machine 1", "Machine 2", "Machine 3", "Machine 4"],
-    ["Machine 1", "Machine 2", "Storage", "Generator"],
+    ["Welding Machine", "CNC Machine", "Energy Storage", "Wind Turbine"],
     ["Machine 1", "Machine 2", "Storage", "Generator"],
     ["Machine 1", "Machine 2", "Storage", "Generator"]
 ]
@@ -25,7 +26,7 @@ def parse_raw_data(data_path):
             _path_all = os.path.normpath('{}/scenario_{}/{}/run-.-tag-cul_reward.csv'
                                          .format(data_path, scenario, seed))
             cul_reward.append(np.loadtxt(_path_all, skiprows=1, delimiter=','))
-        scenario_reward['all'] = np.array(cul_reward)
+        scenario_reward['all'] = np.array(cul_reward) # [:, :DATA_SIZE]
 
         # Get energy prices
         tous = []
@@ -33,7 +34,7 @@ def parse_raw_data(data_path):
             _path_tous = os.path.normpath('{}/scenario_{}/{}/run-.-tag-current_energy_price.csv'
                                          .format(data_path, scenario, seed))
             tous.append(np.loadtxt(_path_tous, skiprows=1, delimiter=','))
-        scenario_reward['tou_prices'] = np.array(tous)
+        scenario_reward['tou_prices'] = np.array(tous) # [:, :DATA_SIZE]
 
         # Get current power
         power = []
@@ -41,7 +42,7 @@ def parse_raw_data(data_path):
             _path_power = os.path.normpath('{}/scenario_{}/{}/run-.-tag-current_system_power.csv'
                                          .format(data_path, scenario, seed))
             power.append(np.loadtxt(_path_power, skiprows=1, delimiter=','))
-        scenario_reward['power'] = np.array(power)
+        scenario_reward['power'] = np.array(power) # [:, :DATA_SIZE]
 
         # Get load profile
         load = []
@@ -49,7 +50,7 @@ def parse_raw_data(data_path):
             _path_load = os.path.normpath('{}/scenario_{}/{}/run-.-tag-max_load_pofile.csv'
                                          .format(data_path, scenario, seed))
             load.append(np.loadtxt(_path_load, skiprows=1, delimiter=','))
-        scenario_reward['load'] = np.array(load)
+        scenario_reward['load'] = np.array(load) # [:, :DATA_SIZE]
 
         # Get production
         load = []
@@ -57,7 +58,7 @@ def parse_raw_data(data_path):
             _path_production = os.path.normpath('{}/scenario_{}/{}/run-.-tag-production.csv'
                                           .format(data_path, scenario, seed))
             load.append(np.loadtxt(_path_production, skiprows=1, delimiter=','))
-        scenario_reward['production'] = np.array(load)
+        scenario_reward['production'] = np.array(load) # [:, :DATA_SIZE]
 
         # Get all agent rewards
         for agent in range(AGENT_COUNT):
@@ -66,7 +67,7 @@ def parse_raw_data(data_path):
                 _path_agent = os.path.normpath('{}/scenario_{}/{}/run-.-tag-cul_reward_agent_{}.csv'
                                                .format(data_path, scenario, seed, agent))
                 agent_reward.append(np.loadtxt(_path_agent, skiprows=1, delimiter=','))
-            scenario_reward['agent_{}'.format(agent)] = np.array(agent_reward)
+            scenario_reward['agent_{}'.format(agent)] = np.array(agent_reward) # [:, :DATA_SIZE]
 
         rslt['scenario_{}'.format(scenario)] = scenario_reward
     return rslt
@@ -145,7 +146,6 @@ def plot_all_learning_curve(subplot, train_sizes, train_scores, title, alpha=0.2
 def plot_agent_learning_curve(subplot, train_sizes, train_scores, title, alpha=0.2):
 
     # These are the colors that will be used in the plot
-    # These are the colors that will be used in the plot
     subplot.set_prop_cycle(color=[
         '#1f77b4', '#ff7f0e', '#2ca02c',
         '#d62728', '#9467bd', '#8c564b',
@@ -203,64 +203,65 @@ def plot_agents_learning_curve(subplot, agent_train_data_sizes, agent_train_data
 
 
 def plot_plant_performance(subplot, production__sizes, production_performance, _power_consumtions, alpha=0.7):
-    # Remove the plot frame lines. They are unnecessary here.
-    subplot.xaxis.set_tick_params(labelsize=8)
-    subplot.yaxis.set_tick_params(labelsize=8)
-
-    ax2 = subplot.twinx()  # instantiate a second axes that shares the same x-axis
-
+    # Prepare the data
     production_performance_mean = np.mean(production_performance, axis=0)
     power_consumptions_mean = np.mean(_power_consumtions, axis=0)
 
-    subplot.plot(production__sizes, production_performance_mean, "--", linewidth=2,
-                 color='tab:green', label="Executed Production Tasks")
-    ax2.plot(production__sizes, power_consumptions_mean, color='tab:blue', label="Current Power")
-    ax2.fill_between(production__sizes, power_consumptions_mean, 0, color='tab:blue', alpha=alpha)
+    ax2 = subplot.twinx()  # instantiate a second axes that shares the same x-axis
 
-    # subplot.set_title("TOU price ($/kWh)", fontsize='9')
-    subplot.set_xlabel('Episodes', fontsize='9')
-    subplot.set_ylabel('Executed Production Tasks', fontsize='9')
-    subplot.grid(ls='--')
-    subplot.legend(loc='best', frameon=True, fontsize=8)
-
-    # ax2.tick_params(axis='y', rotation=0, labelcolor='tab:blue')
-    ax2.tick_params(axis='y', rotation=0)
+    # Remove the plot frame lines. They are unnecessary here.
     ax2.xaxis.set_tick_params(labelsize=8)
     ax2.yaxis.set_tick_params(labelsize=8)
-    ax2.set_ylabel('Power (kWh)', fontsize='9')
-    # ax2.legend(loc='best', frameon=True, fontsize=8)
+    ax2.grid(ls='--')
     ax2.grid(False)
+    ax2.plot(production__sizes, production_performance_mean, "--", linewidth=2,
+                 color='tab:green', label="Executed Production Tasks")
+    ax2.set_xlabel('Episodes', fontsize='9')
+    ax2.set_ylabel('Executed Production Tasks', fontsize='9')
+    ax2.legend(loc='best')
+    ax2.legend(frameon=True, fontsize=8)
+    # ax2.set_title("TOU price ($/kWh)", fontsize='9')
 
-
-def plot_energy_costs(subplot, train_sizes, energy_prices, power_consumptions, alpha=0.7):
-    # Remove the plot frame lines. They are unnecessary here.
+    # ax2.legend(loc='best', frameon=True, fontsize=8)
+    subplot.plot(production__sizes, power_consumptions_mean, color='tab:blue', label="Current Power")
+    subplot.fill_between(production__sizes, power_consumptions_mean, 0, color='tab:blue', alpha=alpha)
+    subplot.set_ylabel('Power (kWh)', fontsize='9')
+    # subplot.tick_params(axis='y', rotation=0, labelcolor='tab:blue')
+    subplot.tick_params(axis='y', rotation=0)
     subplot.xaxis.set_tick_params(labelsize=8)
     subplot.yaxis.set_tick_params(labelsize=8)
 
-    ax2 = subplot.twinx()  # instantiate a second axes that shares the same x-axis
 
-    energy_prices_mean = np.around(np.mean(energy_prices, axis=0), decimals=1)
+def plot_energy_costs(subplot, train_sizes, energy_prices, power_consumptions, alpha=0.7):
+    # Prepare the data
+    energy_prices_mean = np.mean(energy_prices, axis=0)
     power_consumptions_mean = np.mean(power_consumptions, axis=0)
     energy_cost_mean = np.multiply(energy_prices_mean, power_consumptions_mean)
 
-    subplot.plot(train_sizes, energy_prices_mean,  '-.', linewidth=2,
-                 color='tab:brown', label="TOU price ($/kWh)")
-    ax2.plot(train_sizes, energy_cost_mean, color='tab:blue', label="Energy Cost ($/h)")
-    ax2.fill_between(train_sizes, energy_cost_mean,  0, color='tab:blue', alpha=alpha)
+    ax2 = subplot.twinx()  # instantiate a second axes that shares the same x-axis
 
-    # subplot.set_title("TOU price ($/kWh)", fontsize='9')
-    subplot.set_xlabel('Episodes', fontsize='9')
-    subplot.set_ylabel('TOU price ($/kWh)', fontsize='9')
-    subplot.grid(ls='--')
-    subplot.legend(loc='best', frameon=True, fontsize=8)
+    subplot.plot(train_sizes, energy_cost_mean, color='tab:blue', label="Energy Cost ($/h)")
+    subplot.fill_between(train_sizes, energy_cost_mean, 0, color='tab:blue', alpha=alpha)
+    # subplot.tick_params(axis='y', rotation=0, labelcolor='tab:blue')
+    subplot.tick_params(axis='y', rotation=0)
+    subplot.xaxis.set_tick_params(labelsize=8)
+    subplot.yaxis.set_tick_params(labelsize=8)
+    subplot.set_ylabel('Energy Cost ($/h)', fontsize='9')
+    # subplot.legend(loc='best')
+    # subplot.legend(frameon=True, fontsize=8)
 
-    # ax2.tick_params(axis='y', rotation=0, labelcolor='tab:blue')
-    ax2.tick_params(axis='y', rotation=0)
+    # Remove the plot frame lines. They are unnecessary here.
     ax2.xaxis.set_tick_params(labelsize=8)
     ax2.yaxis.set_tick_params(labelsize=8)
-    ax2.set_ylabel('Energy Cost ($/h)', fontsize='9')
-    # ax2.legend(loc='best')
-    # ax2.legend(frameon=True, fontsize=8)
+    ax2.plot(train_sizes, energy_prices_mean,  '-.', linewidth=2,
+                 color='tab:brown', label="TOU price ($/kWh)")
+
+    # ax2.set_title("TOU price ($/kWh)", fontsize='9')
+    ax2.set_xlabel('Episodes', fontsize='9')
+    ax2.set_ylabel('TOU price ($/kWh)', fontsize='9')
+    ax2.grid(ls='--')
+    ax2.legend(loc='best')
+    ax2.legend(frameon=True, fontsize=8)
     ax2.grid(False)
 
 
@@ -268,7 +269,7 @@ if __name__ == '__main__':
     raw_data = parse_raw_data(DATA_ROOT_PATH)
 
     # Configure the Plot
-    plt.style.use('bmh')
+    plt.style.use('ggplot')
 
     # fig, axes = plt.subplots(3, SCENARIO_COUNT, sharex=True, figsize=(20, 9))
     fig, axes = plt.subplots(4, SCENARIO_COUNT, figsize=(20, 9))

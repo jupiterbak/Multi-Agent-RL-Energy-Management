@@ -70,14 +70,18 @@ class TOUGenerator:
 
         self.current_step = self.current_step + 1
         for i, limit in enumerate(self.steps):
-            if self.current_step <= limit:
+            if self.current_step > limit:
                 self.current_tou_value = self.values[i]
+                continue
+            else:
+                break
 
         return self.current_tou_value
 
     def reset(self):
-        self.current_step = 0
-        self.current_tou_value = self.values[0]
+        # self.current_step = 0
+        # self.current_tou_value = self.values[0]
+        pass
 
     def seed(self, seed=None):
         self.np_random, seed = seeding.np_random(seed)
@@ -110,14 +114,18 @@ class LoadProfile:
 
         self.current_step = self.current_step + 1
         for i, limit in enumerate(self.steps):
-            if self.current_step <= limit:
+            if self.current_step > limit:
                 self.current_max_load = self.values[i] * (1 + self.tolerance_factor)
+                continue
+            else:
+                break
 
         return self.current_max_load
 
     def reset(self):
-        self.current_step = 0
-        self.current_max_load = self.values[0] * (1 + self.tolerance_factor)
+        # self.current_step = 0
+        # self.current_max_load = self.values[0] * (1 + self.tolerance_factor)
+        pass
 
     def seed(self, seed=None):
         self.np_random, seed = seeding.np_random(seed)
@@ -151,6 +159,7 @@ class EFlexMultiAgentCooperationClsV3(gym.Env):
 
         # Eflex related variables
         self.max_allowed_power = 0
+        self.energy_cost_budget = 0
         self.current_system_power = 0.0
         self.global_reward = 0.0
         self.current_winner = []
@@ -168,6 +177,7 @@ class EFlexMultiAgentCooperationClsV3(gym.Env):
         # Read the environment configurations
         env_config = self.agent_configs['environement_config']
         self.max_allowed_power = env_config['max_allowed_power']
+        self.energy_cost_budget = env_config['energy_cost_budget']
 
         # Read TOU generator config
         tou_conf = env_config['tou_generartor']
@@ -301,10 +311,12 @@ class EFlexMultiAgentCooperationClsV3(gym.Env):
         # Check if the total energy is smaller than the maximum allowed energy
         self.current_system_power = np.sum(np.array(current_power_n))
         info_n['current_system_power'] = self.current_system_power
-        # if self.current_system_power > self.max_allowed_power:
-        #     # set a maximum negative reward to all agents
-        #     reward_n = [-0.5] * self.n
-        #     done = True
+        info_n['energy_cost_budget'] = self.energy_cost_budget
+        if (self.current_system_power * current_energy_price) > self.energy_cost_budget:
+            # set a maximum negative reward to all agents
+            # reward_n = [-0.5] * self.n
+            reward_n = [(r - 0.5) for r in reward_n]
+            # done = True
 
         info_n['production'] = production
 

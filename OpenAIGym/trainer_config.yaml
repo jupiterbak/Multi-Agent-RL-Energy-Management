@@ -261,7 +261,7 @@ MCD_MAPPO_mult:
     batch_size: 256         # batch size. Normally 4 to 4096
     memory_size: 102400      # allocated memory size
     beta: 5.0e-3
-    loss_clipping: 0.3      # Only implemented clipping for the surrogate loss, paper said it was best. 0.1, 0.2, 0.3
+    loss_clipping: 0.1      # Only implemented clipping for the surrogate loss, paper said it was best. 0.1, 0.2, 0.3
     entropy_loss: 0.005     # Entropy loss. 0 to 0.01
     exploration_noise: 0.2  # Exploration noise. Normally 0.2
     gamma: 0.9             # discount factor. 0.8 to 0.9997
@@ -270,8 +270,8 @@ MCD_MAPPO_mult:
     critic_hidden_units: 512 # number of hidden unit in the critic hidden layer
     use_recurrent: false    # use R-NN
     lambd: 0.95             # GAE smoothing parameter
-    learning_rate: 0.001    # learning rate or learning factor. Normally 0.003 to 5e-6
-    max_steps: 100         # maximum number of state for an episode
+    learning_rate: 0.0001    # learning rate or learning factor. Normally 0.003 to 5e-6
+    max_steps: 3000         # maximum number of state for an episode
     normalize: false        # add normalization layer to the associated NN
     num_epoch: 2            # total number of epochs. 3 to 30
     time_horizon: 1024      # time horizon. Normally 32 to 5000

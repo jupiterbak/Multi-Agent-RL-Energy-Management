@@ -8,3 +8,4 @@ from .EFlexMultiAgentCompetitionV1 import EFlexMultiAgentCompetition
 from .EFlexMultiAgentCompetitionV2 import EFlexMultiAgentCompetitionClsV2
 from .EFlexMultiAgentCooperationV2 import EFlexMultiAgentCooperationClsV2
 from .EFlexMultiAgentCooperationV3 import EFlexMultiAgentCooperationClsV3
+from .EFlexMultiAgentCooperationV4 import EFlexMultiAgentCooperationClsV4
