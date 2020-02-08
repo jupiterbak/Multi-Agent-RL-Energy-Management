@@ -2,27 +2,67 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac5cb565-613a-4825-b8bb-08171f326be0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Visualisation/data/scenario_3/run-.-tag-cul_reward.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/data/scenario_3/run-.-tag-cul_reward_agent_0.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/data/scenario_3/run-.-tag-cul_reward_agent_1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/data/scenario_3/run-.-tag-cul_reward_agent_2.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/data/scenario_3/run-.-tag-cul_reward_agent_3.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/data/scenario_3/run-.-tag-current_energy_price.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/data/scenario_3/run-.-tag-current_system_power.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/data/scenario_3/run-.-tag-energy_cost_budget.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/data/scenario_3/run-.-tag-max_load_pofile.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/data/scenario_3/run-.-tag-production.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OpenAIGym/MARL_config_scenario_1.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OpenAIGym/MARL_config_scenario_2.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_1/scenario_0/998/run-.-tag-cul_reward.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_1/scenario_0/998/run-.-tag-cul_reward_agent_0.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_1/scenario_0/998/run-.-tag-cul_reward_agent_1.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_1/scenario_0/998/run-.-tag-cul_reward_agent_2.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_1/scenario_0/998/run-.-tag-cul_reward_agent_3.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_1/scenario_0/998/run-.-tag-current_energy_price.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_1/scenario_0/998/run-.-tag-current_system_power.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_1/scenario_0/998/run-.-tag-energy_cost_budget.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_1/scenario_0/998/run-.-tag-max_load_pofile.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_1/scenario_0/998/run-.-tag-production.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/2148/run-.-tag-cul_reward.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/2148/run-.-tag-cul_reward_agent_0.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/2148/run-.-tag-cul_reward_agent_1.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/2148/run-.-tag-cul_reward_agent_2.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/2148/run-.-tag-cul_reward_agent_3.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/2148/run-.-tag-current_energy_price.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/2148/run-.-tag-current_system_power.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/2148/run-.-tag-max_load_pofile.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/2148/run-.-tag-production.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/667/run-.-tag-cul_reward.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/667/run-.-tag-cul_reward_agent_0.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/667/run-.-tag-cul_reward_agent_1.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/667/run-.-tag-cul_reward_agent_2.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/667/run-.-tag-cul_reward_agent_3.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/667/run-.-tag-current_energy_price.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/667/run-.-tag-current_system_power.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/667/run-.-tag-max_load_pofile.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/667/run-.-tag-production.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/784/run-.-tag-cul_reward.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/784/run-.-tag-cul_reward_agent_0.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/784/run-.-tag-cul_reward_agent_1.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/784/run-.-tag-cul_reward_agent_2.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/784/run-.-tag-cul_reward_agent_3.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/784/run-.-tag-current_energy_price.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/784/run-.-tag-current_system_power.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/784/run-.-tag-max_load_pofile.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/784/run-.-tag-production.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/79/run-.-tag-cul_reward.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/79/run-.-tag-cul_reward_agent_0.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/79/run-.-tag-cul_reward_agent_1.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/79/run-.-tag-cul_reward_agent_2.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/79/run-.-tag-cul_reward_agent_3.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/79/run-.-tag-current_energy_price.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/79/run-.-tag-current_system_power.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/79/run-.-tag-max_load_pofile.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/79/run-.-tag-production.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/998/run-.-tag-cul_reward.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/998/run-.-tag-cul_reward_agent_0.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/998/run-.-tag-cul_reward_agent_1.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/998/run-.-tag-cul_reward_agent_2.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/998/run-.-tag-cul_reward_agent_3.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/998/run-.-tag-current_energy_price.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/998/run-.-tag-current_system_power.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/998/run-.-tag-max_load_pofile.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/998/run-.-tag-production.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/learning_curve_experiment_1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Visualisation/learning_curve_experiment_2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenAIGym/MARL_config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/MARL_config.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenAIGym/models/MCD_MAPPO_mult/MAPPO_actor_0_model_v2.h5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenAIGym/models/MCD_MAPPO_mult/MAPPO_actor_1_model_v2.h5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenAIGym/models/MCD_MAPPO_mult/MAPPO_actor_2_model_v2.h5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenAIGym/models/MCD_MAPPO_mult/MAPPO_actor_3_model_v2.h5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenAIGym/models/MCD_MAPPO_mult/MAPPO_critic_0_model_v2.h5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenAIGym/models/MCD_MAPPO_mult/MAPPO_critic_1_model_v2.h5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenAIGym/models/MCD_MAPPO_mult/MAPPO_critic_2_model_v2.h5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenAIGym/models/MCD_MAPPO_mult/MAPPO_critic_3_model_v2.h5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenAIGym/summaries/MCD_MAPPO_mult/events.out.tfevents.1578001557.LAPLACE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/trainer_config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/trainer_config.yaml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/" />
     <ignored path="$PROJECT_DIR$/venv/" />
@@ -60,7 +100,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/MAPPOv2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3213">
+            <state relative-caret-position="170">
               <caret line="205" column="60" selection-start-line="205" selection-start-column="56" selection-end-line="205" selection-end-column="60" />
               <folding>
                 <element signature="e#20#34#0" expanded="true" />
@@ -81,17 +121,17 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/OpenAIGym/trainer_config.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="332">
-              <caret line="271" column="9" lean-forward="true" selection-start-line="271" selection-start-column="9" selection-end-line="271" selection-end-column="9" />
+            <state relative-caret-position="123">
+              <caret line="380" column="4" selection-start-line="380" selection-start-column="4" selection-end-line="380" selection-end-column="21" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Visualisation/learning_curve_combined.py">
+        <entry file="file://$PROJECT_DIR$/Visualisation/learning_curve_experiment_1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4845">
-              <caret line="287" column="25" selection-start-line="287" selection-start-column="25" selection-end-line="287" selection-end-column="25" />
+            <state relative-caret-position="297">
+              <caret line="271" column="24" selection-start-line="271" selection-start-column="24" selection-end-line="271" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -153,6 +193,7 @@
       <find>Idle</find>
       <find>lambd</find>
       <find>_get_advantages</find>
+      <find>sequence_length</find>
     </findStrings>
     <replaceStrings>
       <replace>C:\SP347\02_Papers\2019_Multi_Agent_Energy_Management\03_Python_Workspace\OpenAIGym\MARL_config.yaml</replace>
@@ -200,9 +241,12 @@
         <option value="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/__init__.py" />
         <option value="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentCooperationV4.py" />
         <option value="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/MAPPOv2.py" />
-        <option value="$PROJECT_DIR$/OpenAIGym/trainer_config.yaml" />
         <option value="$PROJECT_DIR$/Visualisation/learning_curve_combined.py" />
         <option value="$PROJECT_DIR$/OpenAIGym/MARL_config.yaml" />
+        <option value="$PROJECT_DIR$/OpenAIGym/MARL_config_scenario_1.yaml" />
+        <option value="$PROJECT_DIR$/OpenAIGym/trainer_config.yaml" />
+        <option value="$PROJECT_DIR$/Visualisation/learning_curve_experiment_2.py" />
+        <option value="$PROJECT_DIR$/Visualisation/learning_curve_experiment_1.py" />
       </list>
     </option>
   </component>
@@ -232,31 +276,7 @@
             <path>
               <item name="Multi-Agent-RL-Energy-Management" type="b2602c69:ProjectViewProjectNode" />
               <item name="Multi-Agent-RL-Energy-Management" type="462c0819:PsiDirectoryNode" />
-              <item name="gym_eflex_agent" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Multi-Agent-RL-Energy-Management" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Multi-Agent-RL-Energy-Management" type="462c0819:PsiDirectoryNode" />
-              <item name="gym_eflex_agent" type="462c0819:PsiDirectoryNode" />
-              <item name="gym_eflex_agent" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Multi-Agent-RL-Energy-Management" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Multi-Agent-RL-Energy-Management" type="462c0819:PsiDirectoryNode" />
-              <item name="gym_eflex_agent" type="462c0819:PsiDirectoryNode" />
-              <item name="gym_eflex_agent" type="462c0819:PsiDirectoryNode" />
-              <item name="envs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Multi-Agent-RL-Energy-Management" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Multi-Agent-RL-Energy-Management" type="462c0819:PsiDirectoryNode" />
               <item name="OpenAIGym" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Multi-Agent-RL-Energy-Management" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Multi-Agent-RL-Energy-Management" type="462c0819:PsiDirectoryNode" />
-              <item name="OpenAIGym" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Multi-Agent-RL-Energy-Management" type="b2602c69:ProjectViewProjectNode" />
@@ -274,6 +294,12 @@
               <item name="Multi-Agent-RL-Energy-Management" type="462c0819:PsiDirectoryNode" />
               <item name="Visualisation" type="462c0819:PsiDirectoryNode" />
               <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Multi-Agent-RL-Energy-Management" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Multi-Agent-RL-Energy-Management" type="462c0819:PsiDirectoryNode" />
+              <item name="Visualisation" type="462c0819:PsiDirectoryNode" />
+              <item name="export" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Multi-Agent-RL-Energy-Management" type="b2602c69:ProjectViewProjectNode" />
@@ -304,19 +330,19 @@
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentCooperationV2.py" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\Visualisation\data\scenario_0\2148" />
-      <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\Visualisation\data\scenario_0\998" />
-      <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\Visualisation\data\scenario_0\784" />
-      <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\Visualisation\data\scenario_0\667" />
-      <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\Visualisation\data\scenario_0\79" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\Visualisation\experiment_1\scenario_3\998" />
+      <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\Visualisation" />
       <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\OpenAIGym\summaries\backup_random_3000" />
       <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\OpenAIGym\summaries\backup_run_3000_998" />
       <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\Visualisation\backup" />
-      <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\Visualisation\data\scenario_01\998" />
-      <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\Visualisation\data\scenario_01" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\Visualisation" />
+      <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\Visualisation\experiment_1" />
+      <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\OpenAIGym" />
+      <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\Visualisation\data\scenario_0\2148" />
+      <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\Visualisation\data\scenario_0\998" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -331,7 +357,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.learning_curve_combined">
+  <component name="RunManager" selected="Python.main_MCD_MAPPO_Scenario_1">
     <configuration name="learning_curve" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="03_Pythom_Workspace" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -366,6 +392,48 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Visualisation/learning_curve_combined.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="learning_curve_experiment_1" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="03_Pythom_Workspace" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Visualisation" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Visualisation/learning_curve_experiment_1.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="learning_curve_experiment_2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="03_Pythom_Workspace" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Visualisation" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Visualisation/learning_curve_experiment_2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -668,6 +736,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="main_MCD_MAPPO_Scenario_1" type="PythonConfigurationType" factoryName="Python">
+      <module name="03_Pythom_Workspace" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/OpenAIGym" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/OpenAIGym/main_01.py" />
+      <option name="PARAMETERS" value="--train --use-gpu --environment=eflex-multi-agent-cooperation-v4 --brain_name=MCD_MAPPO_mult_scenario_1 --render --seed=79" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main_MCD_MAPPO_env_v0" type="PythonConfigurationType" factoryName="Python">
       <module name="03_Pythom_Workspace" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -806,6 +895,7 @@
       <item itemvalue="Python.main_MCD_MAPPO_Cooperation" />
       <item itemvalue="Python.main_MCD_MAPPO_CooperationV2" />
       <item itemvalue="Python.main_MCD_MAPPO_CooperationV3" />
+      <item itemvalue="Python.main_MCD_MAPPO_Scenario_1" />
       <item itemvalue="Python.main_MCD_MAPPO_CooperationV4" />
       <item itemvalue="Python.main_MCD_MAPPO_Competition" />
       <item itemvalue="Python.main_MCD_MAPPO_CompetitionV2" />
@@ -817,9 +907,13 @@
       <item itemvalue="Python.main_MCD_DQN" />
       <item itemvalue="Python.learning_curve" />
       <item itemvalue="Python.learning_curve_combined" />
+      <item itemvalue="Python.learning_curve_experiment_1" />
+      <item itemvalue="Python.learning_curve_experiment_2" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.learning_curve_experiment_1" />
+        <item itemvalue="Python.learning_curve_experiment_2" />
         <item itemvalue="Python.learning_curve_combined" />
         <item itemvalue="Python.learning_curve" />
         <item itemvalue="Python.main_MCD_DQN" />
@@ -936,13 +1030,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18598525" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18598525" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.38401777" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32963374" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.58046615" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.45504993" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -1186,15 +1281,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Visualisation/backup/scenario_0/2148/run-.-tag-production.csv" />
-    <entry file="file://$PROJECT_DIR$/Visualisation/backup/scenario_1/11/run-.-tag-production.csv" />
-    <entry file="file://$PROJECT_DIR$/Visualisation/backup/scenario_1/667/run-.-tag-production.csv" />
-    <entry file="file://$PROJECT_DIR$/Visualisation/backup/scenario_1/998/run-.-tag-production.csv" />
-    <entry file="file://$PROJECT_DIR$/Visualisation/backup/scenario_1/2148/run-.-tag-production.csv" />
-    <entry file="file://$PROJECT_DIR$/Visualisation/backup/scenario_2/998/run-.-tag-production.csv" />
-    <entry file="file://$PROJECT_DIR$/Visualisation/backup/scenario_2/2148/run-.-tag-production.csv" />
-    <entry file="file://$PROJECT_DIR$/Visualisation/backup/scenario_2/667/run-.-tag-production.csv" />
-    <entry file="file://$PROJECT_DIR$/Visualisation/backup/scenario_2/11/run-.-tag-production.csv" />
     <entry file="file://$PROJECT_DIR$/Visualisation/backup/scenario_3/11/run-.-tag-production.csv" />
     <entry file="file://$PROJECT_DIR$/Visualisation/backup/scenario_3/667/run-.-tag-production.csv" />
     <entry file="file://$PROJECT_DIR$/Visualisation/backup/scenario_3/998/run-.-tag-production.csv" />
@@ -1290,16 +1376,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/MAPPOv2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3213">
-          <caret line="205" column="60" selection-start-line="205" selection-start-column="56" selection-end-line="205" selection-end-column="60" />
-          <folding>
-            <element signature="e#20#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/MAPPOv3.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6392">
@@ -1322,13 +1398,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/MARL_config.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="33" column="14" selection-start-line="33" selection-start-column="14" selection-end-line="33" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Visualisation/learning_curve_combined.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4845">
@@ -1336,10 +1405,66 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/OpenAIGym/MARL_config_scenario_2.yaml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Visualisation/experiment_1/scenario_0/998/run-.-tag-cul_reward.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Visualisation/export/scenario_1_result.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Visualisation/export/scenario_1_result.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/79/run-.-tag-cul_reward.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OpenAIGym/MARL_config_scenario_1.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="30" column="15" selection-start-line="30" selection-start-column="15" selection-end-line="30" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Visualisation/export/scenario_2_result.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OpenAIGym/MARL_config.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="33" column="14" selection-start-line="33" selection-start-column="14" selection-end-line="33" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/MAPPOv2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="205" column="60" selection-start-line="205" selection-start-column="56" selection-end-line="205" selection-end-column="60" />
+          <folding>
+            <element signature="e#20#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Visualisation/learning_curve_experiment_2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-672">
+          <caret line="228" column="48" selection-start-line="228" selection-start-column="48" selection-end-line="228" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Visualisation/learning_curve_experiment_1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="271" column="24" selection-start-line="271" selection-start-column="24" selection-end-line="271" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/OpenAIGym/trainer_config.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="271" column="9" lean-forward="true" selection-start-line="271" selection-start-column="9" selection-end-line="271" selection-end-column="9" />
+        <state relative-caret-position="123">
+          <caret line="380" column="4" selection-start-line="380" selection-start-column="4" selection-end-line="380" selection-end-column="21" />
         </state>
       </provider>
     </entry>
