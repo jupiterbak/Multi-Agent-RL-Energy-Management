@@ -16,7 +16,7 @@ agents:
     utility1:
         type: EFlexAgentPConstant       # trainer type
         p_min: 0.0
-        p_max: 50.0
+        p_max: 20.0
         p_slope: 1.0
 
     utility2:
@@ -55,14 +55,14 @@ agents:
 #        p_max: 5.0
 #        p_slope: 1.0
 #
-#    storage:
-#        type: EFlexEnergyStorageAgent       # trainer type
-#        p_min: 0.0
-#        p_max: 20.0
-#        p_slope: 1.0
-#
-#    generator:
-#        type: EFLEXEnergyGeneratorAgent       # trainer type
-#        p_min: 0.0
-#        p_max: 20.0
-#        p_slope: 1.0
+    storage:
+        type: EFlexEnergyStorageAgent       # trainer type
+        p_min: 0.0
+        p_max: 20.0
+        p_slope: 1.0
+
+    generator:
+        type: EFLEXEnergyGeneratorAgent       # trainer type
+        p_min: 0.0
+        p_max: 20.0
+        p_slope: 1.0

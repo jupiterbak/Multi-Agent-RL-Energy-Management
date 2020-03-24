@@ -156,10 +156,13 @@ class MAPPOv2(object):
             prob = y_true * y_pred
             old_prob = y_true * old_prediction
             r = prob / (old_prob + 1e-10)
-            return -k.mean(k.minimum(r * advantage, k.clip(r, min_value=1 - self.loss_clipping,
-                                                           max_value=1 + self.loss_clipping) * advantage)
-                           + self.entropy_loss * -(prob * k.log(prob + 1e-10)))
-
+            return -k.mean(
+                k.minimum(
+                    r * advantage,
+                    k.clip(r, min_value=1 - self.loss_clipping, max_value=1 + self.loss_clipping) * advantage
+                )
+                + self.entropy_loss * -(prob * k.log(prob + 1e-10))
+            )
         return loss
 
     def proximal_policy_optimization_loss_continuous(self, advantage, old_prediction):

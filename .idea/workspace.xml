@@ -3,11 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="ac5cb565-613a-4825-b8bb-08171f326be0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/MAPPOLSTMv2.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/MAPPOLSTMv2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Visualisation/export/scenario_1_result.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Visualisation/export/scenario_1_result.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Visualisation/export/scenario_2_result.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Visualisation/export/scenario_2_result.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/litterature/1-s2.0-S2405896317317238-main.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/litterature/energies-11-02010.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/MAPPOv2.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/MAPPOv2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/MARL_config_scenario_2.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/MARL_config_scenario_2.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/summaries/MCD_MAPPO_mult_scenario_1/events.out.tfevents.1578448837.LAPLACE" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,11 +46,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\OpenAIGym\summaries" />
+      <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\OpenAIGym\models" />
       <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\Visualisation" />
       <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\Visualisation\experiment_1" />
       <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\OpenAIGym" />
-      <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\Visualisation\data\scenario_0\2148" />
-      <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\Visualisation\data\scenario_0\998" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\Visualisation\experiment_1\scenario_3\998" />
@@ -62,7 +60,7 @@
       <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\Visualisation\backup" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.learning_curve_experiment_1">
+  <component name="RunManager" selected="Python.learning_curve_combined">
     <configuration name="learning_curve" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="03_Pythom_Workspace" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -617,10 +615,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.learning_curve_combined" />
         <item itemvalue="Python.learning_curve_experiment_1" />
         <item itemvalue="Python.learning_curve_grid" />
         <item itemvalue="Python.learning_curve" />
-        <item itemvalue="Python.learning_curve_combined" />
         <item itemvalue="Python.learning_curve_experiment_2" />
       </list>
     </recent_temporary>
@@ -801,26 +799,26 @@
     </state>
     <state x="739" y="327" key="FileChooserDialogImpl/-1920.0.1920.1040/0.0.1920.1160@0.0.1920.1160" timestamp="1576680934890" />
     <state x="739" y="293" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1585042480408" />
-    <state width="1898" height="298" key="GridCell.Tab.0.bottom" timestamp="1585043267388">
+    <state width="1898" height="203" key="GridCell.Tab.0.bottom" timestamp="1585079576171">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1315" height="455" key="GridCell.Tab.0.bottom/-1920.0.1920.1040/0.0.1920.1160@0.0.1920.1160" timestamp="1576683562089" />
-    <state width="1898" height="298" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1585043267388" />
-    <state width="1898" height="298" key="GridCell.Tab.0.center" timestamp="1585043267388">
+    <state width="1898" height="203" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1585079576171" />
+    <state width="1898" height="203" key="GridCell.Tab.0.center" timestamp="1585079576171">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1315" height="455" key="GridCell.Tab.0.center/-1920.0.1920.1040/0.0.1920.1160@0.0.1920.1160" timestamp="1576683562089" />
-    <state width="1898" height="298" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1585043267388" />
-    <state width="1898" height="298" key="GridCell.Tab.0.left" timestamp="1585043267388">
+    <state width="1898" height="203" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1585079576171" />
+    <state width="1898" height="203" key="GridCell.Tab.0.left" timestamp="1585079576171">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1315" height="455" key="GridCell.Tab.0.left/-1920.0.1920.1040/0.0.1920.1160@0.0.1920.1160" timestamp="1576683562089" />
-    <state width="1898" height="298" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1585043267388" />
-    <state width="1898" height="298" key="GridCell.Tab.0.right" timestamp="1585043267388">
+    <state width="1898" height="203" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1585079576171" />
+    <state width="1898" height="203" key="GridCell.Tab.0.right" timestamp="1585079576171">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1315" height="455" key="GridCell.Tab.0.right/-1920.0.1920.1040/0.0.1920.1160@0.0.1920.1160" timestamp="1576683562089" />
-    <state width="1898" height="298" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1585043267388" />
+    <state width="1898" height="203" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1585079576171" />
     <state width="1320" height="433" key="GridCell.Tab.1.bottom" timestamp="1576682886061">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
@@ -926,7 +924,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/MAPPOv2.py</url>
-          <line>467</line>
+          <line>470</line>
           <option name="timeStamp" value="160" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
