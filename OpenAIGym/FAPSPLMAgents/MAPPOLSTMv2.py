@@ -68,8 +68,16 @@ class MAPPOLSTMv2(object):
         self.state_size = [None] * self.agent_count
         for env_name, env in self.env_brains.items():
             for i in range(self.agent_count):
-                self.action_size[i] = env.action_space[i].n
-                self.state_size[i] = env.observation_space[i].n
+                a_space = env.action_space[i]
+                o_space = env.observation_space[i]
+                if isinstance(a_space, spaces.Discrete):
+                    self.action_size[i] = a_space.n
+                else:
+                    self.action_space[i] = a_space.shape[0]
+                if isinstance(o_space, spaces.Discrete):
+                    self.state_size[i] = o_space.n
+                else:
+                    self.state_size[i] = o_space.shape[0]
 
         self.all_state_size = 0
         for i in range(self.agent_count):
@@ -489,6 +497,20 @@ class MAPPOLSTMv2(object):
         summary_value.simple_value = value
         summary_value.tag = key
         self.tensorBoard.writer.add_summary(summary, int(self.steps / self.time_horizon))
+        self.tensorBoard.writer.flush()
+
+    def write_tensorboard_value_by_step(self, key, value):
+        """
+        Saves text to Tensorboard.
+        Note: Only works on tensorflow r1.2 or above.
+        :param key: The name of the text.
+        :param value: A value that will bw displayed on Tensorboard.
+        """
+        summary = tf.Summary()
+        summary_value = summary.value.add()
+        summary_value.simple_value = value
+        summary_value.tag = key
+        self.tensorBoard.writer.add_summary(summary, int(self.steps))
         self.tensorBoard.writer.flush()
 
     @staticmethod

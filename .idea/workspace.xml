@@ -2,71 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac5cb565-613a-4825-b8bb-08171f326be0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/OpenAIGym/MARL_config_scenario_1.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OpenAIGym/MARL_config_scenario_2.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_1/scenario_0/998/run-.-tag-cul_reward.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_1/scenario_0/998/run-.-tag-cul_reward_agent_0.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_1/scenario_0/998/run-.-tag-cul_reward_agent_1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_1/scenario_0/998/run-.-tag-cul_reward_agent_2.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_1/scenario_0/998/run-.-tag-cul_reward_agent_3.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_1/scenario_0/998/run-.-tag-current_energy_price.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_1/scenario_0/998/run-.-tag-current_system_power.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_1/scenario_0/998/run-.-tag-energy_cost_budget.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_1/scenario_0/998/run-.-tag-max_load_pofile.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_1/scenario_0/998/run-.-tag-production.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/2148/run-.-tag-cul_reward.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/2148/run-.-tag-cul_reward_agent_0.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/2148/run-.-tag-cul_reward_agent_1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/2148/run-.-tag-cul_reward_agent_2.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/2148/run-.-tag-cul_reward_agent_3.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/2148/run-.-tag-current_energy_price.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/2148/run-.-tag-current_system_power.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/2148/run-.-tag-max_load_pofile.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/2148/run-.-tag-production.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/667/run-.-tag-cul_reward.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/667/run-.-tag-cul_reward_agent_0.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/667/run-.-tag-cul_reward_agent_1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/667/run-.-tag-cul_reward_agent_2.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/667/run-.-tag-cul_reward_agent_3.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/667/run-.-tag-current_energy_price.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/667/run-.-tag-current_system_power.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/667/run-.-tag-max_load_pofile.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/667/run-.-tag-production.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/784/run-.-tag-cul_reward.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/784/run-.-tag-cul_reward_agent_0.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/784/run-.-tag-cul_reward_agent_1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/784/run-.-tag-cul_reward_agent_2.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/784/run-.-tag-cul_reward_agent_3.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/784/run-.-tag-current_energy_price.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/784/run-.-tag-current_system_power.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/784/run-.-tag-max_load_pofile.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/784/run-.-tag-production.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/79/run-.-tag-cul_reward.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/79/run-.-tag-cul_reward_agent_0.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/79/run-.-tag-cul_reward_agent_1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/79/run-.-tag-cul_reward_agent_2.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/79/run-.-tag-cul_reward_agent_3.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/79/run-.-tag-current_energy_price.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/79/run-.-tag-current_system_power.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/79/run-.-tag-max_load_pofile.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/79/run-.-tag-production.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/998/run-.-tag-cul_reward.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/998/run-.-tag-cul_reward_agent_0.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/998/run-.-tag-cul_reward_agent_1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/998/run-.-tag-cul_reward_agent_2.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/998/run-.-tag-cul_reward_agent_3.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/998/run-.-tag-current_energy_price.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/998/run-.-tag-current_system_power.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/998/run-.-tag-max_load_pofile.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/998/run-.-tag-production.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/learning_curve_experiment_1.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualisation/learning_curve_experiment_2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenAIGym/trainer_config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/trainer_config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/MAPPOLSTMv2.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/MAPPOLSTMv2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Visualisation/export/scenario_1_result.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Visualisation/export/scenario_1_result.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Visualisation/export/scenario_2_result.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Visualisation/export/scenario_2_result.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/litterature/1-s2.0-S2405896317317238-main.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/litterature/energies-11-02010.pdf" beforeDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/.idea/" />
-    <ignored path="$PROJECT_DIR$/venv/" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -77,84 +19,6 @@
       <favorite_root url="file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentV1.py" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
     </favorites_list>
   </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentCooperationV3.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5338">
-              <caret line="321" selection-start-line="321" selection-end-line="321" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/OpenAIGym/MARL_config.yaml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="151">
-              <caret line="33" column="14" selection-start-line="33" selection-start-column="14" selection-end-line="33" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/MAPPOv2.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="205" column="60" selection-start-line="205" selection-start-column="56" selection-end-line="205" selection-end-column="60" />
-              <folding>
-                <element signature="e#20#34#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/MAPPOv3.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6392">
-              <caret line="391" column="23" selection-start-line="391" selection-start-column="8" selection-end-line="391" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/OpenAIGym/trainer_config.yaml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="123">
-              <caret line="380" column="4" selection-start-line="380" selection-start-column="4" selection-end-line="380" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Visualisation/learning_curve_experiment_1.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="271" column="24" selection-start-line="271" selection-start-column="24" selection-end-line="271" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentCooperationV4.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8330">
-              <caret line="600" column="57" selection-start-line="600" selection-start-column="53" selection-end-line="600" selection-end-column="57" />
-              <folding>
-                <element signature="e#0#21#0" expanded="true" />
-                <element signature="e#191#367#0" />
-                <element signature="e#408#617#0" />
-                <element signature="e#673#737#0" />
-                <element signature="e#765#1773#0" />
-                <element signature="e#1800#2960#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -162,159 +26,12 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>C:\JBK_WORKSPACE\GitHub\Multi-Agent-RL-Energy-Management\OpenAIGym\MARL_config.yaml</find>
-      <find>update_last_reward</find>
-      <find>last_reward</find>
-      <find>max</find>
-      <find>C:\GitHub\Multi-Agent-RL-Energy-Management\OpenAIGym\MARL_config.yaml</find>
-      <find>SPACE_TYPE</find>
-      <find>discrete</find>
-      <find>proximal_policy_optimization_loss</find>
-      <find>disc</find>
-      <find>exploration_noise</find>
-      <find>C:\SP347\02_Papers\2019_Multi_Agent_Energy_Management\03_Python_Workspace\OpenAIGym\MARL_config.yaml</find>
-      <find>learning_rate</find>
-      <find>incre</find>
-      <find>EFlexMultiAgentCompetition</find>
-      <find>EFlexMultiAgentCompetitionV2</find>
-      <find>Completed</find>
-      <find>seed</find>
-      <find>MAPPOv2</find>
-      <find>p_slope: 1</find>
-      <find>EFlexMultiAgentCompetitionClsV2</find>
-      <find>EFlexMultiAgentCooperationClsV2</find>
-      <find>configure</find>
-      <find>Epochs</find>
-      <find>EFlexMultiAgentCooperationClsV3</find>
-      <find>_get_obs</find>
-      <find>==</find>
-      <find>Idle</find>
-      <find>lambd</find>
-      <find>_get_advantages</find>
-      <find>sequence_length</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>C:\SP347\02_Papers\2019_Multi_Agent_Energy_Management\03_Python_Workspace\OpenAIGym\MARL_config.yaml</replace>
-      <replace>EFlexMultiAgentCompetitionV2</replace>
-      <replace>EFlexMultiAgentCompetitionClsV2</replace>
-      <replace>MAPPOLSTMv2</replace>
-      <replace>C:\GitHub\Multi-Agent-RL-Energy-Management\OpenAIGym\MARL_config.yaml</replace>
-      <replace>p_slope: 1.0</replace>
-      <replace>EFlexMultiAgentCooperationClsV2</replace>
-      <replace>EFlexMultiAgentCooperationClsV3</replace>
-      <replace>Episodes</replace>
-      <replace>EFlexMultiAgentCooperationClsV4</replace>
-      <replace>is</replace>
-    </replaceStrings>
-    <dirStrings>
-      <dir>C:\GitHub\Multi-Agent-RL-Energy-Management\gym_eflex_agent</dir>
-    </dirStrings>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/MAPPO.py" />
-        <option value="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/MAPPOv3.py" />
-        <option value="$PROJECT_DIR$/OpenAIGym/trainer_controller.py" />
-        <option value="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentCompetitionV1.py" />
-        <option value="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/MAPPOLSTMv2.py" />
-        <option value="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentCompetitionV2.py" />
-        <option value="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentCooperationV1.py" />
-        <option value="$PROJECT_DIR$/Visualisation/data/run-.-tag-cul_reward_seed_998.csv" />
-        <option value="$PROJECT_DIR$/Visualisation/data/run-.-tag-cul_reward_agent_2_seed_998.csv" />
-        <option value="$PROJECT_DIR$/Visualisation/data/run-.-tag-cul_reward_agent_1_seed_998.csv" />
-        <option value="$PROJECT_DIR$/Visualisation/data/run-.-tag-cul_reward_agent_0_seed_998.csv" />
-        <option value="$PROJECT_DIR$/Visualisation/learning_curve.py" />
-        <option value="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentCooperationV2.py" />
-        <option value="$PROJECT_DIR$/gym_eflex_agent/setup.py" />
-        <option value="$PROJECT_DIR$/scripts/run_5_times_no_seed.bat" />
-        <option value="$PROJECT_DIR$/__init__.py" />
-        <option value="$PROJECT_DIR$/OpenAIGym/__init__.py" />
-        <option value="$PROJECT_DIR$/OpenAIGym/main_01.py" />
-        <option value="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentCooperationV3.py" />
-        <option value="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/__init__.py" />
-        <option value="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/__init__.py" />
-        <option value="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentCooperationV4.py" />
-        <option value="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/MAPPOv2.py" />
-        <option value="$PROJECT_DIR$/Visualisation/learning_curve_combined.py" />
-        <option value="$PROJECT_DIR$/OpenAIGym/MARL_config.yaml" />
-        <option value="$PROJECT_DIR$/OpenAIGym/MARL_config_scenario_1.yaml" />
-        <option value="$PROJECT_DIR$/OpenAIGym/trainer_config.yaml" />
-        <option value="$PROJECT_DIR$/Visualisation/learning_curve_experiment_2.py" />
-        <option value="$PROJECT_DIR$/Visualisation/learning_curve_experiment_1.py" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="240" />
-    <option name="y" value="145" />
-    <option name="width" value="1440" />
-    <option name="height" value="870" />
   </component>
   <component name="ProjectId" id="1TbmCECVorFGU3wqUFAG78Jyeoy" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
-  </component>
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="Multi-Agent-RL-Energy-Management" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Multi-Agent-RL-Energy-Management" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Multi-Agent-RL-Energy-Management" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Multi-Agent-RL-Energy-Management" type="462c0819:PsiDirectoryNode" />
-              <item name="OpenAIGym" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Multi-Agent-RL-Energy-Management" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Multi-Agent-RL-Energy-Management" type="462c0819:PsiDirectoryNode" />
-              <item name="OpenAIGym" type="462c0819:PsiDirectoryNode" />
-              <item name="summaries" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Multi-Agent-RL-Energy-Management" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Multi-Agent-RL-Energy-Management" type="462c0819:PsiDirectoryNode" />
-              <item name="Visualisation" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Multi-Agent-RL-Energy-Management" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Multi-Agent-RL-Energy-Management" type="462c0819:PsiDirectoryNode" />
-              <item name="Visualisation" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Multi-Agent-RL-Energy-Management" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Multi-Agent-RL-Energy-Management" type="462c0819:PsiDirectoryNode" />
-              <item name="Visualisation" type="462c0819:PsiDirectoryNode" />
-              <item name="export" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Multi-Agent-RL-Energy-Management" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-            </path>
-            <path>
-              <item name="Multi-Agent-RL-Energy-Management" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.6 (Multi-Agent-RL-Energy-Management) &gt;" type="70bed36:NamedLibraryElementNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-    </panes>
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -325,18 +42,11 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentCooperationV2.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/OpenAIGym/summaries" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
-    <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentCooperationV2.py" />
+    <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentCooperationV4.py" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\Visualisation\experiment_1\scenario_3\998" />
-      <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\Visualisation" />
-      <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\OpenAIGym\summaries\backup_random_3000" />
-      <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\OpenAIGym\summaries\backup_run_3000_998" />
-      <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\Visualisation\backup" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\Visualisation" />
       <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\Visualisation\experiment_1" />
@@ -344,20 +54,15 @@
       <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\Visualisation\data\scenario_0\2148" />
       <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\Visualisation\data\scenario_0\998" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\Visualisation\experiment_1\scenario_3\998" />
+      <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\Visualisation" />
+      <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\OpenAIGym\summaries\backup_random_3000" />
+      <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\OpenAIGym\summaries\backup_run_3000_998" />
+      <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\Visualisation\backup" />
+    </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager" selected="Python.main_MCD_MAPPO_Scenario_1">
+  <component name="RunManager" selected="Python.learning_curve_experiment_1">
     <configuration name="learning_curve" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="03_Pythom_Workspace" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -442,6 +147,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="learning_curve_grid" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="03_Pythom_Workspace" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Visualisation" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Visualisation/learning_curve_grid.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main_MCD_A2C" type="PythonConfigurationType" factoryName="Python">
       <module name="03_Pythom_Workspace" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -498,27 +224,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/OpenAIGym/main_01.py" />
       <option name="PARAMETERS" value="--train --use-gpu --environment=eflex-agent-v0 --brain_name=MCD_DDPGCat --render --seed=11" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="main_MCD_DQN" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="03_Pythom_Workspace" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/OpenAIGym" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/OpenAIGym/main_01.py" />
-      <option name="PARAMETERS" value="--train --use-gpu --environment=eflex-agent-v0 --brain_name=MCD_DQN --render --seed=11" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -904,19 +609,19 @@
       <item itemvalue="Python.main_MCD_MAPPOv2" />
       <item itemvalue="Python.main_MCD_SARSA" />
       <item itemvalue="Python.main_MCD_PPO" />
-      <item itemvalue="Python.main_MCD_DQN" />
       <item itemvalue="Python.learning_curve" />
       <item itemvalue="Python.learning_curve_combined" />
       <item itemvalue="Python.learning_curve_experiment_1" />
       <item itemvalue="Python.learning_curve_experiment_2" />
+      <item itemvalue="Python.learning_curve_grid" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.learning_curve_experiment_1" />
-        <item itemvalue="Python.learning_curve_experiment_2" />
-        <item itemvalue="Python.learning_curve_combined" />
+        <item itemvalue="Python.learning_curve_grid" />
         <item itemvalue="Python.learning_curve" />
-        <item itemvalue="Python.main_MCD_DQN" />
+        <item itemvalue="Python.learning_curve_combined" />
+        <item itemvalue="Python.learning_curve_experiment_2" />
       </list>
     </recent_temporary>
   </component>
@@ -1028,32 +733,6 @@
       <is-autoscroll-to-source value="true" />
     </todo-panel>
   </component>
-  <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
-    <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18598525" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.38401777" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.58046615" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.45504993" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32852387" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.32917467" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32852387" />
-      <window_info anchor="bottom" id="Python Console" order="11" weight="0.32963374" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="R Graphics" order="3" />
-      <window_info anchor="right" id="R Packages" order="4" />
-    </layout>
-  </component>
   <component name="Vcs.Log.History.Properties">
     <option name="COLUMN_ORDER">
       <list>
@@ -1070,12 +749,6 @@
         <entry key="MAIN">
           <value>
             <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
               <option name="COLUMN_ORDER" />
             </State>
           </value>
@@ -1109,78 +782,69 @@
     <option name="LAST_COMMIT_MESSAGE" value="Optimized environement" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="414" y="194" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1576679420650">
-      <screen x="0" y="0" width="1920" height="1160" />
+    <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585043130096">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="414" y="194" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1920.0.1920.1040/0.0.1920.1160@0.0.1920.1160" timestamp="1576679420650" />
-    <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1576264695626" />
+    <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585043130096" />
     <state x="640" y="307" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1576678273135">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
     <state x="640" y="307" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/-1920.0.1920.1040/0.0.1920.1160@0.0.1920.1160" timestamp="1576678273135" />
-    <state width="722" height="466" key="DebuggerActiveHint" timestamp="1576256075175">
+    <state x="92" y="82" width="1736" height="876" maximized="true" key="DiffContextDialog" timestamp="1585042988014">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="722" height="466" key="DebuggerActiveHint/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1576256075175" />
-    <state x="92" y="92" width="1736" height="976" key="DiffContextDialog" timestamp="1576681153058">
-      <screen x="0" y="0" width="1920" height="1160" />
-    </state>
     <state x="92" y="92" width="1736" height="976" key="DiffContextDialog/-1920.0.1920.1040/0.0.1920.1160@0.0.1920.1160" timestamp="1576681153058" />
-    <state x="739" y="327" key="FileChooserDialogImpl" timestamp="1576680934890">
-      <screen x="0" y="0" width="1920" height="1160" />
+    <state x="92" y="82" width="1736" height="876" maximized="true" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585042988014" />
+    <state x="739" y="293" key="FileChooserDialogImpl" timestamp="1585042480408">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="739" y="327" key="FileChooserDialogImpl/-1920.0.1920.1040/0.0.1920.1160@0.0.1920.1160" timestamp="1576680934890" />
-    <state x="739" y="293" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1576233049882" />
-    <state width="1315" height="455" key="GridCell.Tab.0.bottom" timestamp="1576683562089">
-      <screen x="0" y="0" width="1920" height="1160" />
+    <state x="739" y="293" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1585042480408" />
+    <state width="1898" height="298" key="GridCell.Tab.0.bottom" timestamp="1585043267388">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1315" height="455" key="GridCell.Tab.0.bottom/-1920.0.1920.1040/0.0.1920.1160@0.0.1920.1160" timestamp="1576683562089" />
-    <state width="1877" height="313" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1576264725419" />
-    <state width="1315" height="455" key="GridCell.Tab.0.center" timestamp="1576683562089">
-      <screen x="0" y="0" width="1920" height="1160" />
+    <state width="1898" height="298" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1585043267388" />
+    <state width="1898" height="298" key="GridCell.Tab.0.center" timestamp="1585043267388">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1315" height="455" key="GridCell.Tab.0.center/-1920.0.1920.1040/0.0.1920.1160@0.0.1920.1160" timestamp="1576683562089" />
-    <state width="1877" height="313" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1576264725418" />
-    <state width="1315" height="455" key="GridCell.Tab.0.left" timestamp="1576683562089">
-      <screen x="0" y="0" width="1920" height="1160" />
+    <state width="1898" height="298" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1585043267388" />
+    <state width="1898" height="298" key="GridCell.Tab.0.left" timestamp="1585043267388">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1315" height="455" key="GridCell.Tab.0.left/-1920.0.1920.1040/0.0.1920.1160@0.0.1920.1160" timestamp="1576683562089" />
-    <state width="1877" height="313" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1576264725418" />
-    <state width="1315" height="455" key="GridCell.Tab.0.right" timestamp="1576683562089">
-      <screen x="0" y="0" width="1920" height="1160" />
+    <state width="1898" height="298" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1585043267388" />
+    <state width="1898" height="298" key="GridCell.Tab.0.right" timestamp="1585043267388">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1315" height="455" key="GridCell.Tab.0.right/-1920.0.1920.1040/0.0.1920.1160@0.0.1920.1160" timestamp="1576683562089" />
-    <state width="1877" height="313" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1576264725419" />
+    <state width="1898" height="298" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1585043267388" />
     <state width="1320" height="433" key="GridCell.Tab.1.bottom" timestamp="1576682886061">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
     <state width="1320" height="433" key="GridCell.Tab.1.bottom/-1920.0.1920.1040/0.0.1920.1160@0.0.1920.1160" timestamp="1576682886061" />
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1576259506247" />
     <state width="1320" height="433" key="GridCell.Tab.1.center" timestamp="1576682886061">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
     <state width="1320" height="433" key="GridCell.Tab.1.center/-1920.0.1920.1040/0.0.1920.1160@0.0.1920.1160" timestamp="1576682886061" />
-    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1576259506247" />
     <state width="1320" height="433" key="GridCell.Tab.1.left" timestamp="1576682886060">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
     <state width="1320" height="433" key="GridCell.Tab.1.left/-1920.0.1920.1040/0.0.1920.1160@0.0.1920.1160" timestamp="1576682886060" />
-    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1576259506247" />
     <state width="1320" height="433" key="GridCell.Tab.1.right" timestamp="1576682886061">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
     <state width="1320" height="433" key="GridCell.Tab.1.right/-1920.0.1920.1040/0.0.1920.1160@0.0.1920.1160" timestamp="1576682886061" />
-    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1576259506247" />
     <state x="461" y="180" key="SettingsEditor" timestamp="1576678148711">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
     <state x="461" y="180" key="SettingsEditor/-1920.0.1920.1040/0.0.1920.1160@0.0.1920.1160" timestamp="1576678148711" />
-    <state x="461" y="161" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1576233989054" />
     <state x="661" y="381" key="com.intellij.ide.util.TipDialog" timestamp="1576678311616">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
     <state x="661" y="381" key="com.intellij.ide.util.TipDialog/-1920.0.1920.1040/0.0.1920.1160@0.0.1920.1160" timestamp="1576678311616" />
-    <state x="661" y="342" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1576230760981" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1279,195 +943,6 @@
         </breakpoint>
       </default-breakpoints>
     </breakpoint-manager>
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Visualisation/backup/scenario_3/11/run-.-tag-production.csv" />
-    <entry file="file://$PROJECT_DIR$/Visualisation/backup/scenario_3/667/run-.-tag-production.csv" />
-    <entry file="file://$PROJECT_DIR$/Visualisation/backup/scenario_3/998/run-.-tag-production.csv" />
-    <entry file="file://$PROJECT_DIR$/Visualisation/backup/scenario_3/2148/run-.-tag-production.csv" />
-    <entry file="file://$PROJECT_DIR$/Visualisation/backup/scenario_0/79/run-.-tag-cul_reward.csv" />
-    <entry file="file://$PROJECT_DIR$/Visualisation/backup/scenario_1/79/run-.-tag-cul_reward.csv" />
-    <entry file="file://$PROJECT_DIR$/Visualisation/backup/scenario_2/79/run-.-tag-cul_reward.csv" />
-    <entry file="file://$PROJECT_DIR$/Visualisation/backup/scenario_3/79/run-.-tag-production.csv" />
-    <entry file="file://$PROJECT_DIR$/Visualisation/backup/scenario_2/79/run-.-tag-production.csv" />
-    <entry file="file://$PROJECT_DIR$/Visualisation/backup/scenario_1/79/run-.-tag-production.csv" />
-    <entry file="file://$PROJECT_DIR$/Visualisation/backup/scenario_0/79/run-.-tag-production.csv" />
-    <entry file="file://$PROJECT_DIR$/Visualisation/backup/scenario_0/11/run-.-tag-cul_reward.csv" />
-    <entry file="file://$PROJECT_DIR$/Visualisation/backup/scenario_1/11/run-.-tag-cul_reward.csv" />
-    <entry file="file://$PROJECT_DIR$/Visualisation/backup/scenario_3/11/run-.-tag-cul_reward.csv" />
-    <entry file="file://$PROJECT_DIR$/Visualisation/backup/scenario_2/11/run-.-tag-cul_reward.csv" />
-    <entry file="file://$PROJECT_DIR$/Visualisation/data/scenario_0/11/run-.-tag-cul_reward.csv" />
-    <entry file="file://$PROJECT_DIR$/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/utils/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/scripts/run_5_times_no_seed.bat">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="69" selection-start-line="7" selection-start-column="69" selection-end-line="7" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Visualisation/data/scenario_0/998/run-.-tag-production.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Visualisation/data/scenario_1/998/run-.-tag-cul_reward.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Visualisation/data/scenario_0/667/run-.-tag-cul_reward_agent_1.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Visualisation/data/scenario_1/667/run-.-tag-cul_reward_agent_1.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="73" selection-start-line="10" selection-start-column="73" selection-end-line="10" selection-end-column="73" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="546">
-          <caret line="44" column="69" selection-start-line="44" selection-start-column="69" selection-end-line="44" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/trainer_controller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="135" selection-start-line="135" selection-end-line="135" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/main_01.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Visualisation/data/scenario_1/79/run-.-tag-cul_reward.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Visualisation/data/scenario_0/79/run-.-tag-cul_reward.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Visualisation/data/scenario_0/667/run-.-tag-cul_reward.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Visualisation/data/scenario_0/784/run-.-tag-cul_reward.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Visualisation/data/scenario_0/998/run-.-tag-cul_reward.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Visualisation/data/scenario_0/2148/run-.-tag-cul_reward.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentCooperationV3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5338">
-          <caret line="321" selection-start-line="321" selection-end-line="321" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/MAPPOv3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6392">
-          <caret line="391" column="23" selection-start-line="391" selection-start-column="8" selection-end-line="391" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentCooperationV4.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8330">
-          <caret line="600" column="57" selection-start-line="600" selection-start-column="53" selection-end-line="600" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-            <element signature="e#191#367#0" />
-            <element signature="e#408#617#0" />
-            <element signature="e#673#737#0" />
-            <element signature="e#765#1773#0" />
-            <element signature="e#1800#2960#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Visualisation/learning_curve_combined.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4845">
-          <caret line="287" column="25" selection-start-line="287" selection-start-column="25" selection-end-line="287" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/MARL_config_scenario_2.yaml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Visualisation/experiment_1/scenario_0/998/run-.-tag-cul_reward.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Visualisation/export/scenario_1_result.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Visualisation/export/scenario_1_result.svg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Visualisation/experiment_2/scenario_0/79/run-.-tag-cul_reward.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/MARL_config_scenario_1.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" column="15" selection-start-line="30" selection-start-column="15" selection-end-line="30" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Visualisation/export/scenario_2_result.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/MARL_config.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="33" column="14" selection-start-line="33" selection-start-column="14" selection-end-line="33" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/MAPPOv2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="205" column="60" selection-start-line="205" selection-start-column="56" selection-end-line="205" selection-end-column="60" />
-          <folding>
-            <element signature="e#20#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Visualisation/learning_curve_experiment_2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-672">
-          <caret line="228" column="48" selection-start-line="228" selection-start-column="48" selection-end-line="228" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Visualisation/learning_curve_experiment_1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="271" column="24" selection-start-line="271" selection-start-column="24" selection-end-line="271" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OpenAIGym/trainer_config.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="380" column="4" selection-start-line="380" selection-start-column="4" selection-end-line="380" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
   </component>
   <component name="masterDetails">
     <states>
