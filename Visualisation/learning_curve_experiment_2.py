@@ -169,7 +169,7 @@ def plot_agent_learning_curve(subplot, train_sizes, train_scores, title, alpha=0
 
     # subplot.set_title(title, fontsize='9')
     subplot.set_xlabel('Episodes', fontsize='9')
-    subplot.set_ylabel('Reward', fontsize='9')
+    subplot.set_ylabel('Reward per Agent', fontsize='9')
     subplot.grid(ls='--')
     # subplot.legend(loc='best')
     subplot.legend(frameon=True, fontsize=8)
@@ -196,7 +196,7 @@ def plot_agents_learning_curve(subplot, agent_train_data_sizes, agent_train_data
 
     # subplot.set_title(title, fontsize='9')
     subplot.set_xlabel('Episodes', fontsize='9')
-    subplot.set_ylabel('Reward', fontsize='9')
+    subplot.set_ylabel('Agent Reward', fontsize='9')
     subplot.grid(ls='--')
     subplot.legend(loc='best')
     subplot.legend(frameon=True, fontsize=8)
@@ -225,7 +225,7 @@ def plot_plant_performance(subplot, production__sizes, production_performance, _
     # ax2.legend(loc='best', frameon=True, fontsize=8)
     subplot.plot(production__sizes, power_consumptions_mean, color='tab:blue', label="Current Power")
     subplot.fill_between(production__sizes, power_consumptions_mean, 0, color='tab:blue', alpha=alpha)
-    subplot.set_ylabel('Power (kWh)', fontsize='9')
+    subplot.set_ylabel('Consumed Power (kWh)', fontsize='9')
     subplot.set_xlabel('Episodes', fontsize='9')
     # subplot.tick_params(axis='y', rotation=0, labelcolor='tab:blue')
     subplot.tick_params(axis='y', rotation=0)
@@ -312,7 +312,7 @@ if __name__ == '__main__':
                            alpha=0.5)
 
     fig.tight_layout()
-    plt.show()
+
 
     _save_path_pdf = os.path.normpath('{}/scenario_2_result.pdf'.format(EXPORT_ROOT_PATH))
     _save_path_svg = os.path.normpath('{}/scenario_2_result.svg'.format(EXPORT_ROOT_PATH))
@@ -320,3 +320,5 @@ if __name__ == '__main__':
     plt.savefig(_save_path_pdf, bbox_inches='tight')
     plt.savefig(_save_path_svg)
     plt.savefig(_save_path_png, dpi=300, transparent=True)
+
+    plt.show()

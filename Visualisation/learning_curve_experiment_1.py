@@ -304,10 +304,12 @@ if __name__ == '__main__':
                            alpha=0.5)
 
     fig.tight_layout()
-    plt.show()
+
     _save_path_pdf = os.path.normpath('{}/scenario_1_result.pdf'.format(EXPORT_ROOT_PATH))
     _save_path_svg = os.path.normpath('{}/scenario_1_result.svg'.format(EXPORT_ROOT_PATH))
     _save_path_png = os.path.normpath('{}/scenario_1_result.png'.format(EXPORT_ROOT_PATH))
     plt.savefig(_save_path_pdf, bbox_inches='tight')
     plt.savefig(_save_path_svg)
     plt.savefig(_save_path_png, dpi=300, transparent=True)
+
+    plt.show()

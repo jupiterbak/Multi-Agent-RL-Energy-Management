@@ -3,9 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="ac5cb565-613a-4825-b8bb-08171f326be0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/MAPPOv2.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/FAPSPLMAgents/MAPPOv2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenAIGym/MARL_config_scenario_2.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/OpenAIGym/MARL_config_scenario_2.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenAIGym/summaries/MCD_MAPPO_mult_scenario_1/events.out.tfevents.1578448837.LAPLACE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Visualisation/export/scenario_1_result.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Visualisation/export/scenario_1_result.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Visualisation/export/scenario_1_result.png" beforeDir="false" afterPath="$PROJECT_DIR$/Visualisation/export/scenario_1_result.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Visualisation/export/scenario_1_result.svg" beforeDir="false" afterPath="$PROJECT_DIR$/Visualisation/export/scenario_1_result.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Visualisation/export/scenario_2_result.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Visualisation/export/scenario_2_result.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Visualisation/export/scenario_2_result.png" beforeDir="false" afterPath="$PROJECT_DIR$/Visualisation/export/scenario_2_result.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Visualisation/export/scenario_2_result.svg" beforeDir="false" afterPath="$PROJECT_DIR$/Visualisation/export/scenario_2_result.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Visualisation/learning_curve_experiment_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Visualisation/learning_curve_experiment_1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Visualisation/learning_curve_experiment_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Visualisation/learning_curve_experiment_2.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +38,6 @@
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
@@ -60,7 +64,7 @@
       <recent name="C:\GitHub\Multi-Agent-RL-Energy-Management\Visualisation\backup" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.learning_curve_combined">
+  <component name="RunManager" selected="Python.learning_curve_experiment_2">
     <configuration name="learning_curve" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="03_Pythom_Workspace" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -615,26 +619,15 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.learning_curve_combined" />
+        <item itemvalue="Python.learning_curve_experiment_2" />
         <item itemvalue="Python.learning_curve_experiment_1" />
+        <item itemvalue="Python.learning_curve_combined" />
         <item itemvalue="Python.learning_curve_grid" />
         <item itemvalue="Python.learning_curve" />
-        <item itemvalue="Python.learning_curve_experiment_2" />
       </list>
     </recent_temporary>
   </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
-  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="StructureViewFactory">
     <option name="ACTIVE_ACTIONS" value=",SHOW_FIELDS" />
   </component>
@@ -746,9 +739,7 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
@@ -767,6 +758,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Remove spelling" />
@@ -780,69 +772,22 @@
     <option name="LAST_COMMIT_MESSAGE" value="Optimized environement" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585043130096">
+    <state width="1898" height="203" key="GridCell.Tab.0.bottom" timestamp="1598295903983">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="414" y="194" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1920.0.1920.1040/0.0.1920.1160@0.0.1920.1160" timestamp="1576679420650" />
-    <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585043130096" />
-    <state x="640" y="307" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1576678273135">
-      <screen x="0" y="0" width="1920" height="1160" />
-    </state>
-    <state x="640" y="307" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/-1920.0.1920.1040/0.0.1920.1160@0.0.1920.1160" timestamp="1576678273135" />
-    <state x="92" y="82" width="1736" height="876" maximized="true" key="DiffContextDialog" timestamp="1585042988014">
+    <state width="1898" height="203" key="GridCell.Tab.0.bottom/-1920.0.1920.1040/1920.0.1680.1050/0.0.1920.1040@0.0.1920.1040" timestamp="1598295903983" />
+    <state width="1898" height="203" key="GridCell.Tab.0.center" timestamp="1598295903983">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="92" y="92" width="1736" height="976" key="DiffContextDialog/-1920.0.1920.1040/0.0.1920.1160@0.0.1920.1160" timestamp="1576681153058" />
-    <state x="92" y="82" width="1736" height="876" maximized="true" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585042988014" />
-    <state x="739" y="293" key="FileChooserDialogImpl" timestamp="1585042480408">
+    <state width="1898" height="203" key="GridCell.Tab.0.center/-1920.0.1920.1040/1920.0.1680.1050/0.0.1920.1040@0.0.1920.1040" timestamp="1598295903983" />
+    <state width="1898" height="203" key="GridCell.Tab.0.left" timestamp="1598295903982">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="739" y="327" key="FileChooserDialogImpl/-1920.0.1920.1040/0.0.1920.1160@0.0.1920.1160" timestamp="1576680934890" />
-    <state x="739" y="293" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1585042480408" />
-    <state width="1898" height="203" key="GridCell.Tab.0.bottom" timestamp="1585079576171">
+    <state width="1898" height="203" key="GridCell.Tab.0.left/-1920.0.1920.1040/1920.0.1680.1050/0.0.1920.1040@0.0.1920.1040" timestamp="1598295903982" />
+    <state width="1898" height="203" key="GridCell.Tab.0.right" timestamp="1598295903983">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1315" height="455" key="GridCell.Tab.0.bottom/-1920.0.1920.1040/0.0.1920.1160@0.0.1920.1160" timestamp="1576683562089" />
-    <state width="1898" height="203" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1585079576171" />
-    <state width="1898" height="203" key="GridCell.Tab.0.center" timestamp="1585079576171">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1315" height="455" key="GridCell.Tab.0.center/-1920.0.1920.1040/0.0.1920.1160@0.0.1920.1160" timestamp="1576683562089" />
-    <state width="1898" height="203" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1585079576171" />
-    <state width="1898" height="203" key="GridCell.Tab.0.left" timestamp="1585079576171">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1315" height="455" key="GridCell.Tab.0.left/-1920.0.1920.1040/0.0.1920.1160@0.0.1920.1160" timestamp="1576683562089" />
-    <state width="1898" height="203" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1585079576171" />
-    <state width="1898" height="203" key="GridCell.Tab.0.right" timestamp="1585079576171">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1315" height="455" key="GridCell.Tab.0.right/-1920.0.1920.1040/0.0.1920.1160@0.0.1920.1160" timestamp="1576683562089" />
-    <state width="1898" height="203" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1585079576171" />
-    <state width="1320" height="433" key="GridCell.Tab.1.bottom" timestamp="1576682886061">
-      <screen x="0" y="0" width="1920" height="1160" />
-    </state>
-    <state width="1320" height="433" key="GridCell.Tab.1.bottom/-1920.0.1920.1040/0.0.1920.1160@0.0.1920.1160" timestamp="1576682886061" />
-    <state width="1320" height="433" key="GridCell.Tab.1.center" timestamp="1576682886061">
-      <screen x="0" y="0" width="1920" height="1160" />
-    </state>
-    <state width="1320" height="433" key="GridCell.Tab.1.center/-1920.0.1920.1040/0.0.1920.1160@0.0.1920.1160" timestamp="1576682886061" />
-    <state width="1320" height="433" key="GridCell.Tab.1.left" timestamp="1576682886060">
-      <screen x="0" y="0" width="1920" height="1160" />
-    </state>
-    <state width="1320" height="433" key="GridCell.Tab.1.left/-1920.0.1920.1040/0.0.1920.1160@0.0.1920.1160" timestamp="1576682886060" />
-    <state width="1320" height="433" key="GridCell.Tab.1.right" timestamp="1576682886061">
-      <screen x="0" y="0" width="1920" height="1160" />
-    </state>
-    <state width="1320" height="433" key="GridCell.Tab.1.right/-1920.0.1920.1040/0.0.1920.1160@0.0.1920.1160" timestamp="1576682886061" />
-    <state x="461" y="180" key="SettingsEditor" timestamp="1576678148711">
-      <screen x="0" y="0" width="1920" height="1160" />
-    </state>
-    <state x="461" y="180" key="SettingsEditor/-1920.0.1920.1040/0.0.1920.1160@0.0.1920.1160" timestamp="1576678148711" />
-    <state x="661" y="381" key="com.intellij.ide.util.TipDialog" timestamp="1576678311616">
-      <screen x="0" y="0" width="1920" height="1160" />
-    </state>
-    <state x="661" y="381" key="com.intellij.ide.util.TipDialog/-1920.0.1920.1040/0.0.1920.1160@0.0.1920.1160" timestamp="1576678311616" />
+    <state width="1898" height="203" key="GridCell.Tab.0.right/-1920.0.1920.1040/1920.0.1680.1050/0.0.1920.1040@0.0.1920.1040" timestamp="1598295903983" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
