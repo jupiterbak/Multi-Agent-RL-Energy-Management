@@ -1,26 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ac5cb565-613a-4825-b8bb-08171f326be0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Visualisation/export/scenario_1_result.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Visualisation/export/scenario_1_result.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Visualisation/export/scenario_1_result.png" beforeDir="false" afterPath="$PROJECT_DIR$/Visualisation/export/scenario_1_result.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Visualisation/export/scenario_1_result.svg" beforeDir="false" afterPath="$PROJECT_DIR$/Visualisation/export/scenario_1_result.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Visualisation/export/scenario_2_result.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Visualisation/export/scenario_2_result.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Visualisation/export/scenario_2_result.png" beforeDir="false" afterPath="$PROJECT_DIR$/Visualisation/export/scenario_2_result.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Visualisation/export/scenario_2_result.svg" beforeDir="false" afterPath="$PROJECT_DIR$/Visualisation/export/scenario_2_result.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Visualisation/learning_curve_experiment_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Visualisation/learning_curve_experiment_1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Visualisation/learning_curve_experiment_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Visualisation/learning_curve_experiment_2.py" afterDir="false" />
-    </list>
+    <list default="true" id="ac5cb565-613a-4825-b8bb-08171f326be0" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FavoritesManager">
-    <favorites_list name="pause">
-      <favorite_root url="file://$PROJECT_DIR$/gym_eflex_agent/gym_eflex_agent/envs/EFlexMultiAgentV1.py" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
-    </favorites_list>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
